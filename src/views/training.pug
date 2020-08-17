@@ -1,0 +1,77 @@
+extends layout.pug
+
+block links
+
+block content
+    //- section 1 - asesoría
+    section.bg-red.custom-padding-1.d-flex.align-items-center
+        .container
+            .row.align-items-center.flex-column-reverse.flex-lg-row
+                .col-sm-12.col-lg-6.text-left
+                    h4.text-white ¿Quiénes somos?
+                    h2.display-3.text-primary.font-weight-bold Acerca de nosotros
+                .col-sm-12.col-lg-6
+                    img(src="/public/img/training.png", alt="" class="img-fluid")
+    //- section 2 -
+    section.custom-padding-1.bg-white
+        .container
+            h4.text-secondary.text-center ¿Tiénes o deseas iniciar un emprendimiento?
+            h2.text-primary.text-center.font-weight-bold.display-3 Servicios y asesoría para tu empresa
+            br
+            span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
+            .row.py-5
+                .col-sm-12.col-md-12.col-lg-4
+                    div(class="p-5 mr-3 bg-yellow d-flex align-items-center justify-content-center m-auto" style="border-radius: 30px; height: 25px; width: 25px")
+                        i.fas.fa-user-tie.fa-2x.text-warning
+                    div.py-4
+                        p.text-muted.text-center.paragraph-1 Te brindamos asesoría legal para el registro de tu empresa
+                .col-sm-12.col-md-12.col-lg-4
+                    div(class="p-5 mr-3 bg-green d-flex align-items-center justify-content-center m-auto" style="border-radius: 30px; height: 25px; width: 25px")
+                        i.fas.fa-chart-line.fa-2x.text-success
+                    div.py-4
+                        p.text-muted.text-center.paragraph-1 Te brindamos asesoría de mercadeo para el posicionamiento de tu empresa
+                .col-sm-12.col-md-12.col-lg-4
+                    div(class="p-5 mr-3 bg-blue d-flex align-items-center justify-content-center m-auto" style="border-radius: 30px; height: 25px; width: 25px")
+                        i.fas.fa-award.fa-2x.text-primary
+                    div.py-4
+                        p.text-muted.text-center.paragraph-1 Te capacitamos para que logres mayor eficiencia en tu trabajo
+    //- section 3 -
+    section.custom-padding-1.bg-light
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-6
+                    h2.text-primary.font-weight-bold.display-3 Pasos
+                    span(class="d-block bg-secondary my-5" style="height: 6px; width: 80px")
+                .col-sm-12.col-md-12.col-lg-6
+                    p.custom-line-height-1.paragraph-1.text-muted ¿Quieres fortalecer tus planes de negocios y tus procesos de ventas y mercadeo? Aplica a la asesoría y los servicios que CDMYPE UNIVO te ofrece
+            .row.py-5
+                .col-sm-12.col-md-12.col-lg-4.d-flex.align-items-center.my-4
+                    div(class="bg-primary rounded-circle d-flex align-items-center justify-content-center mr-2"
+                    style="height: 60px; width: 60px;")
+                        h2.text-white.m-0 1
+                    p.text-muted Descarga el formulario de 
+                        br
+                        | solicitud 
+                        a(href="/training/download/solicitud" class="text-secondary") aquí
+                .col-sm-12.col-md-12.col-lg-4.d-flex.align-items-center.my-4
+                    div(class="bg-primary rounded-circle d-flex align-items-center justify-content-center mr-2"
+                    style="height: 60px; width: 60px;")
+                        h2.text-white.m-0 2
+                    p.text-muted Llena el formulario con los 
+                        br  
+                        |datos de tu empresa
+                .col-sm-12.col-md-12.col-lg-4.d-flex.align-items-center.my-4
+                    div(class="bg-primary rounded-circle d-flex align-items-center justify-content-center mr-2"
+                    style="height: 60px; width: 60px;")
+                        h2.text-white.m-0 3
+                    p.text-muted Envía la solicitud
+                        br  
+                        | al correo 
+                        span.text-secondary cdmypeunivo@gmail.com
+    //- section 4 -
+    section.bg-white.custom-padding-1
+        .container
+            h4.text-secondary.text-center ¡Confia en nosotros!
+            h2.text-primary.font-weight-bold.text-center.display-3 Te brindamos total confidencialidad
+            span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
+block scripts

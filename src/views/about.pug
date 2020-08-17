@@ -1,0 +1,147 @@
+extends layout.pug
+
+block links
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css")
+block content
+    //- model contact
+    div(id="modal-contact" class="modal fade" tabindex="-1" role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5.text-primary.font-weight-bold Form contact
+                    button(type="button" class="close" data-dismiss="modal")
+                        apan(aria-hidden="true") &times;
+                .modal-body
+                    form(action="", method="post")
+                        .form-group
+                            labe(for="") Para
+                            input(type="email" id="email-to" name="email-to" class="form-control bg-light border-0 py-4")
+                        .form-group
+                            .row
+                                .col-sm-12.col-md-6.col-lg-6
+                                    label(for="") Nombre
+                                    input(type="text" name="name" class="form-control bg-light border-0 py-4")
+                                .col-sm-12.col-md-6.col-lg-6
+                                    label(for="") Email
+                                    input(type="email" name="email-from" class="form-control bg-light border-0 py-4")
+                        .form-group
+                            label(for="") Asunto
+                            input(type="text" name="subject" class="form-control bg-light border-0 py-4")
+                        .form-group
+                            label(for="") Mensaje
+                            textarea(name="message", cols="30", rows="5" class="form-control bg-light border-0")
+                        .form-group
+                            a(href="/contact" class="btn btn-primary py-3 px-5 mr-3") Enviar
+                            button(type="button" class="btn btn-secondary py-3 px-5" data-dismiss="modal") Cerrar
+    //- section 1 - quienes somos
+    section.bg-green.custom-padding-1.d-flex.align-items-center
+        .container
+            .row.align-items-center.flex-column-reverse.flex-lg-row
+                .col-sm-12.col-lg-6.text-left
+                    h4.text-white ¿Quiénes somos?
+                    h2.display-3.text-primary.font-weight-bold Acerca de nosotros
+                .col-sm-12.col-lg-6
+                    img(src="/public/img/group.png", alt="" class="img-fluid")
+    //- section 2 - historia
+    section.custom-padding-1.bg-white
+        .container
+            h4.text-secondary.text-center Nuestra
+            h2.text-primary.text-center.font-weight-bold.display-3 Historia
+            span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
+            p.text-muted.text-justify.w-50.m-auto CDMYPE UNIVO es un modelo de atención
+                    | y de servicios a
+                    | micro y pequeñas empresas, basado en la alianza público-privado-academia, forma parte de una
+                    | política de Estado que genera oportunidades para el desarrollo de este segmento económico. También
+                    | es una red de apoyo que CONAMYPE facilita a empresarios y empresarias para acercar más los servicios
+                    | brindando más cobertura. Acompaña el desarrollo de las MYPEs, mediante la prestación de servicios de
+                    | mayor calidad, gracias a la aplicación de una metodología de acompañamiento a mediano y largo plazo
+                    | que se adecúa a las condiciones, naturaleza y necesidades de las MYPEs. Contribuye, además, en la
+                    | dinamización de las economías en los territorios, al desarrollo de los tejidos productivos
+                    | empresariales y que busca integrar a las MYPEs a la economía del país. Es una entidad comprometida
+                    | con el empresario y empresaria, que lo coloca al centro de su accionar, considerandolo como agente
+                    | que contribuye al desarrollo económico del país.
+    //- section 3 - marco filosófico
+    section.bg-light.custom-padding-1
+        .container
+            h4.text-secondary.text-center Marco
+            h2.text-primary.text-center.font-weight-bold.display-3 Filosófico
+            span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
+            .row
+                .col-sm-12.col-md-12.col-lg-4.my-4
+                    .card.border-0
+                        .card-body
+                            h4.text-primary.card-title.font-weight-bold Misión
+                            p.text-muted.card-text Somos un Centro de Desarrollo de la micro y pequeña
+                                    | empresa, que facilita y provee servicios
+                                    | de desarrollo empresarial integral con equidad de género a través de asesoría
+                                    | empresarial,
+                                    | financiera, tecnológica, asistencia técnica, capacitación y vinculación con el
+                                    | entorno
+                                    | empresarial, para contribuir a la generación de impacto económico del departamento
+                                    | de San
+                                    | Miguel.
+                .col-sm-12.col-md-12.col-lg-4.my-4
+                    .card.border-0
+                        .card-body
+                            h4.text-primary.card-title.font-weight-bold Visión
+                            p.text-muted.card-text Ser un centro líder reconocido en el departamento de San
+                                    | Miguel y a nivel nacional, como facilitador de la cultura emprendedora empresarial,
+                                    | mediante procesos transparentes, equitativos en servicios integrales vinculados con
+                                    | la academia y con énfasis en la equidad de género, que contribuyan a la generación
+                                    | de impacto económico en las MYPES.
+                .col-sm-12.col-md-12.col-lg-4.my-4
+                    .card.border-0
+                        .card-body
+                            h4.text-primary.card-title.font-weight-bold Valores
+                            ul.list-unstyled
+                                li.d-inline-block.pr-3.py-3
+                                    span.text-muted Integridad
+                                li.d-inline-block.pr-3.py-3
+                                    span.text-muted Lealtad
+                                li.d-inline-block.pr-3.py-3
+                                    span.text-muted Responsablidad
+                                li.d-inline-block.pr-3.py-3
+                                    span.text-muted Honestidad
+                                li.d-inline-block.pr-3.py-3
+                                    span.text-muted Excelencia
+                                li.d-inline-block.pr-3.py-3
+                                    span.text-muted Innovación
+                                li.d-inline-block.pr-3.py-3
+                                    span.text-muted Servicio
+    //- section 4 - equipo
+    section(id="team" class="custom-padding-1 bg-white")
+        .container
+            .row
+                .col-sm-12.col-md-6.col-lg-6
+                    h2.text-primary.font-weight-bold.display-3 Equipo de trabajo
+                    span(class="d-block bg-secondary my-5" style="height: 6px; width: 80px")
+                .col-sm-12.col-md-6.col-lg-6
+                    p.text-muted.paragraph-1.custom-line-height-1 Conoce nuestro
+                            | equipo de profesionales
+                            | que te brindan ayuda en todo tu proceso de acompañamiento
+            .pt-5
+                .owl-carousel.owl-theme
+                    each val in employees
+                        .item.pt-5
+                            .card.my-5.bg-light.border-0
+                                .card-header.border-0.bg-transparent
+                                    .card-header-profile
+                                        img(src="" + val.imgPath + "", alt="" class="img-fluid")
+                                    .text-right
+                                        h6.text-primary.font-weight-bold= val.name
+                                        span.d-blockd.text-secondary= val.position
+                                .card-body
+                                    .text-center.py-3
+                                        i.fas.fa-quote-left.fa-2x.text-muted
+                                    p.text-muted.card-text= val.description
+                                    .d-flex.justify-content-between
+                                        div
+                                            span.d-block.text-secondary= val.email
+                                            span.d-block.text-muted= val.phone
+                                        div
+                                            button(type="button" class="btn btn-primary btn-contact" data-toggle="modal" data-target="#modal-contact" data-contact-to="" + val.email) Contactar
+block scripts
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js")
+    script(src="/public/js/owl.js")
+    script(src="/public/js/formcontact.js")

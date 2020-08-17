@@ -1,0 +1,41 @@
+extends layout.pug
+
+block links
+
+block content
+    //- section 1 - servicios
+    section.bg-orange.custom-padding-1.d-flex.align-items-center
+        .container
+            .row.align-items-center.flex-column-reverse.flex-lg-row
+                .col-sm-12.col-lg-6.text-left
+                    h4.text-white Se más productivo
+                    h2.display-3.text-orange.font-weight-bold Servicios
+                .col-sm-12.col-lg-6
+                    img(src="/public/img/services.png", alt="" class="img-fluid")
+    //- section 2 -
+    section.bg-white.custom-padding-1
+        .container
+            h2.text-primary.font-weight-bold.text-center.display-3 Servicios
+               br 
+               | empresariales
+            span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
+            p.text-muted.paragraph-1.custom-line-height-1.w-75.m-auto.text-center Aprovecha los servicios que CDMYPE UNIVO te ofrece para el crecimiento de tu emprendimiento y la posicion en el mercado
+            br
+            br
+            .row.text-center
+                each val in services
+                    .col-sm-12.col-md-12.col-lg-6.d-lg-flex.align-items-center.my-5.text-lg-left
+                        div(class="p-5 m-auto mr-lg-3 "+ val.bgColor +" d-flex align-items-center justify-content-center" style="border-radius: 30px; height: 25px; width: 25px")
+                            i(class="fa fa-" + val.icon + " fa-2x " + val.textColor)
+                        div
+                            h4(class="text-center.text-md-left " + val.textColor)= val.name
+                            p.text-muted.text-center.text-md-left= val.description
+    //- section 3 -
+    section.bg-white.custom-padding-1
+        .container
+            h4.text-secondary.text-center ¡Recuerda!
+            h2.text-primary.font-weight-bold.text-center.display-3 Todos nuestros servicio son gratuitos
+            span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
+            .text-center.py-5
+                a(href="/training" class="btn btn-primary py-4 px-5") Aplicar a asesoría
+block scripts

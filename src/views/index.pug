@@ -1,0 +1,179 @@
+extends layout.pug
+
+block links
+    //- slick carousel
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css")
+
+block content
+    //- section 1 - carousel
+    section
+        div(id="principal-carousel" class="carousel slide" data-ride="carousel")
+            .carousel-inner
+                .carousel-item.bg-green.active
+                    .carousel-caption.d-flex.align-items-center.justify-content-center
+                        .container
+                            .row.align-items-center.flex-column-reverse.flex-lg-row
+                                .col-sm-12.col-lg-6.text-left
+                                    span.d-block.text-primary 1/5
+                                    br
+                                    h4 Emprende e innova
+                                    h2.display-3.text-primary.font-weight-bold Nosotros te asesoramos
+                                .col-sm-12.col-lg-6
+                                    img(src="/public/img/img-3.png", alt="" class="img-fluid")
+                .carousel-item.bg-primary
+                    .carousel-caption.d-flex.align-items-center.justify-content-center
+                        .container
+                            .row.align-items-center.flex-column-reverse.flex-lg-row
+                                .col-sm-12.col-lg-6.text-left
+                                    span.d-block.text-orange 2/5
+                                    br
+                                    h4.text-white-50 Asesoría legal y de mercadeo
+                                    h2.display-3.text-white.font-weight-bold Legaliza tu empresa
+                                .col-sm-12.col-lg-6
+                                    img(src="/public/img/img-2.png", alt="" class="img-fluid")
+                .carousel-item.bg-orange
+                    .carousel-caption.d-flex.align-items-center.justify-content-center
+                        .container
+                            .row.align-items-center.flex-column-reverse.flex-lg-row
+                                .col-sm-12.col-lg-6.text-left
+                                    span.d-block.text-primary 3/5
+                                    br
+                                    h4 Desarrolla tu idea
+                                    h2.display-3.text-primary.font-weight-bold Centro emprendedor
+                                .col-sm-12.col-lg-6
+                                    img(src="/public/img/img-1.png", alt="" class="img-fluid")
+                .carousel-item.bg-red
+                    .carousel-caption.d-flex.align-items-center.justify-content-center
+                        .container
+                            .row.align-items-center.flex-column-reverse.flex-lg-row
+                                .col-sm-12.col-lg-6.text-left
+                                    span.d-block.text-primary 4/5
+                                    br
+                                    h4 Impulsamos tu emprendimiento
+                                    h2.display-3.text-primary.font-weight-bold Incubadora de empresas
+                                .col-sm-12.col-lg-6
+                                    img(src="/public/img/img-5.png", alt="" class="img-fluid")
+                .carousel-item.bg-blue
+                    .carousel-caption.d-flex.align-items-center.justify-content-center
+                        .container
+                            .row.align-items-center.flex-column-reverse.flex-lg-row
+                                .col-sm-12.col-lg-6.text-left
+                                    span.d-block.text-primary 5/5
+                                    br
+                                    h4 Nos innovamos por ti, hoy te ofrecemos
+                                    h2.display-3.text-secondary.font-weight-bold Asesoría virtual
+                                .col-sm-12.col-lg-6
+                                    img(src="/public/img/img-4.png", alt="" class="img-fluid")
+            a(href="#principal-carousel" class="carousel-control-prev" data-slide="prev")
+                i.fas.fa-chevron-left
+            a(href="#principal-carousel" class="carousel-control-next" data-slide="next")
+                i.fas.fa-chevron-right
+            ol.carousel-indicators
+                li(data-target="#principal-carousel" data-slide-to="0" class="active")
+                li(data-target="#principal-carousel" data-slide-to="1")
+                li(data-target="#principal-carousel" data-slide-to="2")
+                li(data-target="#principal-carousel" data-slide-to="3")
+                li(data-target="#principal-carousel" data-slide-to="4")
+    //- section 2 - nostros, servicios
+    section.bg-white.custom-padding-1
+        .container
+            .row
+                .col-sm-12.col-lg-6
+                    h4.text-secondary ¿Deseas emprender?
+                    h2.text-primary.display-3.font-weight-bold Asesoría para tu negocio
+                .col-sm-12.col-lg-6
+                    p.custom-line-height-1.paragraph-1 Como modelo de atención a micro y pequeñas empresas ponemos a tu  disposición diversos servicos para el crecimiento de tu empresa
+                    span(class="d-block bg-secondary my-5" style="height: 6px; width: 80px")
+                    div
+                        a(href="/services" class="btn btn-primary py-3 px-4 mr-1") Saber más
+                        a(href="/services" class="btn btn-outline-secondary py-3 px-4") Nosotros
+    //- section 3 - aplicar a asesoría
+    section.bg-orange
+        .container.custom-padding-1
+            .row
+                .col-sm-12.col-lg-6
+                    div.d-flex.align-items-center
+                        .d-flex.align-items-center.justify-content-between.mr-3
+                            div(class="p-5 bg-green d-flex align-items-center justify-content-center" style="border-radius: 30px; height: 25px; width: 25px;")
+                                i.fas.fa-chart-line.fa-2x.text-success
+                        .py-5
+                            p.text-dark.paragraph-1 Innova en tus procesos de marketing y ventas, alcanza tu mejor nivel
+                    div.d-flex.align-items-center
+                        .d-flex.align-items-center.justify-content-between.mr-3
+                            div(class="p-5 bg-yellow d-flex align-items-center justify-content-center" style="border-radius: 30px; height: 25px; width: 25px;")
+                                i.fas.fa-user-tie.fa-2x.text-warning
+                        .py-5
+                            p.text-dark.paragraph-1 Capacitate en procesos de mercadeo y aumenta las ganacias de tu empresa
+                .col-sm-12.col-lg-6
+                    h4.text-secondary Aumenta tu potencial
+                    h2.font-weight-bold.text-primary.display-3 Sumate a nuestro equipo
+                    span(class="d-block bg-secondary my-5" style="height: 6px; width: 80px")
+                    div
+                        a(href="/training" class="btn btn-primary py-4 px-5") Aplicar a asesoría
+    //- section 4 - casos de éxtio
+    section.bg-white.custom-padding-1
+        .container
+            h2.text-primary.text-center.font-weight-bold.display-4 Casos de éxito
+            br
+            p.custom-line-height-1.paragraph-1.w-75.m-auto.text-center Conoce algunas de las historias de las empresas que trabajan con nosotros, su desarrollo, crecimiento y cómo lograron una mayor eficiencia en su labor
+            span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
+        .slick-carousel
+            each val in business
+                .slick-carousel-item
+                    img(src="" + val.imgPath alt="" class="img-fluid d-block mx-auto my-5")
+                    h4.text-center.text-primary.font-weight-bold= val.name
+                    p.text-muted.text-center.p-4
+        .text-center.pt-5
+            a(href="/business" class="btn btn-link") Ver más
+    //- section 5 - impacto social
+    section.bg-primary
+        .overlay
+            .container
+                .custom-padding-1
+                    h4.text-center.text-secondary Estadísticas
+                    h2.text-center.text-white.font-weight-bold.display-3 Impacto Social
+                    span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
+                    .row.text-center.py-5
+                        .col-sm-12.col-md-4.col-lg-4.my-4
+                            h2.text-white.font-weight-bold.display-4  12
+                            p.text-white-50 Clientes
+                        .col-sm-12.col-md-4.col-lg-4.my-4
+                            h2.text-white.font-weight-bold.display-4  23
+                            p.text-white-50 Empresas
+                        .col-sm-12.col-md-4.col-lg-4.my-4
+                            h2.text-white.font-weight-bold.display-4  16
+                            p.text-white-50 Convenios
+    //- section 6 - alianzas estrategicas
+    section.bg-white
+        .container.custom-padding-1
+            h2.text-center.text-secondary.font-weight-bold Alianzas
+            h2.text-center.text-primary.font-weight-bold.display-3 Estratégicas 
+            span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
+            .row
+                .col-sm-12.col-md-4.col-lg-4.my-4
+                    img(src="/public/img/conamype.jpg", alt="" class="img-fluid")
+                .col-sm-12.col-md-4.col-lg-4.my-4
+                    img(src="/public/img/cdmype.jpg", alt="" class="img-fluid")
+                .col-sm-12.col-md-4.col-lg-4.my-4
+                    img(src="/public/img/univo.gif", alt="" class="img-fluid")
+                .col-sm-12.col-md-4.col-lg-3.my-4
+                    div.py-5.w-100.img-fluid.bg-light
+                .col-sm-12.col-md-4.col-lg-3.my-4
+                    div.py-5.w-100.img-fluid.bg-light
+                .col-sm-12.col-md-4.col-lg-3.my-4
+                    div.py-5.w-100.img-fluid.bg-light
+                .col-sm-12.col-md-4.col-lg-3.my-4
+                    div.py-5.w-100.img-fluid.bg-light
+                .col-sm-12.col-md-4.col-lg-3.my-4
+                    div.py-5.w-100.img-fluid.bg-light
+                .col-sm-12.col-md-4.col-lg-3.my-4
+                    div.py-5.w-100.img-fluid.bg-light
+                .col-sm-12.col-md-4.col-lg-3.my-4
+                    div.py-5.w-100.img-fluid.bg-light
+                .col-sm-12.col-md-4.col-lg-3.my-4
+                    div.py-5.w-100.img-fluid.bg-light
+block scripts
+    //- slick carousel
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js")
+    script(src="/public/js/slick.js")

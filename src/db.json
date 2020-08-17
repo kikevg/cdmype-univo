@@ -1,0 +1,187 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "name": "Categoria A",
+            "description": "Descripcion de categoria A"
+        },
+        {
+            "id": 2,
+            "name": "Categoria B",
+            "description": "Descripcion de categoria B"
+        }
+    ],
+    "business": [
+        {
+            "id": 1,
+            "name": "Agroindustrias San Romero de América S.A. de C.V",
+            "own": "Persona Jurídica",
+            "fundation": "Año 2007",
+            "description": "La iniciativa de don “Toñito” como es conocido el Sr. Antonio Bonilla, en Cdad. Barrios, nace de contar con su propia terreno donde es apto para el cultivo de café ya que estamos a 1000 metros de altura del ecosistema natural de la Ciudad. Es así como inicia con la siembra de los primero cultivos, el procesamiento del grano, lo que le permite es tener su propio beneficio del café. Don Toñito fue por muchos años representante legal de la cooperativa cafetalera de la ciudad, permitiéndole así tener conocimiento en el procesamiento y tratamiento del mismo. Dentro de las principales actividades que se realizan en la empresa está el cultivo, procesamiento y comercialización de café. En nuestras operaciones de cultivo de café, pretendemos ayudar a la comunidad brindándoles oportunidades de empleo en las labores de plantación, cosechas, procesamiento y empacado. El Café San Romero, cumple con los estándares nacionales e internacionales que permiten su exportación a regiones americanas y europeas, siendo catalogado como café de altura.",
+            "website": "#",
+            "category": "Categoria A",
+            "imgPath": "/public/img/business-1.jpg"
+        },
+        {
+            "id": 2,
+            "name": "Calzado Ketzaly",
+            "own": "Esposos José Abraham López y Jessenia Castro",
+            "fundation": "Año 2007",
+            "description": "Los esposos José Abraham López y niña Jessenia Castro, originarios de Chapeltique, San Miguel; iniciaron con la actividad de calzado en el mes de febrero de 2014, junto a un grupo de diez jóvenes de la localidad, que fueron capacitados por Visión Mundial en el año 2010. Los esposos desde el inicio han tenido una visión de crecimiento e innovación; poco a poco han ido sumando más jóvenes en la elaboración de sandalias en choche y macramé, contando a la fecha con 16 jóvenes laborando en la micro empresa. La empresa visito CDMYPE UNIVO en el mes de agosto de 2014, para esa fecha iniciaban con la actividad, pero no sabían cómo funcionaba una empresa; fueron atendidos y recibieron en primer momento asesoría en creación de nombre de la marca, logotipo, y registro de marca, capación en trabajo en equipo para el personal, en el 2015, en ese mismo año fueron beneficiados con asistencia técnica para elaboración de calzado en cuero y tecnificación en sandalias. En los meses de junio a diciembre se creó el modelo de negocios que fue realizado en el programa de Desarrollo de Proveedores del PNUD, en el programa Creciendo con su negocio, realizado por asesora TIC. La empresa ha tenido impacto en ventas y desarrollo del personal gracias a la intervención de CDMYPE UNIVO en alianza con CONAMYPE. Actualmente cuentan con más de 100 estilos diferentes de calzado entre sandalias, calzado juvenil y formal.",
+            "website": "#",
+            "category": "Categoria B",
+            "imgPath": "/public/img/business-2.png"
+        }
+    ],
+    "services": [
+        {
+            "id": 1,
+            "name": "Asesoría empresarial",
+            "icon": "briefcase",
+            "bgColor": "bg-yellow",
+            "textColor": "text-warning",
+            "description": "Acompañamiento temporal para el diseño del plan de negocio y temas de mercadeo y ventas"
+        },
+        {
+            "id": 2,
+            "name": "Asesoría empresarial femenina",
+            "icon": "female",
+            "bgColor": "bg-green",
+            "textColor": "text-success",
+            "description": "Acompañamiento temporal a la mujer emprendedora para desarrollar sus habilidades dentro del marco empresarial"
+        },
+        {
+            "id": 3,
+            "name": "Asesoría en uso de TICs",
+            "icon": "desktop",
+            "bgColor": "bg-blue",
+            "textColor": "text-primary",
+            "description": "Acompañamiento temporal para el manejo de las TICs para una mejor competitividad"
+        },
+        {
+            "id": 4,
+            "name": "Asesoría financiera",
+            "icon": "dollar-sign",
+            "bgColor": "bg-red",
+            "textColor": "text-danger",
+            "description": "Acompañamiento temporal a los emprendedores para desarrollar condiciones de financiamiento necesario"
+        },
+        {
+            "id": 5,
+            "name": "Asistencia técnica",
+            "icon": "user-cog",
+            "bgColor": "bg-yellow",
+            "textColor": "text-warning",
+            "description": "Ofrece servicios técnicos en temas como la gestion empresarial o temas más especializados, fotaleciendo muchos de sus aspectos"
+        },
+        {
+            "id": 6,
+            "name": "Capacitaciones",
+            "icon": "users",
+            "bgColor": "bg-orange",
+            "textColor": "text-orange",
+            "description": "Formaciones grupales o individuales en temas generales de la empresa o especializadas"
+        },
+        {
+            "id": 7,
+            "name": "Vinculacion",
+            "icon": "long-arrow-alt-right",
+            "bgColor": "bg-green",
+            "textColor": "text-success",
+            "description": "Proceso de acercamiento del emprendor a otros servicos de intituciones publicas o privadas"
+        },
+        {
+            "id": 8,
+            "name": "Propuestas de crédito",
+            "icon": "file-invoice-dollar",
+            "bgColor": "bg-blue",
+            "textColor": "text-primary",
+            "description": "Proceso de acercamiento del emprendor a otros servicos de intituciones publicas o privadas"
+        }
+    ],
+    "employees": [
+        {
+            "id": 1,
+            "name": "Ever Israel Martínez Reyes",
+            "position": "Director",
+            "description": "Como director del centro de desarrollo de las micros y pequeñas empresas (CDMYPE UNIVO), el licenciado Ever Israel Martínez Reyes, está a cargo del liderazgo y la entrega del programa orientado al desarrollo empresarial integral con equidad de género, entre sus atribuciones están representar legalmente a CDMYPE, planificar, organizar, dirigir y evaluar las operaciones de CDMYPE. La experiencia profesional del licenciado Ever Martínez, incluye la administración de empresas y finanzas en el sector educativo y las MYPES.",
+            "email": "ever@gmail.com",
+            "phone": "0000-0000",
+            "imgPath": "/public/img/profile-8.jpeg"
+        },
+        {
+            "id": 2,
+            "name": "Reina Azucena Rodríguez Merlos",
+            "position": "Asesora de TICs",
+            "description": "Como asesora en tecnologías de información y comunicación Reina Azucena Rodríguez fomenta la auto motivación y la pasión de los clientes para crear algo nuevo y excepcional. Además de los consejos prácticos que hacen avanzar a las empresas, también ayuda a los clientes a articular su visión y reunir a los partidarios que los ayuden a lograr el éxito que desean. Entre las funciones que se realizan se encuentran: identificar las áreas en que la empresa puede mejorar al incorporar tecnologías de información y comunicación, proponer soluciones adecuadas según el tipo y tamaño de la empresa, capacitar sobre el manejo de herramientas informáticas, asesorar en la adquisición de equipamiento informático y servicios web.",
+            "email": "reina@gmail.com",
+            "phone": "0000-0000",
+            "imgPath": "/public/img/profile-1.png"
+        },
+        {
+            "id": 3,
+            "name": "Jessica Yamileth Alvarenga Umanzor",
+            "position": "Técnico de compras",
+            "description": "Como técnico de compras Jessica Yamileth Alvarenga le apasiona ayudar a las personas a alcanzar su máximo potencial, accediendo a los recursos que necesitan para tener éxito con su pequeña empresa, trabaja con clientes de micros y pequeñas empresas en todo el departamento, para desarrollar y refinar su plan de negocios, conectarse con recursos adecuados, ayuda a navegar por las regulaciones legales y comerciales relacionadas con el inicio de negocios, establece las políticas de compras de la organización en coordinación con el área productiva y el área financiera. Todo ello en términos de calidad, cantidad y sobre todo, precio, y guía a los empresarios a través de los desafíos y la ejecución de sus decisiones comerciales.",
+            "email": "jesica@gmail.com",
+            "phone": "0000-0000",
+            "imgPath": "/public/img/profile-2.jpeg"
+        },
+        {
+            "id": 4,
+            "name": "Rosemary Patricia Sorto Gómez",
+            "position": "Asesor empresarial",
+            "description": "Rosemary Patricia Sorto trabaja con empresarios y propietarios de micros y pequeñas empresas. Con más de una década de experiencia en la realización de capacitaciones y asesoría en diseño de planes de negocios, asesoría a microempresas en la puesta en marcha de la empresa, realización de congreso regional de emprendedores, participación en competencias de emprendedores y coordinación de ferias emprendedores. Rosemary Patricia Sorto proporciona a sus clientes una visión competitiva, habilidades técnicas y orientación estratégica para impulsar su éxito en los mercados nacionales e internacionales.",
+            "email": "rosemary@gmail.com",
+            "phone": "0000-0000",
+            "imgPath": "/public/img/profile-3.jpeg"
+        },
+        {
+            "id": 5,
+            "name": "Miguel Ángel Reyes Reyes",
+            "position": "Asesor empresarial",
+            "description": " Miguel Ángel Reyes Reyes asesora a empresarios y propietarios de micros y pequeñas empresas, ayudándolos a crear productos y servicios que sus clientes y la comunidad valoran y utilizan, entre sus funciones que realiza con las micros y pequeñas empresas podemos resaltar, el diseño de planes de negocio a micros y pequeñas empresas en diferentes actividades económicas, análisis de mercado, análisis y proyecciones financieras, entre otras.",
+            "email": "migule@gmail.com",
+            "phone": "0000-0000",
+            "imgPath": "/public/img/profile-4.jpg"
+        },
+        {
+            "id": 6,
+            "name": "Juan Ramón Ramírez Díaz",
+            "position": "Asesor empresarial",
+            "description": "Como asesor empresarial Juan Ramón Ramírez trabaja con empresarios y propietarios de micros y pequeñas empresas, con más de 6 años de experiencia como consultor empresarial asesorando en el proceso de legalización, constitución y desarrollo económico de las micros y pequeñas empresas, Juan Ramón Ramírez comparte su conocimiento y su amplia visión para los negocios para ayudar a sus clientes a crear la mejor oportunidad de soportar el crecimiento y la rentabilidad.",
+            "email": "juan@gmail.com",
+            "phone": "0000-0000",
+            "imgPath": "/public/img/profile-5.jpeg"
+        },
+        {
+            "id": 7,
+            "name": "Nelson Omar Ventura Méndez",
+            "position": "Asesor financiero",
+            "description": "Nelson Omar Ventura asesora a empresarios y propietarios de pequeñas empresas, brindando las opciones más viables para invertir su dinero, el tipo de inversión y por supuesto la rentabilidad de la inversión. Nelson Ventura asesora al empresario en relación a donde destinas sus fondos de capital para sacarles un rendimiento económico y financiero, y minimizar los costos y maximizar los beneficios de fondos de capital.",
+            "email": "nelson@gmail.com",
+            "phone": "0000-0000",
+            "imgPath": "/public/img/profile-6.jpeg"
+        },
+        {
+            "id": 8,
+            "name": "Alma Damary Amaya Rivas",
+            "position": "Asesora de empresarialidad femenina",
+            "description": "Como asesor de empresariabilidad femenina, Alma Damary Amaya Fomenta la auto motivación y la pasión de las mujeres en el área empresarial con el fin de lograr la autonomía y empoderamiento de las mujeres empresarias del país, a través de la disminución de los impedimentos de género que enfrentan las mujeres en la creación y el desarrollo de sus empresas, mediante entrega de herramientas especializadas de servicios de desarrollo emprendedor y empresarial.",
+            "email": "alma@gmail.com",
+            "phone": "0000-0000",
+            "imgPath": "/public/img/profile-7.jpg"
+        }
+    ],
+    "socialImpact": [],
+    "alliances": [],
+    "users": [
+        {
+            "id": 1,
+            "name": "Enrique Vigil",
+            "email": "kikev1998@gmail.com",
+            "username": "kikev98",
+            "password": "$2b$10$vKFK0.mynWWwKiUkI.HLyOMj8j6KqBg.0cQsSdFt42qb7uIcnnSe6"
+        }
+    ]
+}

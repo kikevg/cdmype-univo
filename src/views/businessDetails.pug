@@ -1,0 +1,32 @@
+extends layout.pug
+
+block links
+
+block content
+    //- section 1 - servicios
+    section.bg-orange.custom-padding-1.d-flex.align-items-center
+        .container
+            .row.align-items-center.flex-column-reverse.flex-lg-row
+                .col-sm-12.col-lg-6.text-left
+                    h4.text-white Se más productivo
+                    h2.display-3.text-primary.font-weight-bold Detalles de empresa
+                .col-sm-12.col-lg-6
+                    img(src="/public/img/img-3.png", alt="" class="img-fluid")
+    //- section 2 - mostar los detalles de las empresas
+    section.custom-padding-1.bg-white
+        .container
+            if data
+                img(src=""+ data.imgPath +"", alt="" class="img-fluid")
+                .py-5
+                    span.d-block.text-muted Nombre
+                    h2.text-primary.display-4.font-weight-bold= data.name
+                    span.d-block.text-muted Fecha de fundación
+                    h4.text-primary= data.fundation
+                    span.d-block.text-muted Descripcion
+                    p.text-primary= data.description
+            else
+                .text-center
+                    h2.text-primary.display-3.font-weight-bold No data available
+                    br
+                    a(href="/business" class="btn btn-secondary py-4 px-5") Regresar
+block scripts

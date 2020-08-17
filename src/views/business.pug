@@ -1,0 +1,43 @@
+extends layout.pug
+
+block links
+
+block content
+    //- section 1 - servicios
+    section.bg-green.custom-padding-1.d-flex.align-items-center
+        .container
+            .row.align-items-center.flex-column-reverse.flex-lg-row
+                .col-sm-12.col-lg-6.text-left
+                    h4.text-white Se más productivo
+                    h2.display-3.text-primary.font-weight-bold Empresas
+                .col-sm-12.col-lg-6
+                    img(src="/public/img/img-3.png", alt="" class="img-fluid")
+    //- section 2 -
+    section.custom-padding-1.bg-light
+        .container
+            h4.text-secondary.text-center Catálogo de
+            h2.text-primary.text-center.font-weight-bold.display-3 Empresas
+            span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
+            .text-center.py-5.filter-button-group
+                button(type="button" class="btn bg-yellow m-2" data-filter="*") Todas
+                button(type="button" class="btn bg-yellow m-2" data-filter="Categoria A") Categoría A
+                button(type="button" class="btn bg-yellow m-2" data-filter="Categoria B") Categoría B
+            
+            .row.grid-isotope
+                each val in business
+                    .col-sm-12.col-md-6.col-lg-6.my-4.grid-isotope-item
+                        a(href="/business/" + val.id class="text-decoration-none")
+                            div(class="card border-0 " + val.category + "")
+                                img(src=""+ val.imgPath +"", alt="" class="card-img-top")
+                                .card-body
+                                    h3.text-primary.card-title= val.name
+
+    //- section 4 -
+    section.custom-padding-1.bg-white
+        .container
+            h4.text-secondary.text-center ¡Supera tus espectativas!
+            h2.text-primary.text-center.font-weight-bold.display-3 Atrévete a ser diferente
+            span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
+block scripts
+    script(src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js")
+    script(src="/public/js/isotope.js")

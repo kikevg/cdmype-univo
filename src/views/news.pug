@@ -1,0 +1,57 @@
+extends layout.pug
+
+block links
+
+block content
+    //- section 1 -
+    section.custom-padding-1.bg-white
+        .container
+            h1.text-primary.text-center.display-3.font-weight-bold Noticias
+    //- section 2
+    section.pb-5.bg-white
+        .container
+            .row
+                .col-sm-12.col-md-8.col-lg-8
+                    .card.mb-4
+                        img(src="/public/img/img-1.png", alt="" class="card-img-top")
+                        .card-body
+                            h3.card-title.text-primary New event 
+                    .card.my-4
+                        img(src="/public/img/img-4.png", alt="" class="card-img-top")
+                        .card-body
+                            h3.card-title.text-primary New event
+                    
+                    nav
+                        ul.pagination.pagination-lg
+                            li.page-item
+                                a(href="#" class="page-link") 1
+                            li.page-item
+                                a(href="#" class="page-link") 2
+                            li.page-item
+                                a(href="#" class="page-link") 3
+                            li.page-item
+                                a(href="#" class="page-link") 4
+                .col-sm-12.col-md-4.col-lg-4
+                    .card.mb-4
+                        .card-body
+                            h4.text-primary Categories
+                            ul.list-unstyled
+                                li.d-inline-block.mr-3.my-2
+                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Emprendimiento
+                                li.d-inline-block.mr-3.my-2
+                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Empresas
+                                li.d-inline-block.mr-3.my-2
+                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Logística
+                                li.d-inline-block.mr-3.my-2
+                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Desarrollo empresarial
+                                li.d-inline-block.mr-3.my-2
+                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Web y Apps
+                                li.d-inline-block.mr-3.my-2
+                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Java
+                                li.d-inline-block.mr-3.my-2
+                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") .NET
+                                li.d-inline-block.mr-3.my-2
+                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Front End
+                                li.d-inline-block.mr-3.my-2
+                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Back End
+block scripts
