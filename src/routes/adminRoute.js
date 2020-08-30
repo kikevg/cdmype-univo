@@ -56,12 +56,12 @@ router.get("/alliances/delete/:id", loginController.isLogged, alliancesControlle
 router.get("/alliances/delete/confirm/:id", loginController.isLogged, alliancesController.confirmDeleteAlliance);
 
 // para la administracion de noticias
-router.get("/news", /* loginController.isLogged, */ newsController.getNews);
+router.get("/news", loginController.isLogged, newsController.getNews);
 router.get("/news/details/:id", loginController.isLogged, newsController.getNewsById);
 router.get("/news/add", loginController.isLogged, newsController.addNews);
 router.post("/news/add", loginController.isLogged, newsController.confirmAddNews);
-router.get("/news/update/:id", /* loginController.isLogged, */ newsController.updateNews);
-router.post("/news/update", /* loginController.isLogged, */ newsController.confirmUpdateNews);
+router.get("/news/update/:id", loginController.isLogged, newsController.updateNews);
+router.post("/news/update", loginController.isLogged, newsController.confirmUpdateNews);
 router.get("/news/delete/:id", loginController.isLogged, newsController.deleteNews);
 router.get("/news/delete/confirm/:id", loginController.isLogged, newsController.confirmDeleteNews);
 
