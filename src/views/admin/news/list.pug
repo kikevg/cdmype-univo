@@ -1,0 +1,39 @@
+extends ../shared.pug
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home") Home
+    li.breadcrumb-item.active
+        span Noticias
+block content
+    section.custom-padding-1
+        .container
+            .d-flex.justify-content-between.pb-5
+                h2.text-primary.font-weight-bold Lista de noticias
+                a(href="/admin/news/add" class="btn btn-primary py-3 px-4") Agregar noticia
+            table.table
+                thead
+                    tr
+                        th Id
+                        th Titulo
+                        th Fecha de publicacion
+                        th Acciones
+                tbody
+                    if data.length > 0
+                        each val in data
+                            tr
+                                td= val.id
+                                td= val.title
+                                td= val.date
+                                td
+                                    div.btn-group
+                                        a(href="/admin/news/details/" + val.id class="btn btn-light")
+                                            i.fa.fa-info.text-primary
+                                        a(href="/admin/news/update/" + val.id class="btn btn-light")
+                                            i.fa.fa-pencil.text-primary
+                                        a(href="/admin/news/delete/" + val.id class="btn btn-light")
+                                            i.fa.fa-trash.text-danger
+                    else
+                        tr
+                            td(colspan="4")
+                                h4.text-center.text-primary.font-weight-bold No hay datos

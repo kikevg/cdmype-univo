@@ -1,0 +1,33 @@
+extends ../shared.pug
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home") Home
+    li.breadcrumb-item
+        a(href="/admin/alliances") Alianzas
+    li.breadcrumb-item.active
+        span Detalles de alianza
+block content
+    section.custom-padding-1.bg-white
+        .container
+            if data
+                img(src=""+ data.imgPath +"", alt="" class="img-fluid")
+                .py-5
+                    span.d-block.text-muted Nombre
+                    h2.text-primary.display-4.font-weight-bold= data.name
+                    span.d-block.text-muted Descripcion
+                    p.text-primary= data.description
+                a(href="/admin/alliances/update/" + data.id class="btn btn-light py-3 px-4 mr-3")
+                    i.fa.fa-pencil.text-primary
+                    | &nbsp;
+                    span.text-primary Editar
+                a(href="/admin/alliances/delete/" + data.id class="btn btn-light py-3 px-4 mr-3")
+                    i.fa.fa-trash.text-danger
+                    | &nbsp;
+                    span.text-danger Eliminar
+            else
+                .text-center
+                    h2.text-primary.display-3.font-weight-bold No data available
+                    br
+                    a(href="/admin/home" class="btn btn-secondary py-4 px-5") Regresar
+block scripts

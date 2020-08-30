@@ -1,0 +1,43 @@
+extends ../shared.pug
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home") Home
+    li.breadcrumb-item.active
+        span Empresas
+block content
+    div(id="modal-delete" class="modal fade" tabindex="-1")
+        .modal-content
+            .modal-header
+                h3.text-danger Deseas eliminar este registro?
+            .modal-body
+                a(href="/")
+    section.custom-padding-1
+        .container
+            .d-flex.justify-content-between.pb-5
+                h2.text-primary.font-weight-bold Lista de servicios
+                a(href="/admin/services/add" class="btn btn-primary py-3 px-4") Agregar servicio
+            table.table
+                thead
+                    tr
+                        th Id
+                        th Nombre
+                        th Acciones
+                tbody
+                    if data.length > 0
+                        each val in data
+                            tr
+                                td= val.id
+                                td= val.name
+                                td
+                                    div.btn-group
+                                        a(href="/admin/services/details/" + val.id class="btn btn-light")
+                                            i.fa.fa-info.text-primary
+                                        a(href="/admin/services/update/" + val.id class="btn btn-light")
+                                            i.fa.fa-pencil.text-primary
+                                        a(href="/admin/services/delete/" + val.id class="btn btn-light")
+                                            i.fa.fa-trash.text-danger
+                    else
+                        tr
+                            td(colspan="4")
+                                h4.text-center.text-primary.font-weight-bold No hay datos

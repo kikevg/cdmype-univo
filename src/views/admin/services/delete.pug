@@ -1,0 +1,30 @@
+extends ../shared.pug
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home") Home
+    li.breadcrumb-item
+        a(href="/admin/services") Servicios
+    li.breadcrumb-item.active
+        span Borrar servicio
+block content
+    section.custom-padding-1
+        .container
+            .row
+                .col-sm-12.col-lg-6
+                    div(class="p-5 "+ data.bgColor +" d-flex align-items-center justify-content-center" style="border-radius: 30px; height: 25px; width: 25px")
+                        i(class="fa fa-" + data.icon + " fa-2x " + data.textColor)
+                    div
+                        h4(class="text-center.text-md-left " + data.textColor)= data.name
+                        p.text-muted.text-center.text-md-left= data.description
+                .col-sm-12.col-lg-6
+                    h2.text-danger.font-weight-bold.display-4 Deseas eliminar este registro?
+                        .py-4
+                        a(href="/admin/services/delete/confirm/" + data.id class="btn btn-light py-3 px-4 mr-3")
+                            i.fa.fa-trash.text-danger
+                            | &nbsp;
+                            span.text-danger Confirmar
+                        a(href="/admin/services" class="btn btn-light py-3 px-4")
+                            i.fa.fa-arrow-left.text-primary
+                            | &nbsp;
+                            span.text-primary Cancelar

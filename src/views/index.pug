@@ -119,7 +119,7 @@ block content
             p.custom-line-height-1.paragraph-1.w-75.m-auto.text-center Conoce algunas de las historias de las empresas que trabajan con nosotros, su desarrollo, crecimiento y cómo lograron una mayor eficiencia en su labor
             span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
         .slick-carousel
-            each val in business
+            each val in businessList
                 .slick-carousel-item
                     img(src="" + val.imgPath alt="" class="img-fluid d-block mx-auto my-5")
                     h4.text-center.text-primary.font-weight-bold= val.name
@@ -136,14 +136,14 @@ block content
                     span(class="d-block bg-secondary my-5 mx-auto" style="height: 6px; width: 80px")
                     .row.text-center.py-5
                         .col-sm-12.col-md-4.col-lg-4.my-4
-                            h2.text-white.font-weight-bold.display-4  12
-                            p.text-white-50 Clientes
-                        .col-sm-12.col-md-4.col-lg-4.my-4
-                            h2.text-white.font-weight-bold.display-4  23
+                            h2.text-white.font-weight-bold.display-4= data.businessTotal
                             p.text-white-50 Empresas
                         .col-sm-12.col-md-4.col-lg-4.my-4
-                            h2.text-white.font-weight-bold.display-4  16
-                            p.text-white-50 Convenios
+                            h2.text-white.font-weight-bold.display-4= data.alliancesTotal
+                            p.text-white-50 Alianzas
+                        .col-sm-12.col-md-4.col-lg-4.my-4
+                            h2.text-white.font-weight-bold.display-4= data.servicesTotal
+                            p.text-white-50 Servicios
     //- section 6 - alianzas estrategicas
     section.bg-white
         .container.custom-padding-1
@@ -157,22 +157,10 @@ block content
                     img(src="/public/img/cdmype.jpg", alt="" class="img-fluid")
                 .col-sm-12.col-md-4.col-lg-4.my-4
                     img(src="/public/img/univo.gif", alt="" class="img-fluid")
-                .col-sm-12.col-md-4.col-lg-3.my-4
-                    div.py-5.w-100.img-fluid.bg-light
-                .col-sm-12.col-md-4.col-lg-3.my-4
-                    div.py-5.w-100.img-fluid.bg-light
-                .col-sm-12.col-md-4.col-lg-3.my-4
-                    div.py-5.w-100.img-fluid.bg-light
-                .col-sm-12.col-md-4.col-lg-3.my-4
-                    div.py-5.w-100.img-fluid.bg-light
-                .col-sm-12.col-md-4.col-lg-3.my-4
-                    div.py-5.w-100.img-fluid.bg-light
-                .col-sm-12.col-md-4.col-lg-3.my-4
-                    div.py-5.w-100.img-fluid.bg-light
-                .col-sm-12.col-md-4.col-lg-3.my-4
-                    div.py-5.w-100.img-fluid.bg-light
-                .col-sm-12.col-md-4.col-lg-3.my-4
-                    div.py-5.w-100.img-fluid.bg-light
+            .row
+                each val in alliancesList
+                    .col-sm-12.col-md-4.col-lg-2.my-4.d-flex.align-items-center
+                        img(src= val.imgPath, alt="" class="img-fluid")
 block scripts
     //- slick carousel
     script(src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js")

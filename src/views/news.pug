@@ -3,55 +3,88 @@ extends layout.pug
 block links
 
 block content
-    //- section 1 -
-    section.custom-padding-1.bg-white
-        .container
-            h1.text-primary.text-center.display-3.font-weight-bold Noticias
-    //- section 2
-    section.pb-5.bg-white
-        .container
-            .row
-                .col-sm-12.col-md-8.col-lg-8
-                    .card.mb-4
-                        img(src="/public/img/img-1.png", alt="" class="card-img-top")
-                        .card-body
-                            h3.card-title.text-primary New event 
-                    .card.my-4
-                        img(src="/public/img/img-4.png", alt="" class="card-img-top")
-                        .card-body
-                            h3.card-title.text-primary New event
-                    
-                    nav
-                        ul.pagination.pagination-lg
-                            li.page-item
-                                a(href="#" class="page-link") 1
-                            li.page-item
-                                a(href="#" class="page-link") 2
-                            li.page-item
-                                a(href="#" class="page-link") 3
-                            li.page-item
-                                a(href="#" class="page-link") 4
-                .col-sm-12.col-md-4.col-lg-4
-                    .card.mb-4
-                        .card-body
-                            h4.text-primary Categories
-                            ul.list-unstyled
-                                li.d-inline-block.mr-3.my-2
-                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Emprendimiento
-                                li.d-inline-block.mr-3.my-2
-                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Empresas
-                                li.d-inline-block.mr-3.my-2
-                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Logística
-                                li.d-inline-block.mr-3.my-2
-                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Desarrollo empresarial
-                                li.d-inline-block.mr-3.my-2
-                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Web y Apps
-                                li.d-inline-block.mr-3.my-2
-                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Java
-                                li.d-inline-block.mr-3.my-2
-                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") .NET
-                                li.d-inline-block.mr-3.my-2
-                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Front End
-                                li.d-inline-block.mr-3.my-2
-                                    a(href="#" class="badge font-weight-normal bg-blue text-primary p-2 rounded-pill") Back End
+    .bg-light
+        //- section 1 -
+        section.custom-padding-1
+            .container
+                h1.text-primary.text-center.display-3.font-weight-bold Noticias
+        //- section 2
+        section.pb-5
+            .container
+                .row
+                    .col-sm-12.col-md-8.col-lg-8
+                        if data.news.length > 0
+                            each val, i in data.news
+                                .card.mb-5.border-0
+                                    if val.images.length > 1
+                                        div(id="carousel-news" + i class="carousel slide" data-ride="carousel")
+                                            .carousel-inner
+                                                - let j = 0;
+                                                each img in val.images
+                                                    - let classActive = (j == 0) ? "active" : "";
+                                                    div(class="carousel-item " + classActive)
+                                                        img(src= img alt="" class="d-block w-100 rounded-top")
+                                                    - j = 1;
+                                            a(href="#carousel-news" + i class="carousel-control-prev" role="button" data-slide="prev")
+                                                i.fas.fa-chevron-left
+                                            a(href="#carousel-news" + i class="carousel-control-next" role="button" data-slide="next")
+                                                i.fas.fa-chevron-right
+                                    else
+                                        img(src= val.images[0], alt="" class="card-img-top")
+                                    .card-body
+                                        h4.card-title
+                                            a(href="/news/" + val.id class="text-primary font-weight-bold")= val.title
+                                        span.text-muted Fecha de publicación:
+                                            | 
+                                            span.font-italic= val.date
+                            nav(aria-label="Page navigation")
+                                ul.pagination
+                                    - let pagePrev = data.pages.prev;
+                                    - let urlPrev = "";
+                                    - let isDisable = "disabled";
+                                    - if (pagePrev != undefined) { urlPrev = "/news?category=" + data.pages.category + "&page=" + pagePrev; isDisable = ""}
+                                    li(class="page-item " + isDisable)
+                                        a(href= urlPrev class="page-link border-0") Previous
+                                    
+                                    - let i = 0;
+                                    - let activated = "";
+                                    while i < pagination / 5
+                                        - activated = ((i + 1) == data.pages.current) ? "active" : "";
+                                        li(class="page-item " + activated)
+                                            a(href="/news?category="+data.pages.category+"&page=" + (i + 1) class="page-link border-0")= i + 1
+                                        - i++
+
+                                    - let pageNext = data.pages.next;
+                                    - let urlNext = "";
+                                    - let isDisabled = "disabled";
+                                    - if (pageNext != undefined) { urlNext = "/news?category="+data.pages.category+"&page=" + pageNext; isDisabled = ""}
+                                    li(class="page-item " + isDisabled)
+                                        a(href= urlNext class="page-link border-0") Next
+                        else
+                            h3.text-muted No hay datos
+                    .col-sm-12.col-md-4.col-lg-4
+                        .card.mb-5.border-0
+                            .card-body
+                                h4.card-title.text-primary.font-weight-bold Categorías
+                                ul.list-unstyled
+                                    if categories.length > 0
+                                        li.d-inline-block.mr-3.my-2
+                                            a(href="/news?category=all&page=1" class="badge bg-blue text-primary p-2 rounded-pill") #Todas
+                                        each val in categories
+                                            li.d-inline-block.mr-3.my-2
+                                                a(href="/news?category=" + val + "&page=1" class="badge bg-blue text-primary p-2 rounded-pill")= val
+                                    else
+                                        h5.text-muted No hay datos
+                        .card.mb-5.border-0
+                            .card-body
+                                h4.card-title.text-primary.font-weight-bold Últimas noticias
+                                ul.list-group.list-group-flush
+                                    if latestNews.length > 0
+                                        each val in latestNews
+                                            li.list-group-item.py-3.px-0
+                                                h5.font-weight-bold
+                                                    a(href="/news/" + val.id class="text-primary")= val.title
+                                                span.text-muted= val.date
+                                    else
+                                        h5.text-muted No hay datos
 block scripts

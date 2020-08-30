@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-html(lang="en")
+html(lang="es")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
@@ -18,8 +18,8 @@ html(lang="en")
             //- login
             div(style="width: 300px")
                 img(src="/public/img/cdmype.jpg", alt="" width="300" class="img-fluid my-5")
-                if message != null
-                    .alert.alert-danger.alert-dismissible.fade.show= message
+                if error_message != null
+                    .alert.alert-danger.alert-dismissible.fade.show= error_message
                         button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                             span(aria-hidden="true") &times;
                 form(action="/admin", method="post")

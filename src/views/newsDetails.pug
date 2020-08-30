@@ -1,0 +1,72 @@
+extends layout.pug
+
+block links
+
+block content
+    //- section 1
+    section.pb-5.bg-white.custom-padding-1
+        .container
+            .row
+                .col-sm-12.col-lg-8
+                    if news
+                        .card.mb-4.border-0
+                            if news.images.length > 1
+                                div(id="carousel-news" + i class="carousel slide" data-ride="carousel")
+                                    .carousel-inner
+                                        - let j = 0;
+                                        each img in news.images
+                                            - let classActive = (j == 0) ? "active" : "";
+                                            div(class="carousel-item " + classActive)
+                                                img(src= img alt="" class="d-block w-100 rounded-top")
+                                            - j = 1;
+                                    a(href="#carousel-news" + i class="carousel-control-prev" role="button" data-slide="prev")
+                                        i.fas.fa-chevron-left
+                                    a(href="#carousel-news" + i class="carousel-control-next" role="button" data-slide="next")
+                                        i.fas.fa-chevron-right
+                            else
+                                img(src= news.images[0], alt="" class="card-img-top")
+                            .card-body.p-0
+                                h4.card-title.text-primary.font-weight-bold.display-3= news.title
+                                p= news.description
+                    else
+                        h5.text-muted No hay datos
+                .col-sm-12.col-lg-4
+                    .card.mb-4.border-0
+                        .card-header.bg-white.border-0
+                            h4.card-title.text-primary.font-weight-bold Informacion
+                        .card-body
+                            if news
+                                ul.list-unstyled
+                                        li.d-inline-block.mr-3.my-2
+                                            span.d-block.text-muted.pb-2 Fecha de publicacion
+                                            span.badge.bg-blue.text-primary.p-2.rounded-pill= news.date
+                                        li.d-block.mr-3.my-2
+                                            span.d-block.text-muted.pb-2 Categoria
+                                            span.badge.bg-blue.text-primary.p-2.rounded-pill= news.category
+                            else
+                                h5.text-muted No hay datos
+                    .card.mb-4.border-0
+                        .card-header.bg-white.border-0
+                            h4.card-title.text-primary.font-weight-bold Últimas noticias
+                        .card-body
+                            ul.list-group.list-group-flush
+                                each val in latestNews
+                                    li.list-group-item.py-3.px-0
+                                        h5.font-weight-bold
+                                            a(href="/news/" + val.id class="text-primary")= val.title
+                                        span.text-muted= val.date
+    section.py-5
+        .container
+            h2.text-primary.font-weight-bold Otras noticias
+            br
+            .row
+                each val in randomNews
+                    .col-sm-12.col-md-6.col-lg-3.my-3
+                        a(href="/news/" + val.id class="text-decoration-none")
+                            .card.bg-light.border-0
+                                .card-body
+                                    h5.font-weight-bold.text-primary= val.title
+                                    span.text-muted Fecha de publicación:
+                                        | 
+                                        span= val.date
+block scripts

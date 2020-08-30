@@ -1,0 +1,37 @@
+extends ../shared.pug
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home") Home
+    li.breadcrumb-item
+        a(href="/admin/alliances") Alianzas
+    li.breadcrumb-item.active
+        span Agregar alianza
+
+
+block content
+    section.custom-padding-1
+        .container
+            h2.text-primary.font-weight-bold Agregar nueva alianza
+            form(action="/admin/alliances/add", method="post" enctype="multipart/form-data")
+                .form-group
+                    .row
+                        .col-sm-12.col-lg-6
+                            label(for="" class="font-weight-bold") Nombre
+                                span.text-danger &nbsp; *
+                            input(type="text" name="name" class="form-control border-0 bg-light py-4")
+                        .col-sm-12.col-lg-6
+                            label(for="" class="font-weight-bold") Imagen de la empresa
+                                span.text-danger &nbsp; *
+                            .custom-file
+                                input(type="file" name="file" class="custom-file-input" id="customFile")
+                                label(for="customFile" class="custom-file-label") Choose file
+                .form-group
+                    label(for="" class="font-weight-bold") Descripción
+                        span.text-danger &nbsp; *
+                    textarea(name="description", cols="30", rows="10" class="form-control border-0 bg-light")
+                .form-group
+                    button(type="submit" class="btn btn-primary py-3 px-5 mr-3") Guardar
+                    a(href="/admin/alliances" class="btn btn-secondary py-3 px-5") Cancelar
+block scripts
+    script(src="/public/js/fileinput.js")

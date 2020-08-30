@@ -13,11 +13,11 @@ body {
     color: var(--secondary-color) !important;
 }
 
-.carousel-item {
+#principal-carousel .carousel-item {
     height: 100vh;
 }
 
-.carousel-caption {
+#principal-carousel .carousel-caption {
     /* background-color: rgba(0, 0, 0, .5); */
     height: 100%;
     left: 0%;
@@ -25,8 +25,8 @@ body {
     width: 100%;
 }
 
-.carousel-control-prev,
-.carousel-control-next {
+#principal-carousel .carousel-control-prev,
+#principal-carousel .carousel-control-next {
     z-index: 100;
 }
 

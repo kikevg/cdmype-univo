@@ -1,0 +1,37 @@
+extends ../shared.pug
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home") Home
+    li.breadcrumb-item.active
+        span Alianzas
+block content
+    section.custom-padding-1
+        .container
+            .d-flex.justify-content-between.pb-5
+                h2.text-primary.font-weight-bold Lista de alianzas
+                a(href="/admin/alliances/add" class="btn btn-primary py-3 px-4") Agregar alianza
+            table.table
+                thead
+                    tr
+                        th Id
+                        th Institucion
+                        th Acciones
+                tbody
+                    if data.length > 0
+                        each val in data
+                            tr
+                                td= val.id
+                                td= val.name
+                                td
+                                    div.btn-group
+                                        a(href="/admin/alliances/details/" + val.id class="btn btn-light")
+                                            i.fa.fa-info.text-primary
+                                        a(href="/admin/alliances/update/" + val.id class="btn btn-light")
+                                            i.fa.fa-pencil.text-primary
+                                        a(href="/admin/alliances/delete/" + val.id class="btn btn-light")
+                                            i.fa.fa-trash.text-danger
+                    else
+                        tr
+                            td(colspan="3")
+                                h4.text-center.text-primary.font-weight-bold No hay datos

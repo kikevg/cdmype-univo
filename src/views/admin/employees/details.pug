@@ -1,0 +1,40 @@
+extends ../shared.pug
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home") Home
+    li.breadcrumb-item
+        a(href="/admin/employees") Empleados
+    li.breadcrumb-item.active
+        span Detalles de empleado
+block content
+    section.custom-padding-1.bg-white
+        .container
+            if data
+                img(src=""+ data.imgPath +"", alt="" width="300" class="img-fluid")
+                .py-5
+                    span.d-block.text-muted Nombre
+                    h2.text-primary.display-4.font-weight-bold= data.name
+                    span.d-block.text-muted cargo
+                    h4.text-primary= data.position
+                    span.d-block.text-muted Email
+                    h4.text-primary= data.email
+                    span.d-block.text-muted Telefono
+                    h4.text-primary= data.phone
+                    span.d-block.text-muted Descripcion
+                    p.text-primary= data.description
+                    .py-4
+                        a(href="/admin/employees/update/" + data.id class="btn btn-light py-3 px-5 mr-3")
+                            i.fa.fa-pencil.text-primary
+                            | &nbsp;
+                            span.text-primary Editar
+                        a(href="/admin/employees/delete/" + data.id class="btn btn-light py-3 px-5")
+                            i.fa.fa-trash.text-danger
+                            | &nbsp;
+                            span.text-danger Eliminar
+            else
+                .text-center
+                    h2.text-primary.display-3.font-weight-bold No data available
+                    br
+                    a(href="/employees" class="btn btn-secondary py-4 px-5") Regresar
+block scripts
