@@ -1,23 +1,26 @@
 const path = require("path");
-const fs = require("fs");
-const { start } = require("repl");
 
-const jsonFile = path.join(__dirname, "../db.json");
+const Business = require("../models/Business");
+const Alliance = require("../models/Alliance");
+const Service = require("../models/Service");
+const Employee = require("../models/Employee");
+const News = require("../models/News");
 
-const readJsonFile = () => {
-    return JSON.parse(fs.readFileSync(jsonFile, "utf-8"));
-}
+const index = async (req, res) => {
 
-const index = (req, res) => {
-    const json = readJsonFile();
-    const businessTotal = json.business.length;
-    const alliancesTotal = json.alliances.length;
-    const servicesTotal = json.services.length;
-    let alliancesList = json.alliances;
+    const businessTotal = (await Business.find()).length;
+    const alliancesTotal = (await Alliance.find()).length;
+    const servicesTotal = (await Service.find()).length;
+
+    let alliancesList = await Alliance.find();
+    let businesses = await Business.find();
+
     let businessList = [];
-    for (let i = 0; i < json.business.length; i++)
+
+    for (let i = 0; i < businesses.length; i++)
         if (i < 5)
-            businessList.push(json.business[i]);
+            businessList.push(businesses[i]);
+
     res.render("index", {
         title: 'Home', businessList: businessList, alliancesList: alliancesList, data: {
             businessTotal,
@@ -27,9 +30,11 @@ const index = (req, res) => {
     });
 }
 
-const about = (req, res) => {
-    const employeesList = readJsonFile().employees;
-    res.render("about", { title: "About", employees: employeesList });
+const about = async (req, res) => {
+
+    const employees = await Employee.find();
+
+    res.render("about", { title: "About", employees: employees });
 }
 
 const contact = (req, res) => {
@@ -44,26 +49,29 @@ const downloadDocs = (req, res) => {
     res.download(path.join(__dirname, "../public/files/solicitud.docx"));
 }
 
-const services = (req, res) => {
-    const servicesList = readJsonFile().services;
+const services = async (req, res) => {
+
+    const servicesList = await Service.find();
+
     res.render("services", { title: "Services", services: servicesList });
 }
 
-const business = (req, res) => {
-    const businessList = readJsonFile().business;
+const business = async (req, res) => {
+
+    const businessList = await Business.find();
+
     res.render("business", { title: "Business", business: businessList });
 }
 
-const businessDetails = (req, res) => {
-    const businessList = readJsonFile().business;
+const businessDetails = async (req, res) => {
     const { id } = req.params;
-    let business = null;
-    businessList.forEach(b => b.id == id ? business = b : null);
+    let business = await Business.findById(id);
     res.render("businessDetails", { title: "Business Details", data: business });
 }
 
-const news = (req, res) => {
-    const newsList = readJsonFile().news;
+const news = async (req, res) => {
+    const newsList = await News.find();
+
     let news = [];
     let categories = [];
     let latestNews = [];
@@ -112,20 +120,21 @@ const news = (req, res) => {
     res.render("news", { title: "News", data: result, categories: categories, latestNews: latestNews, pagination: news.length });
 }
 
-const newsDetails = (req, res) => {
-    const newsList = readJsonFile().news;
+const newsDetails = async (req, res) => {
     const { id } = req.params;
-    let news = null;
+    let news = await News.findById(id);
+
     let latestNews = [];
     let randomNews = [];
-    newsList.forEach(n => n.id == id ? news = n : null);
 
     let newsLength = (newsList.length > 3) ? 3 : newsList.length;
+
     for (let i = 1; i <= newsLength; i++)
         latestNews.push(newsList[newsList.length - i]);
 
     for (let i = 0; i < 4; i++)
         randomNews.push(newsList[Math.floor(Math.random() * newsList.length)]);
+
     res.render("newsDetails", { title: "News details", news: news, latestNews: latestNews, randomNews: randomNews });
 }
 

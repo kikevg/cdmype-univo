@@ -1,30 +1,18 @@
 const path = require("path");
 const fs = require("fs");
-const { v4: uuid } = require("uuid");
-const { confirmUpdateAlliance } = require("./alliancesController");
 
-const jsonFile = path.join(__dirname, "../db.json");
+const News = require("../models/News");
 
-const readJsonFile = () => {
-    return JSON.parse(fs.readFileSync(jsonFile, "utf-8"));
-}
-
-const writeJsonFile = (data) => {
-    fs.writeFileSync(jsonFile, JSON.stringify(data), "utf-8");
-}
-
-const getNews = (req, res) => {
-    const newsList = readJsonFile().news;
+const getNews = async (req, res) => {
+    const newsList = await News.find();
     let news = [];
     newsList.forEach(n => news.unshift(n));
     res.render("admin/news/list", { title: "News list", data: news });
 }
 
-const getNewsById = (req, res) => {
-    const newsList = readJsonFile().news;
+const getNewsById = async (req, res) => {
     const { id } = req.params;
-    let news = null;
-    newsList.forEach(n => n.id == id ? news = n : null);
+    let news = await News.findById(id);
     res.render("admin/news/details", { title: "News details", news: news });
 }
 
@@ -32,15 +20,13 @@ const addNews = (req, res) => {
     res.render("admin/news/add", { title: "Add news" });
 }
 
-const confirmAddNews = (req, res) => {
-    const json = readJsonFile();
+const confirmAddNews = async (req, res) => {
     const { title, description, category } = req.body;
     let images = [];
     if (req.files)
         req.files.file.forEach(f => images.push("/public/upload/img/" + f.filename))
-        
+
     const news = {
-        id: uuid(),
         title: title,
         description: description,
         category: category,
@@ -48,55 +34,45 @@ const confirmAddNews = (req, res) => {
         images: images
     };
 
-    json.news.push(news);
-    writeJsonFile(json);
+    const n = new News(news);
+    await n.save();
+
     res.redirect("/admin/news");
 }
 
-const updateNews = (req, res) => {
-    const newsList = readJsonFile().news;
+const updateNews = async (req, res) => {
     const { id } = req.params;
-    let news = null;
-    newsList.forEach(n => n.id == id ? news = n : null);
+    let news = await News.findById(id);
     res.render("admin/news/update", { title: "News update", news: news });
 }
 
-const confirmUpdateNews = (req, res) => {
-    const json = readJsonFile();
+const confirmUpdateNews = async (req, res) => {
     const { id, title, description, category } = req.body;
-    let news = null;
-    json.news.forEach(n => n.id == id ? news = n : null);
+    let news = await News.findById(id);
 
     news.title = title;
     news.category = category;
     news.description = description;
 
-    writeJsonFile(json);
+    await News.updateOne({ _id: id}, news);
 
-    res.redirect("/admin/news");   
+    res.redirect("/admin/news");
 }
 
-const deleteNews = (req, res) => {
-    const newsList = readJsonFile().news;
+const deleteNews = async (req, res) => {
     const { id } = req.params;
-    let news = null;
-    newsList.forEach(n => n.id == id ? news = n : null);
+    let news = await News.findById(id);
     res.render("admin/news/delete", { title: "News details", news: news });
 }
 
-const confirmDeleteNews = (req, res) => {
-    const json = readJsonFile();
+const confirmDeleteNews = async (req, res) => {
     const { id } = req.params;
-    let news = [];
-    json.news.forEach(n => {
-        if (n.id != id)
-            news.push(n)
-        else {
-            n.images.forEach(i => fs.unlinkSync(path.join(__dirname, "..", i)));
-        }
-    });
-    json.news = news;
-    writeJsonFile(json);
+    let news = await News.findById(id);
+
+    news.images.forEach(i => fs.unlinkSync(path.join(__dirname, "..", i)));
+
+    await News.deleteOne({ _id: id });
+
     res.redirect("/admin/news");
 }
 

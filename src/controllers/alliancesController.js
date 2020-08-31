@@ -1,27 +1,17 @@
 const path = require("path");
 const fs = require("fs");
-const { v4: uuid } = require("uuid");
 
-const jsonFile = path.join(__dirname, "../db.json");
+const Alliance = require("../models/Alliance");
 
-const readJsonFile = () => {
-    return JSON.parse(fs.readFileSync(jsonFile, "utf-8"));
-}
-
-const writeJsonFile = (data) => {
-    fs.writeFileSync(jsonFile, JSON.stringify(data), "utf-8");
-}
-
-const getAlliances = (req, res) => {
-    const alliancesList = readJsonFile().alliances;
+const getAlliances = async (req, res) => {
+    const alliancesList = await Alliance.find();
     res.render("admin/alliances/list", { title: "Alliances list", data: alliancesList });
 }
 
-const getAlliancesById = (req, res) => {
-    const alliancesList = readJsonFile().alliances;
+const getAlliancesById = async (req, res) => {
     const { id } = req.params;
-    let alliance = null;
-    alliancesList.forEach(a => a.id == id ? alliance = a : null);
+    let alliance = await Alliance.findById(id);
+
     res.render("admin/alliances/details", { title: "Alliances list", data: alliance });
 }
 
@@ -29,58 +19,59 @@ const addAlliance = (req, res) => {
     res.render("admin/alliances/add", { title: "Add alliance" });
 }
 
-const confirmAddAlliance = (req, res) => {
-    const json = readJsonFile();
+const confirmAddAlliance = async (req, res) => {
     const { name, description } = req.body;
     const newAlliance = {
-        id: uuid(),
         name: name,
         description: description,
         imgPath: "/public/upload/img/" + req.files.file[0].filename
     };
-    json.alliances.push(newAlliance);
-    writeJsonFile(json);
+
+    const alliance = new Alliance(newAlliance);
+    await alliance.save();
+
     res.redirect("/admin/alliances");
 }
 
-const updateAlliance = (req, res) => {
-    const alliancesList = readJsonFile().alliances;
+const updateAlliance = async (req, res) => {
     const { id } = req.params;
-    let alliance = null;
-    alliancesList.forEach(a => a.id == id ? alliance = a : null);
+    let alliance = await Alliance.findById(id);
     res.render("admin/alliances/update", { title: "Delete alliance", data: alliance });
 }
 
-const confirmUpdateAlliance = (req, res) => {
-    const json = readJsonFile();
+const confirmUpdateAlliance = async (req, res) => {
     const { id, name, description } = req.body;
-    let alliance = null;
-    json.alliances.forEach(a => a.id == id ? alliance = a : null);
-    if (req.file) {
+    let alliance = await Alliance.findById(id);
+
+    if (req.files) {
         fs.unlinkSync(path.join(__dirname, "..", alliance.imgPath));
         alliance.imgPath = "/public/upload/img/" + req.files.file[0].filename;
     }
+
     alliance.name = name;
     alliance.description = description;
-    writeJsonFile(json);
+    
+    await Alliance.updateOne({
+        _id: id
+    }, alliance);
+
     res.redirect("/admin/alliances");
 }
 
-const deleteAlliance = (req, res) => {
-    const alliancesList = readJsonFile().alliances;
+const deleteAlliance = async (req, res) => {
     const { id } = req.params;
-    let alliance = null;
-    alliancesList.forEach(a => a.id == id ? alliance = a : null);
+    let alliance = await Alliance.findById(id);
+
     res.render("admin/alliances/delete", { title: "Delete alliance", data: alliance });
 }
 
-const confirmDeleteAlliance = (req, res) => {
-    const json = readJsonFile();
+const confirmDeleteAlliance = async (req, res) => {
     const { id } = req.params;
-    let alliances = [];
-    json.alliances.forEach(a => a.id != id ? alliances.push(a) : fs.unlinkSync(path.join(__dirname, "..", a.imgPath)));
-    json.alliances = alliances;
-    writeJsonFile(json);
+    let alliance = await Alliance.findById(id);
+
+    fs.unlinkSync(path.join(__dirname, "..", alliance.imgPath));
+    await Alliance.deleteOne({ _id: id });
+
     res.redirect("/admin/alliances");
 }
 

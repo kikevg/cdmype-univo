@@ -2,36 +2,28 @@ const path = require("path");
 const fs = require("fs");
 const bcrypt = require("bcrypt");
 
-const jsonFile = path.join(__dirname, "../db.json");
-
-const readJsonFileForUsers = () => {
-    return JSON.parse(fs.readFileSync(jsonFile, "utf-8")).users;
-}
+const User = require("../models/User");
 
 const login = (req, res) => {
     res.render("admin/login");
 }
 
-const verifyLogin = (req, res) => {
-    const users = readJsonFileForUsers();
+const verifyLogin = async (req, res) => {
+
     const { username, password } = req.body;
-    let user = null;
-    users.forEach(us => {
-        if (us.username == username) {
-            user = us;
-        }
-    });
+    const user = await User.findOne({ username: username });
+
     if (!user) {
         req.flash("error_message", "El usuario no existe");
         res.redirect("/admin");
     } else {
         bcrypt.compare(password, user.password, (err, same) => {
             if (err) {
-                console.logo("Error: " + err);
+                console.log("Error: " + err);
             } else {
                 if (same) {
                     req.session.user = {
-                        id: user.id,
+                        id: user._id,
                         name: user.name
                     };
                     res.redirect("/admin/home");

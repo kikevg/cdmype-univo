@@ -4,6 +4,8 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const path = require("path");
 const multer = require("multer");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 const indexRoute = require("./routes/indexRoute");
 const adminRoute = require("./routes/adminRoute");
@@ -11,9 +13,21 @@ const adminRoute = require("./routes/adminRoute");
 const app = express();
 
 // settings
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3500);
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
+
+const uri = process.env.DB_URI;
+
+const DbConnect = async () => {
+    await mongoose.connect(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+    console.log("connected");
+}
+
+DbConnect().catch(err => console.log(err));
 
 // middlewares
 app.use(morgan("dev"));
@@ -45,7 +59,7 @@ const diskStorage = multer.diskStorage({
 app.use(multer({
     storage: diskStorage,
     fileFilter: (req, file, cb) => {
-        const extentions = [".jpg", ".jpeg", ".png", ".gif"];
+        const extentions = [".jpg", ".jpeg", ".png", ".gif", ".svg"];
         let isValid = false;
         const fileExt = path.extname(file.originalname);
         extentions.forEach(e => {
