@@ -3,16 +3,6 @@ const fs = require("fs");
 
 const Employee = require("../models/Employee");
 
-const jsonFile = path.join(__dirname, "../db.json");
-
-const readJsonFile = () => {
-    return JSON.parse(fs.readFileSync(jsonFile, "utf-8"));
-}
-
-const writeJsonFile = (data) => {
-    fs.writeFileSync(jsonFile, JSON.stringify(data), "utf-8");
-}
-
 const getEmployees = async (req, res) => {
 
     const employeesList = await Employee.find();
@@ -32,17 +22,20 @@ const addEmployee = (req, res) => {
 
 const confirmAddEmployee = async (req, res) => {
     const { name, position, email, phone, description } = req.body;
-    let filename = "";
-    if (req.files)
-        filename = req.files.file[0].filename
+    let imgPath = "";
+
+    if (req.files.file)
+        imgPath = "/public/upload/img/" + req.files.file[0].filename
+
     const newEmployee = {
         name: name,
         position: position,
         email: email,
         phone: phone,
         description: description,
-        imgPath: "/public/upload/img/" + filename
+        imgPath: imgPath
     };
+
     const employee = new Employee(newEmployee);
     await employee.save();
 
@@ -59,8 +52,11 @@ const confirmUpdateEmployee = async (req, res) => {
     const { id, name, position, email, phone, description } = req.body;
     let employee = await Employee.findById(id);
 
-    if (req.files) {
-        fs.unlinkSync(path.join(__dirname, "..", employee.imgPath));
+    if (req.files.file) {
+        if (employee.imgPath != "")
+            if (fs.existsSync(path.join(__dirname, "..", employee.imgPath)))
+                fs.unlinkSync(path.join(__dirname, "..", employee.imgPath));
+                
         employee.imgPath = "/public/upload/img/" + req.files.file[0].filename;
     }
 
@@ -84,7 +80,10 @@ const deleteEmployee = async (req, res) => {
 const confirmDeleteEmployee = async (req, res) => {
     const { id } = req.params;
     const employee = await Employee.findById(id);
-    fs.unlinkSync(path.join(__dirname, "..", employee.imgPath));
+
+    if (employee.imgPath != "")
+        if (fs.existsSync(path.join(__dirname, "..", employee.imgPath)))
+            fs.unlinkSync(path.join(__dirname, "..", employee.imgPath));
 
     await Employee.deleteOne({ _id: id });
     res.redirect("/admin/employees");

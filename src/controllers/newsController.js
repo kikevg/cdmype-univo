@@ -23,7 +23,8 @@ const addNews = (req, res) => {
 const confirmAddNews = async (req, res) => {
     const { title, description, category } = req.body;
     let images = [];
-    if (req.files)
+
+    if (req.files.file)
         req.files.file.forEach(f => images.push("/public/upload/img/" + f.filename))
 
     const news = {
@@ -69,7 +70,12 @@ const confirmDeleteNews = async (req, res) => {
     const { id } = req.params;
     let news = await News.findById(id);
 
-    news.images.forEach(i => fs.unlinkSync(path.join(__dirname, "..", i)));
+    if (news.images) {
+        news.images.forEach(i => {
+            if (fs.existsSync(path.join(__dirname, "..", i)))
+                fs.unlinkSync(path.join(__dirname, "..", i))
+        });
+    }
 
     await News.deleteOne({ _id: id });
 

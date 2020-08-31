@@ -21,10 +21,15 @@ const addAlliance = (req, res) => {
 
 const confirmAddAlliance = async (req, res) => {
     const { name, description } = req.body;
+    let imgPath = "";
+
+    if (req.files.file)
+        imgPath = "/public/upload/img/" + req.files.file[0].filename;
+
     const newAlliance = {
         name: name,
         description: description,
-        imgPath: "/public/upload/img/" + req.files.file[0].filename
+        imgPath: imgPath
     };
 
     const alliance = new Alliance(newAlliance);
@@ -43,8 +48,11 @@ const confirmUpdateAlliance = async (req, res) => {
     const { id, name, description } = req.body;
     let alliance = await Alliance.findById(id);
 
-    if (req.files) {
-        fs.unlinkSync(path.join(__dirname, "..", alliance.imgPath));
+    if (req.files.file) {
+        if (alliance.imgPath != "")
+            if (fs.existsSync(path.join(__dirname, "..", alliance.imgPath)))
+                fs.unlinkSync(path.join(__dirname, "..", alliance.imgPath));
+
         alliance.imgPath = "/public/upload/img/" + req.files.file[0].filename;
     }
 
@@ -69,7 +77,10 @@ const confirmDeleteAlliance = async (req, res) => {
     const { id } = req.params;
     let alliance = await Alliance.findById(id);
 
-    fs.unlinkSync(path.join(__dirname, "..", alliance.imgPath));
+    if (alliance.imgPath != "")
+        if (fs.existsSync(path.join(__dirname, "..", alliance.imgPath)))
+            fs.unlinkSync(path.join(__dirname, "..", alliance.imgPath));
+
     await Alliance.deleteOne({ _id: id });
 
     res.redirect("/admin/alliances");

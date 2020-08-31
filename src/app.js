@@ -13,7 +13,7 @@ const adminRoute = require("./routes/adminRoute");
 const app = express();
 
 // settings
-app.set("port", process.env.PORT || 3500);
+app.set("port", process.env.PORT || 3000);
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 

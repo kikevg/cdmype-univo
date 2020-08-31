@@ -25,12 +25,17 @@ const addBusiness = (req, res) => {
 const confirmAddBusiness = async (req, res) => {
     const { businessName, own, fundationYear, description } = req.body;
     const { file } = req.files;
+    let imgPath = "";
+
+    if (file)
+        imgPath = "/public/upload/img/" + file[0].filename;
+
     const newBusiness = {
         name: businessName,
         own: own,
         yearFundation: fundationYear,
         description: description,
-        imgPath: "/public/upload/img/" + file[0].filename
+        imgPath: imgPath
     };
 
     const business = new Business(newBusiness);
@@ -51,9 +56,13 @@ const confirmUpdateBusiness = async (req, res) => {
 
     let business = await Business.findById(id);
 
-    if (req.files) {
-        const url = path.join(__dirname, ".." + business.imgPath);
-        fs.unlinkSync(url);
+    if (req.files.file) {
+        if (business.imgPath != "") {
+            if (fs.existsSync(path.join(__dirname, "..", business.imgPath))) {
+                const url = path.join(__dirname, ".." + business.imgPath);
+                fs.unlinkSync(url);
+            }
+        }
         business.imgPath = "/public/upload/img/" + req.files.file[0].filename;
     }
 
@@ -80,7 +89,10 @@ const confirmDeleteBusiness = async (req, res) => {
     const { id } = req.params;
     let business = await Business.findById(id);
 
-    fs.unlinkSync(path.join(__dirname, ".." + business.imgPath));
+    if (business.imgPath != "")
+        if (fs.existsSync(path.join(__dirname, "..", business.imgPath)))
+            fs.unlinkSync(path.join(__dirname, ".." + business.imgPath));
+        
     await Business.deleteOne({ _id: id});
 
     res.redirect("/admin/business");
