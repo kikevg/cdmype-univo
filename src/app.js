@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const session = require("express-session");
 const flash = require("connect-flash");
 const path = require("path");
+const fs = require("fs");
 const multer = require("multer");
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -47,8 +48,13 @@ app.use((req, res, next) => {
 });
 const diskStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const uploadPath = path.join(__dirname, "public", "upload", "img");
-        cb(null, uploadPath);
+
+        const uploadDir = path.join(__dirname, "public", "upload", "img");
+
+        if (!fs.existsSync(uploadDir))
+            fs.mkdirSync(uploadDir, { recursive: true })
+
+        cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1E9);
