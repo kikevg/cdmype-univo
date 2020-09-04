@@ -7,6 +7,7 @@ const fs = require("fs");
 const multer = require("multer");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const cloudinary = require("cloudinary").v2;
 
 const indexRoute = require("./routes/indexRoute");
 const adminRoute = require("./routes/adminRoute");
@@ -18,10 +19,8 @@ app.set("port", process.env.PORT || 3000);
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
-const uri = process.env.DB_URI;
-
 const DbConnect = async () => {
-    await mongoose.connect(uri, {
+    await mongoose.connect(process.env.DB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
@@ -29,6 +28,12 @@ const DbConnect = async () => {
 }
 
 DbConnect().catch(err => console.log(err));
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_crecret: process.env.CLOUDINARY_API_SECRET
+})
 
 // middlewares
 app.use(morgan("dev"));
@@ -49,7 +54,7 @@ app.use((req, res, next) => {
 const diskStorage = multer.diskStorage({
     destination: (req, file, cb) => {
 
-        const uploadDir = path.join(__dirname, "public", "upload", "img");
+        const uploadDir = path.join(__dirname, "public", "upload", "temp");
 
         if (!fs.existsSync(uploadDir))
             fs.mkdirSync(uploadDir, { recursive: true })

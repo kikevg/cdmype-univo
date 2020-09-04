@@ -8,23 +8,36 @@ block breadcrumbItem
     li.breadcrumb-item.active
         span Detalles de alianza
 block content
-    section.custom-padding-1.bg-white
+    section
         .container
             if data
-                img(src=""+ data.imgPath +"", alt="" class="img-fluid")
-                .py-5
-                    span.d-block.text-muted Nombre
-                    h2.text-primary.display-4.font-weight-bold= data.name
-                    span.d-block.text-muted Descripcion
-                    p.text-primary= data.description
-                a(href="/admin/alliances/update/" + data.id class="btn btn-light py-3 px-4 mr-3")
-                    i.fa.fa-pencil.text-primary
-                    | &nbsp;
-                    span.text-primary Editar
-                a(href="/admin/alliances/delete/" + data.id class="btn btn-light py-3 px-4 mr-3")
-                    i.fa.fa-trash.text-danger
-                    | &nbsp;
-                    span.text-danger Eliminar
+
+                 .card
+                    .card-header.bg-white.d-flex.justify-content-between
+                        h4.text-primary.font-weight-bold Detalles de la alianza
+                        .text-right
+                            a(href="/admin/alliances/update/" + data.id class="btn bg-blue py-3 px-5 mr-3")
+                                i.fa.fa-pencil.text-primary
+                                | &nbsp;
+                                span.text-primary Editar
+                            a(href="/admin/alliances/delete/" + data.id class="btn bg-red py-3 px-5")
+                                i.fa.fa-trash.text-danger
+                                | &nbsp;
+                                span.text-danger Eliminar
+                    .card-body
+                        table.table.table-bordered
+                            tr
+                                td(colspan="2" class="font-weight-bold text-center") Imagen
+                            tr
+                                td(colspan="2")
+                                    img(src= data.imgPath, alt="" class="img-fluid")
+                            tr
+                                td.font-weight-bold Nombre
+                                td= data.name
+                            tr
+                                td(colspan="2" class="font-weight-bold text-center") Descripcion
+                            tr
+                                td(colspan="2")= data.description
             else
                 .text-center
                     h2.text-primary.display-3.font-weight-bold No data available

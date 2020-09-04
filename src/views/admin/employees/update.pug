@@ -9,47 +9,50 @@ block breadcrumbItem
         span Agregar empleado
 
 block content
-    section.custom-padding-1
+    section
         .container
-            h2.text-primary.font-weight-bold.py-5 Actualizar datos del empleado
-            form(action="/admin/employees/update", method="post" enctype="multipart/form-data")
-                .row
-                    .col-sm-12.col-md-6.col-lg-4
-                        img(src= data.imgPath alt="" class="d-block img-fluid")
-                        br
-                        label(for="" class="font-weight-bold") Fotografía del empleado (800 x 800)
-                            span.text-danger &nbsp; *
-                        .custom-file
-                            input(type="file" name="file" class="custom-file-input" id="customFile")
-                            label(for="customFile" class="custom-file-label") Choose file
-                    .col-sm-12.col-md-6.col-lg-8
-                        .form-group
-                            input(type="hidden" name="id" value= data.id)
-                            .row
-                                .col-sm-12.col-lg-6
-                                    label(for="" class="font-weight-bold") Nombre del empleado
+            .card
+                .card-header.bg-white
+                    h2.text-primary.font-weight-bold Actualizar datos del empleado
+                .card-body
+                    form(action="/admin/employees/update", method="post" enctype="multipart/form-data")
+                        .row
+                            .col-sm-12.col-md-6.col-lg-4
+                                img(src= data.imgPath alt="" class="d-block img-fluid")
+                                br
+                                label(for="" class="font-weight-bold") Fotografía del empleado (800 x 800)
+                                    span.text-danger &nbsp; *
+                                .custom-file
+                                    input(type="file" name="file" class="custom-file-input" id="customFile")
+                                    label(for="customFile" class="custom-file-label") Choose file
+                            .col-sm-12.col-md-6.col-lg-8
+                                .form-group
+                                    input(type="hidden" name="id" value= data.id)
+                                    .row
+                                        .col-sm-12.col-lg-6
+                                            label(for="" class="font-weight-bold") Nombre del empleado
+                                                span.text-danger &nbsp; *
+                                            input(type="text" name="name" value= data.name class="form-control border-0 bg-light py-4")
+                                        .col-sm-12.col-lg-6
+                                            label(for="" class="font-weight-bold") Cargo que ocupa
+                                                span.text-danger &nbsp; *
+                                            input(type="text" name="position" value= data.position class="form-control border-0 bg-light py-4")
+                                .form-group
+                                    .row
+                                        .col-sm-12.col-lg-6
+                                            label(for="" class="font-weight-bold") Email
+                                                span.text-danger &nbsp; *
+                                            input(type="email" name="email" value= data.email class="form-control border-0 bg-light py-4")
+                                        .col-sm-12.col-lg-6
+                                            label(for="" class="font-weight-bold") Telefono
+                                                span.text-danger &nbsp; *
+                                            input(type="tel" name="phone" value= data.phone class="form-control border-0 bg-light py-4")
+                                .form-group
+                                    label(for="" class="font-weight-bold") Descripción
                                         span.text-danger &nbsp; *
-                                    input(type="text" name="name" value= data.name class="form-control border-0 bg-light py-4")
-                                .col-sm-12.col-lg-6
-                                    label(for="" class="font-weight-bold") Cargo que ocupa
-                                        span.text-danger &nbsp; *
-                                    input(type="text" name="position" value= data.position class="form-control border-0 bg-light py-4")
-                        .form-group
-                            .row
-                                .col-sm-12.col-lg-6
-                                    label(for="" class="font-weight-bold") Email
-                                        span.text-danger &nbsp; *
-                                    input(type="email" name="email" value= data.email class="form-control border-0 bg-light py-4")
-                                .col-sm-12.col-lg-6
-                                    label(for="" class="font-weight-bold") Telefono
-                                        span.text-danger &nbsp; *
-                                    input(type="tel" name="phone" value= data.phone class="form-control border-0 bg-light py-4")
-                        .form-group
-                            label(for="" class="font-weight-bold") Descripción
-                                span.text-danger &nbsp; *
-                            textarea(name="description", cols="30", rows="10" class="form-control border-0 bg-light")= data.description
-                .form-group.text-center
-                    button(type="submit" class="btn btn-primary py-3 px-5 mr-3") Actualizar
-                    a(href="/admin/employees" class="btn btn-secondary py-3 px-5") Cancelar
+                                    textarea(name="description", cols="30", rows="10" class="form-control border-0 bg-light")= data.description
+                        .form-group.text-center
+                            button(type="submit" class="btn btn-primary py-3 px-5 mr-3") Actualizar
+                            a(href="/admin/employees" class="btn btn-secondary py-3 px-5") Cancelar
 block scripts
     script(src="/public/js/fileinput.js")

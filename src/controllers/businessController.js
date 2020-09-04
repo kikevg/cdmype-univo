@@ -1,5 +1,4 @@
-const path = require("path");
-const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
 
 const Business = require("../models/Business");
 
@@ -11,7 +10,7 @@ const getBusiness = async (req, res) => {
 }
 
 const getBusinessById = async (req, res) => {
-  
+
     const { id } = req.params;
     const business = await Business.findById(id);
 
@@ -25,21 +24,29 @@ const addBusiness = (req, res) => {
 const confirmAddBusiness = async (req, res) => {
     const { businessName, own, fundationYear, description } = req.body;
     const { file } = req.files;
-    let imgPath = "";
+    let url = "";
 
-    if (file)
-        imgPath = "/public/upload/img/" + file[0].filename;
+    if (file) {
+        try {
+            const cloudinaryResponse = await cloudinary.uploader.upload(file[0].path, { secure: true });
+            url = cloudinaryResponse.url;
+        } catch (err) {
+            throw new Error(err);
+        }
+    }
 
     const newBusiness = {
         name: businessName,
         own: own,
         yearFundation: fundationYear,
         description: description,
-        imgPath: imgPath
+        imgPath: url
     };
 
     const business = new Business(newBusiness);
     await business.save();
+
+    req.flash("success_message", "Datos guardados exitosamente");
 
     res.redirect("/admin/business/add");
 }
@@ -47,23 +54,24 @@ const confirmAddBusiness = async (req, res) => {
 const updateBusiness = async (req, res) => {
     const { id } = req.params;
     const business = await Business.findById(id);
-  
+
     res.render("admin/business/update", { title: "Business Details", data: business });
 }
 
 const confirmUpdateBusiness = async (req, res) => {
     const { id, businessName, description, own, fundationYear } = req.body;
+    const { file } = req.files;
 
     let business = await Business.findById(id);
 
-    if (req.files.file) {
-        if (business.imgPath != "") {
-            if (fs.existsSync(path.join(__dirname, "..", business.imgPath))) {
-                const url = path.join(__dirname, ".." + business.imgPath);
-                fs.unlinkSync(url);
-            }
+    if (file) {
+        try {
+            const cloudinaryResponse = await cloudinary.uploader.upload(file[0].path, { secure: true });
+            await cloudinary.uploader.destroy(business.imgPath.split("/").pop().split(".")[0]);
+            business.imgPath = cloudinaryResponse.url;
+        } catch (err) {
+            throw new Error(err);
         }
-        business.imgPath = "/public/upload/img/" + req.files.file[0].filename;
     }
 
     business.name = businessName;
@@ -74,6 +82,8 @@ const confirmUpdateBusiness = async (req, res) => {
     await Business.updateOne({
         _id: id
     }, business);
+
+    req.flash("success_message", "Datos actualizados exitosamente");
 
     res.redirect("/admin/business");
 }
@@ -90,10 +100,11 @@ const confirmDeleteBusiness = async (req, res) => {
     let business = await Business.findById(id);
 
     if (business.imgPath != "")
-        if (fs.existsSync(path.join(__dirname, "..", business.imgPath)))
-            fs.unlinkSync(path.join(__dirname, ".." + business.imgPath));
-        
-    await Business.deleteOne({ _id: id});
+        await cloudinary.uploader.destroy(business.imgPath.split("/").pop().split(".")[0]);
+
+    await Business.deleteOne({ _id: id });
+
+    req.flash("success_message", "Datos eliminados exitosamente");
 
     res.redirect("/admin/business");
 }

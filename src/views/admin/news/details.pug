@@ -1,9 +1,16 @@
 extends ../shared.pug
 
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home") Home
+    li.breadcrumb-item
+        a(href="/admin/news") Noticias
+    li.breadcrumb-item.active
+        span Detalles de noticia
 
 block content
     //- section 1
-    section.pb-5.bg-white.custom-padding-1
+    section
         .container
             .row
                 .col-sm-12.col-lg-8
@@ -24,7 +31,7 @@ block content
                                         i.fas.fa-chevron-right
                             else
                                 img(src= news.images[0], alt="" class="card-img-top")
-                            .card-body.p-0
+                            .card-body
                                 h4.card-title.text-primary.font-weight-bold.display-3= news.title
                                 p= news.description
                     else

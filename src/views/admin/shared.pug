@@ -10,10 +10,13 @@ html(lang="es")
         link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap")
         //- font awesome
         script(src="https://kit.fontawesome.com/2b5123bf0f.js")
+
+        link(rel="stylesheet", href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css")
+
         block links
         //- custom css
         link(rel="stylesheet", href="/public/css/style.css")
-    body.m-0.m-lg-5
+    body.bg-light
 
         //- navigation
         header
@@ -36,14 +39,20 @@ html(lang="es")
                             li.nav-item
                                 a(href="/admin/news" class="nav-link") Noticias
                             li.nav-item
-                                a(href="/admin/logout" class="btn btn-secondary") Logout
-            main
-                nav.container
-                    ol.breadcrumb.bg-white
+                                a(href="/admin/logout" class="btn border") Logout
+            main.py-5
+                nav.pb-5.container
+                    ol.breadcrumb
                         block breadcrumbItem
                 block content    
         //- jquery
         script(src="https://code.jquery.com/jquery-3.5.1.min.js")
         //- bootstrap
         script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+
+        script(src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js")
+        script(src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js")
+
+        script(src="/public/js/datatable.js")
+
         block scripts

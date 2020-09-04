@@ -8,35 +8,44 @@ block breadcrumbItem
     li.breadcrumb-item.active
         span Agregar noticia
 block content
-    section.custom-padding-1
+    section
         .container
-            h2.text-primary.font-weight-bold Agregar noticia
-            form(action="/admin/news/add", method="post" class="py-5" enctype="multipart/form-data")
-                .form-group
-                    .row
-                        .col-sm-12.col-lg-4
-                            label(for="" class="font-weight-bold") Titulo
+
+            if success_message != null
+                .alert.alert-success.alert-dismissible.fade.show= success_message
+                    button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                        span(aria-hidden="true") &times;
+
+            .card
+                .card-header.bg-white
+                    h2.text-primary.font-weight-bold Agregar noticia
+                .card-body
+                    form(action="/admin/news/add", method="post" class="py-5" enctype="multipart/form-data")
+                        .form-group
+                            .row
+                                .col-sm-12.col-lg-4
+                                    label(for="" class="font-weight-bold") Titulo
+                                        | &nbsp;
+                                        span.text-danger *
+                                    input(type="text" name="title" class="form-control bg-light border-0 py-4")
+                                .col-sm-12.col-lg-4
+                                    label(for="" class="font-weight-bold") Categoria
+                                        | &nbsp;
+                                        span.text-danger *
+                                    input(type="text" name="category" class="form-control bg-light border-0 py-4")
+                                .col-sm-12.col-lg-4
+                                    label(for="" class="font-weight-bold") Fotografías (800 x 800)
+                                        span.text-danger &nbsp; *
+                                    .custom-file
+                                        input(type="file" name="file" class="custom-file-input" id="customFile" multiple)
+                                        label(for="customFile" class="custom-file-label") Choose file
+                        .form-group
+                            label(for="" class="font-weight-bold") Descripcion
                                 | &nbsp;
                                 span.text-danger *
-                            input(type="text" name="title" class="form-control bg-light border-0 py-4")
-                        .col-sm-12.col-lg-4
-                            label(for="" class="font-weight-bold") Categoria
-                                | &nbsp;
-                                span.text-danger *
-                            input(type="text" name="category" class="form-control bg-light border-0 py-4")
-                        .col-sm-12.col-lg-4
-                            label(for="" class="font-weight-bold") Fotografías (800 x 800)
-                                span.text-danger &nbsp; *
-                            .custom-file
-                                input(type="file" name="file" class="custom-file-input" id="customFile" multiple)
-                                label(for="customFile" class="custom-file-label") Choose file
-                .form-group
-                    label(for="" class="font-weight-bold") Descripcion
-                        | &nbsp;
-                        span.text-danger *
-                    textarea(name="description", cols="30", rows="5" class="form-control bg-light border-0")
-                .form-group
-                    button(type="submit" class="btn btn-primary py-3 px-5 mr-3") Guardar
-                    a(href="/admin/news" class="btn btn-secondary py-3 px-5") Cancelar
+                            textarea(name="description", cols="30", rows="5" class="form-control bg-light border-0")
+                        .form-group
+                            button(type="submit" class="btn btn-primary py-3 px-5 mr-3") Guardar
+                            a(href="/admin/news" class="btn btn-secondary py-3 px-5") Cancelar
 block scripts
     script(src="/public/js/fileinput.js")

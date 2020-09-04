@@ -8,42 +8,47 @@ block breadcrumbItem
     li.breadcrumb-item.active
         span Agregar empresa
 block content
-    section.custom-padding-1
+    section
         .container
+
             if success_message != null
-                    .alert.alert-success.alert-dismissible.fade.show= success_message
-                        button(type="button" class="close" data-dismiss="alert" aria-label="Close")
-                            span(aria-hidden="true") &times;
-            h2.text-primary.font-weight-bold.py-5 Agregar nueva empresa
-            form(action="/admin/business/add", method="post" enctype="multipart/form-data")
-                .form-group
-                    .row
-                        .col-sm-12.col-lg-6
-                            label(for="" class="font-weight-bold") Nombre de la empresa
+                .alert.alert-success.alert-dismissible.fade.show= success_message
+                    button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                        span(aria-hidden="true") &times;
+
+            .card
+                .card-header.bg-white
+                    h2.text-primary.font-weight-bold Agregar nueva empresa
+                .card-body
+                    form(action="/admin/business/add", method="post" enctype="multipart/form-data")
+                        .form-group
+                            .row
+                                .col-sm-12.col-lg-6
+                                    label(for="" class="font-weight-bold") Nombre de la empresa
+                                        span.text-danger &nbsp; *
+                                    input(type="text" name="businessName" class="form-control border-0 bg-light py-4")
+                                .col-sm-12.col-lg-6
+                                    label(for="" class="font-weight-bold") Propietario de la empresa
+                                        span.text-danger &nbsp; *
+                                    input(type="text" name="own" class="form-control border-0 bg-light py-4")
+                        .form-group
+                            .row
+                                .col-sm-12.col-lg-6
+                                    label(for="" class="font-weight-bold") Año de fundación
+                                        span.text-danger &nbsp; *
+                                    input(type="text" name="fundationYear" class="form-control border-0 bg-light py-4")
+                                .col-sm-12.col-lg-6
+                                    label(for="" class="font-weight-bold") Imagen de la empresa
+                                        span.text-danger &nbsp; *
+                                    .custom-file
+                                        input(type="file" name="file" class="custom-file-input" id="customFile")
+                                        label(for="customFile" class="custom-file-label") Choose file
+                        .form-group
+                            label(for="" class="font-weight-bold") Descripción
                                 span.text-danger &nbsp; *
-                            input(type="text" name="businessName" class="form-control border-0 bg-light py-4")
-                        .col-sm-12.col-lg-6
-                            label(for="" class="font-weight-bold") Propietario de la empresa
-                                span.text-danger &nbsp; *
-                            input(type="text" name="own" class="form-control border-0 bg-light py-4")
-                .form-group
-                    .row
-                        .col-sm-12.col-lg-6
-                            label(for="" class="font-weight-bold") Año de fundación
-                                span.text-danger &nbsp; *
-                            input(type="text" name="fundationYear" class="form-control border-0 bg-light py-4")
-                        .col-sm-12.col-lg-6
-                            label(for="" class="font-weight-bold") Imagen de la empresa
-                                span.text-danger &nbsp; *
-                            .custom-file
-                                input(type="file" name="file" class="custom-file-input" id="customFile")
-                                label(for="customFile" class="custom-file-label") Choose file
-                .form-group
-                    label(for="" class="font-weight-bold") Descripción
-                        span.text-danger &nbsp; *
-                    textarea(name="description", cols="30", rows="10" class="form-control border-0 bg-light")
-                .form-group
-                    button(type="submit" class="btn btn-primary py-3 px-5 mr-3") Guardar
-                    a(href="/admin/business" class="btn btn-secondary py-3 px-5") Cancelar
+                            textarea(name="description", cols="30", rows="10" class="form-control border-0 bg-light")
+                        .form-group
+                            button(type="submit" class="btn btn-primary py-3 px-5 mr-3") Guardar
+                            a(href="/admin/business" class="btn btn-secondary py-3 px-5") Cancelar
 block scripts
     script(src="/public/js/fileinput.js")

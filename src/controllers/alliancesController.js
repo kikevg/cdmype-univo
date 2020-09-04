@@ -1,5 +1,4 @@
-const path = require("path");
-const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
 
 const Alliance = require("../models/Alliance");
 
@@ -21,21 +20,27 @@ const addAlliance = (req, res) => {
 
 const confirmAddAlliance = async (req, res) => {
     const { name, description } = req.body;
-    let imgPath = "";
+    const { file } = req.files;
 
-    if (req.files.file)
-        imgPath = "/public/upload/img/" + req.files.file[0].filename;
+    let url = "";
+
+    if (file) {
+        const cloudinaryRespose = await cloudinary.uploader.upload(file[0].path, { secure: true });
+        url = cloudinaryRespose.url;
+    }
 
     const newAlliance = {
         name: name,
         description: description,
-        imgPath: imgPath
+        imgPath: url
     };
 
     const alliance = new Alliance(newAlliance);
     await alliance.save();
 
-    res.redirect("/admin/alliances");
+    req.flash("success_message", "Datos agregados exitosamente");
+
+    res.redirect("/admin/alliances/add");
 }
 
 const updateAlliance = async (req, res) => {
@@ -46,14 +51,22 @@ const updateAlliance = async (req, res) => {
 
 const confirmUpdateAlliance = async (req, res) => {
     const { id, name, description } = req.body;
+    const { file } = req.files;
+
     let alliance = await Alliance.findById(id);
 
-    if (req.files.file) {
-        if (alliance.imgPath != "")
-            if (fs.existsSync(path.join(__dirname, "..", alliance.imgPath)))
-                fs.unlinkSync(path.join(__dirname, "..", alliance.imgPath));
+    if (file) {
 
-        alliance.imgPath = "/public/upload/img/" + req.files.file[0].filename;
+        try {
+
+            const cloudinaryRespose = await cloudinary.uploader.upload(file[0].path, { secure: true });
+            await cloudinary.uploader.destroy(alliance.imgPath.split("/").pop().split(".")[0]);
+            alliance.imgPath = cloudinaryRespose.url;
+
+        } catch (error) {
+            throw new Error(error);
+        }
+        
     }
 
     alliance.name = name;
@@ -62,6 +75,8 @@ const confirmUpdateAlliance = async (req, res) => {
     await Alliance.updateOne({
         _id: id
     }, alliance);
+
+    req.flash("success_message", "Datos actualizados exitosamente");
 
     res.redirect("/admin/alliances");
 }
@@ -78,10 +93,16 @@ const confirmDeleteAlliance = async (req, res) => {
     let alliance = await Alliance.findById(id);
 
     if (alliance.imgPath != "")
-        if (fs.existsSync(path.join(__dirname, "..", alliance.imgPath)))
-            fs.unlinkSync(path.join(__dirname, "..", alliance.imgPath));
+
+        try {
+            await cloudinary.uploader.destroy(alliance.imgPath.split("/").pop().split(".")[0]);
+        } catch (err) {
+            throw new Error(err);
+        }
 
     await Alliance.deleteOne({ _id: id });
+
+    req.flash("success_message", "Datos eliminados exitosamente");
 
     res.redirect("/admin/alliances");
 }

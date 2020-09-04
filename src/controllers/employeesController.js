@@ -1,5 +1,4 @@
-const path = require("path");
-const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
 
 const Employee = require("../models/Employee");
 
@@ -22,10 +21,20 @@ const addEmployee = (req, res) => {
 
 const confirmAddEmployee = async (req, res) => {
     const { name, position, email, phone, description } = req.body;
-    let imgPath = "";
+    const { file } = req.files;
 
-    if (req.files.file)
-        imgPath = "/public/upload/img/" + req.files.file[0].filename
+    let url = "";
+
+    if (file) {
+
+        try {
+            const cloudinaryRespose = await cloudinary.uploader.upload(file[0].path, { secure: true });
+            url = cloudinaryRespose.url;
+        } catch (err) {
+            throw new Error(err);
+        }        
+
+    }
 
     const newEmployee = {
         name: name,
@@ -33,13 +42,15 @@ const confirmAddEmployee = async (req, res) => {
         email: email,
         phone: phone,
         description: description,
-        imgPath: imgPath
+        imgPath: url
     };
 
     const employee = new Employee(newEmployee);
     await employee.save();
 
-    res.redirect("/admin/employees");
+    req.flash("success_message", "Datos agregados exitosamente");
+
+    res.redirect("/admin/employees/add");
 }
 
 const updateEmployee = async (req, res) => {
@@ -50,14 +61,15 @@ const updateEmployee = async (req, res) => {
 
 const confirmUpdateEmployee = async (req, res) => {
     const { id, name, position, email, phone, description } = req.body;
+    const { file } = req.files;
     let employee = await Employee.findById(id);
 
-    if (req.files.file) {
-        if (employee.imgPath != "")
-            if (fs.existsSync(path.join(__dirname, "..", employee.imgPath)))
-                fs.unlinkSync(path.join(__dirname, "..", employee.imgPath));
-                
-        employee.imgPath = "/public/upload/img/" + req.files.file[0].filename;
+    if (file) {
+        if (employee.imgPath != "") {
+            const cloudinaryRespose = await cloudinary.uploader.upload(file[0].path, { secure: true });
+            await cloudinary.uploader.destroy(employee.imgPath.split("/").pop().split(".")[0]);
+            employee.imgPath = cloudinaryRespose.url;
+        }
     }
 
     employee.name = name;
@@ -67,6 +79,8 @@ const confirmUpdateEmployee = async (req, res) => {
     employee.description = description;
 
     await Employee.updateOne({ _id: id }, employee);
+
+    req.flash("success_message", "Datos actualizados exitosamente");
 
     res.redirect("/admin/employees");
 }
@@ -82,10 +96,12 @@ const confirmDeleteEmployee = async (req, res) => {
     const employee = await Employee.findById(id);
 
     if (employee.imgPath != "")
-        if (fs.existsSync(path.join(__dirname, "..", employee.imgPath)))
-            fs.unlinkSync(path.join(__dirname, "..", employee.imgPath));
+        await cloudinary.uploader.destroy(employee.imgPath.split("/").pop().split(".")[0]);
 
     await Employee.deleteOne({ _id: id });
+
+    req.flash("success_message", "Datos eliminados exitosamente");
+
     res.redirect("/admin/employees");
 }
 

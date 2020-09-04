@@ -1,5 +1,4 @@
-const path = require("path");
-const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
 
 const News = require("../models/News");
 
@@ -22,10 +21,18 @@ const addNews = (req, res) => {
 
 const confirmAddNews = async (req, res) => {
     const { title, description, category } = req.body;
+    const { file } = req.files;
+
     let images = [];
 
-    if (req.files.file)
-        req.files.file.forEach(f => images.push("/public/upload/img/" + f.filename))
+    if (file) {
+
+        for (let i = 0; i < file.length; i++) {
+            const result = await cloudinary.uploader.upload(file[i].path, { secure: true });
+            images.push(result.url);
+        }
+
+    }
 
     const news = {
         title: title,
@@ -38,7 +45,9 @@ const confirmAddNews = async (req, res) => {
     const n = new News(news);
     await n.save();
 
-    res.redirect("/admin/news");
+    req.flash("success_message", "Datos agregados exitosamente");
+
+    res.redirect("/admin/news/add");
 }
 
 const updateNews = async (req, res) => {
@@ -55,7 +64,9 @@ const confirmUpdateNews = async (req, res) => {
     news.category = category;
     news.description = description;
 
-    await News.updateOne({ _id: id}, news);
+    await News.updateOne({ _id: id }, news);
+
+    req.flash("success_message", "Datos actualizados exitosamente");
 
     res.redirect("/admin/news");
 }
@@ -70,14 +81,13 @@ const confirmDeleteNews = async (req, res) => {
     const { id } = req.params;
     let news = await News.findById(id);
 
-    if (news.images) {
-        news.images.forEach(i => {
-            if (fs.existsSync(path.join(__dirname, "..", i)))
-                fs.unlinkSync(path.join(__dirname, "..", i))
-        });
-    }
+    if (news.images)
+        for (let i = 0; i < news.images.length; i++)
+            await cloudinary.uploader.destroy(news.images[i].split("/").pop().split(".")[0]);
 
     await News.deleteOne({ _id: id });
+
+    req.flash("success_message", "Datos eliminados exitosamente");
 
     res.redirect("/admin/news");
 }
@@ -92,4 +102,3 @@ module.exports = {
     deleteNews: deleteNews,
     confirmDeleteNews: confirmDeleteNews,
 };
-

@@ -13,22 +13,27 @@ html(lang="es")
         block links
         //- custom css
         link(rel="stylesheet", href="/public/css/style.css")
-    body
-        div(style="height: 100vh;" class="d-flex align-items-center justify-content-center")
-            //- login
-            div(style="width: 300px")
-                img(src="/public/img/cdmype.jpg", alt="" width="300" class="img-fluid my-5")
-                if error_message != null
-                    .alert.alert-danger.alert-dismissible.fade.show= error_message
-                        button(type="button" class="close" data-dismiss="alert" aria-label="Close")
-                            span(aria-hidden="true") &times;
-                form(action="/admin", method="post")
-                    .form-group
-                        input(type="text", name="username" class="form-control bg-light border-0 py-4" placeholder="Nombre de usuario")
-                    .form-group
-                        input(type="password", name="password" class="form-control bg-light border-0 py-4" placeholder="Contraseña")
-                    .form-group
-                        button(type="submit" class="btn btn-block btn-primary py-4") Iniciar sesion
+    body.bg-light
+        //- login
+        div(style="width: 400px" class="mx-auto mt-1")
+
+            if error_message != null
+                .alert.alert-danger.alert-dismissible.fade.show= error_message
+                    button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                        span(aria-hidden="true") &times;
+
+            .card
+                .card-body
+                    img(src="/public/img/cdmype.jpg", alt="" width="200" class="d-block mx-auto my-4 img-fluid")
+                    h4.text-center.text-primary.font-weight-bold Login
+                    br
+                    form(action="/admin", method="post")
+                        .form-group
+                            input(type="text", name="username" class="form-control" placeholder="Nombre de usuario")
+                        .form-group
+                            input(type="password", name="password" class="form-control" placeholder="Contraseña")
+                        .form-group
+                            button(type="submit" class="btn btn-block btn-primary py-3") Iniciar sesion
     //- jquery
     script(src="https://code.jquery.com/jquery-3.5.1.min.js")
     //- bootstrap

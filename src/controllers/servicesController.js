@@ -1,9 +1,4 @@
-const path = require("path");
-const fs = require("fs");
-
 const Service = require("../models/Service");
-
-const jsonFile = path.join(__dirname, "../db.json");
 
 const textColors = [
     "text-success",
@@ -20,14 +15,6 @@ const bgColors = [
     "bg-yellow",
     "bg-orange"
 ];
-
-const readJsonFile = () => {
-    return JSON.parse(fs.readFileSync(jsonFile, "utf-8"));
-}
-
-const writeJsonFile = (data) => {
-    fs.writeFileSync(jsonFile, JSON.stringify(data), "utf-8");
-}
 
 const getServices = async (req, res) => {
     const servicesList = await Service.find();
@@ -57,7 +44,9 @@ const confirmAddService = async (req, res) => {
     const service = new Service(newService);
     await service.save();
 
-    res.redirect("/admin/services");
+    req.flash("success_message", "Datos agregados exitosamente");
+
+    res.redirect("/admin/services/add");
 }
 
 const updateService = async (req, res) => {
@@ -85,6 +74,8 @@ const confirmUpdateService = async (req, res) => {
 
     await Service.updateOne({ _id: id }, service);
 
+    req.flash("success_message", "Datos actualizados exitosamente");
+
     res.redirect("/admin/services");
 }
 
@@ -98,6 +89,7 @@ const deleteService = async (req, res) => {
 const confirmDeleteService = async (req, res) => {
     const { id } = req.params;
     await Service.deleteOne({ _id: id });
+    req.flash("success_message", "Datos eliminados exitosamente");
     res.redirect("/admin/services");
 }
 
