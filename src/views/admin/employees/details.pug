@@ -2,53 +2,46 @@ extends ../shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Home
+        a(href="/admin/home") Inicio
     li.breadcrumb-item
         a(href="/admin/employees") Empleados
     li.breadcrumb-item.active
         span Detalles de empleado
 block content
     section
-        .container
-            if data
-                .card
-                    .card-header.bg-white.d-flex.justify-content-between
-                        h4.text-primary.font-weight-bold Detalles del empleado
-                        .text-right
-                            a(href="/admin/employees/update/" + data.id class="btn bg-blue py-3 px-5 mr-3")
-                                i.fa.fa-pencil.text-primary
-                                | &nbsp;
-                                span.text-primary Editar
-                            a(href="/admin/employees/delete/" + data.id class="btn bg-red py-3 px-5")
-                                i.fa.fa-trash.text-danger
-                                | &nbsp;
-                                span.text-danger Eliminar
-                    .card-body
-                        table.table.table-bordered
-                            tr
-                                td(colspan="2" class="font-weight-bold text-center") Imagen
-                            tr
-                                td(colspan="2")
-                                    img(src= data.imgPath, alt="" class="img-fluid")
-                            tr
-                                td.font-weight-bold Nombre
-                                td= data.name
-                            tr
-                                td.font-weight-bold Cargo
-                                td= data.position
-                            tr
-                                td.font-weight-bold Emial
-                                td= data.email
-                            tr
-                                td.font-weight-bold Telefono
-                                td= data.phone
-                            tr
-                                td(colspan="2" class="font-weight-bold text-center") Descripcion
-                            tr
-                                td(colspan="2")= data.description
-            else
-                .text-center
-                    h2.text-primary.display-3.font-weight-bold No data available
-                    br
-                    a(href="/employees" class="btn btn-secondary py-4 px-5") Regresar
+
+        if data
+
+            .card
+                .card-header.d-flex.justify-content-between
+                    h4.card-title Detalles del empleado
+                    .ml-auto
+                        a(href="/admin/employees/update/" + data.id class="text-decoration-none mr-3") Editar
+                        a(href="/admin/employees/delete/" + data.id class="text-decoration-none") Borrar
+                .card-body
+                    table.table.table-bordered
+                        tr
+                            td(class="font-weight-bold") Imagen
+                            td
+                                img(src= data.imgPath class="img-fluid")
+                        tr
+                            td.font-weight-bold Nombre
+                            td= data.name
+                        tr
+                            td.font-weight-bold Cargo
+                            td= data.position
+                        tr
+                            td.font-weight-bold Emial
+                            td= data.email
+                        tr
+                            td.font-weight-bold Telefono
+                            td= data.phone
+                        tr
+                            td(class="font-weight-bold") Descripcion
+                            td !{data.description}
+        else
+            .text-center
+                h2.text-primary.display-3.font-weight-bold No data available
+                br
+                a(href="/employees" class="btn btn-secondary py-4 px-5") Regresar
 block scripts

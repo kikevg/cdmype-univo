@@ -1,0 +1,34 @@
+extends ../shared.pug
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home") Inicio
+    li.breadcrumb-item
+        a(href="/admin/alliances") Carousel
+    li.breadcrumb-item.active
+        span Eliminar de imagen
+block content
+    section
+        
+        if image
+            .row
+                .col-sm-12.col-lg-5
+                    .card
+                        img(src=""+ image.imgPath +"", alt="" class="card-img-top")
+                        .card-body
+                            span.d-block.text-muted Nombre
+                            h2.display-4= image.name
+                            span.d-block.text-muted Descripcion
+                            div !{image.description}
+                .col-sm-12.col-lg-7
+                    h2.text-danger.font-weight-bold.display-4 Deseas eliminar este registro?
+                    .py-4
+                    a(href="/admin/carousel/delete/confirm/" + image.id class="btn btn-outline-danger mr-3")
+                        i.fa.fa-trash
+                        | &nbsp;
+                        span Confirmar
+                    a(href="/admin/carousel" class="btn bg-white")
+                        i.fa.fa-arrow-left.text-primary
+                        | &nbsp;
+                        span Cancelar
+block scripts

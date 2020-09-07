@@ -2,47 +2,64 @@ extends ../shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Home
+        a(href="/admin/home") Inicio
     li.breadcrumb-item.active
         span Empleados
 
 block content
     section
-        .container
+    
+        include ../../common/buttonChangeView.pug
 
-            if success_message != null
-                .alert.alert-success.alert-dismissible.fade.show= success_message
-                    button(type="button" class="close" data-dismiss="alert" aria-label="Close")
-                        span(aria-hidden="true") &times;
+        include ../../common/messages.pug
 
+        .view-list
             .card
-                .card-header.bg-white.d-flex.justify-content-between
-                    h2.text-primary.font-weight-bold Lista de empleados
-                    a(href="/admin/employees/add" class="btn btn-primary py-3 px-4") Agregar empleado
-                .card-body
-                    table.table
+                .card-header
+                    h4.card-title Lista de empleados
+                .card-body.table-responsive
+                    table.table.table-bordered
                         thead
                             tr
-                                th Id
+                                th Nº
                                 th Nombre
                                 th Cargo
                                 th Acciones
                         tbody
                             if data.length > 0
-                                each val in data
+                                each val, i in data
                                     tr
-                                        td= val.id
+                                        td= i + 1
                                         td= val.name
                                         td= val.position
                                         td
                                             div.btn-group
-                                                a(href="/admin/employees/details/" + val.id class="btn btn-light")
-                                                    i.fa.fa-info.text-primary
-                                                a(href="/admin/employees/update/" + val.id class="btn btn-light")
-                                                    i.fa.fa-pencil.text-primary
-                                                a(href="/admin/employees/delete/" + val.id class="btn btn-light")
+                                                a(href="/admin/employees/details/" + val.id class="btn btn-light" title="info")
+                                                    i.fa.fa-info.text-dark
+                                                a(href="/admin/employees/update/" + val.id class="btn btn-light" title="editar")
+                                                    i.fa.fa-edit.text-dark
+                                                a(href="/admin/employees/delete/" + val.id class="btn btn-light" title="borrar")
                                                     i.fa.fa-trash.text-danger
-                            else
-                                tr
-                                    td(colspan="4")
-                                        h4.text-center.text-primary.font-weight-bold No hay datos
+        
+        div(class="d-none view-grid")
+            .card-columns
+                each val in data
+                    .card
+                        .row.no-gutters
+                            .col-md-4
+                                img(src= val.imgPath, alt="" class="card-img")
+                            .col-md-8
+                                .card-body
+                                    h4.card-title= val.name
+                                    br
+                                    p.text-muted= val.position
+                                    div.btn-group.btn-group-sm
+                                        a(href="/admin/employees/details/" + val.id class="btn btn-light" title="info")
+                                            i.fa.fa-info.text-dark
+                                        a(href="/admin/employees/update/" + val.id class="btn btn-light" title="editar")
+                                            i.fa.fa-edit.text-dark
+                                        a(href="/admin/employees/delete/" + val.id class="btn btn-light" title="borrar")
+                                            i.fa.fa-trash.text-danger
+
+block scripts
+    script(src="/public/js/changeview.js")

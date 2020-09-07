@@ -6,22 +6,29 @@ const getEmployees = async (req, res) => {
 
     const employeesList = await Employee.find();
 
-    res.render("admin/employees/list", { title: "Employees list", data: employeesList });
+    res.render("admin/employees/list", { title: "Lista de empleados", data: employeesList });
 }
 
 const getEmployeeById = async (req, res) => {
     const { id } = req.params;
     const employee = await Employee.findById(id);
-    res.render("admin/employees/details", { title: "Employee details", data: employee });
+    res.render("admin/employees/details", { title: "Detalles de empleado", data: employee });
 }
 
 const addEmployee = (req, res) => {
-    res.render("admin/employees/add", { title: "Add employee" });
+    res.render("admin/employees/add", { title: "Agregar empleado" });
 }
 
 const confirmAddEmployee = async (req, res) => {
     const { name, position, email, phone, description } = req.body;
     const { file } = req.files;
+
+    if (name == "" || position == "" || email == "" || phone == "" || description == "") {
+
+        req.flash("error_message", "Rellene todos los campos necesarios");
+        res.redirect("/admin/employees/add");
+        return;
+    }
 
     let url = "";
 
@@ -31,8 +38,11 @@ const confirmAddEmployee = async (req, res) => {
             const cloudinaryRespose = await cloudinary.uploader.upload(file[0].path, { secure: true });
             url = cloudinaryRespose.url;
         } catch (err) {
-            throw new Error(err);
-        }        
+
+            req.flash("error_message", err);
+            res.redirect("/admin/employees/add");
+
+        }
 
     }
 
@@ -56,7 +66,7 @@ const confirmAddEmployee = async (req, res) => {
 const updateEmployee = async (req, res) => {
     const { id } = req.params;
     let employee = await Employee.findById(id);
-    res.render("admin/employees/update", { title: "Update employee", data: employee });
+    res.render("admin/employees/update", { title: "Editar empleado", data: employee });
 }
 
 const confirmUpdateEmployee = async (req, res) => {
@@ -64,11 +74,24 @@ const confirmUpdateEmployee = async (req, res) => {
     const { file } = req.files;
     let employee = await Employee.findById(id);
 
+    if (name == "" || position == "" || email == "" || phone == "" || description == "") {
+
+        req.flash("error_message", "Rellene todos los campos necesarios");
+        res.redirect("/admin/employees/add");
+        return;
+        
+    }
+
     if (file) {
         if (employee.imgPath != "") {
-            const cloudinaryRespose = await cloudinary.uploader.upload(file[0].path, { secure: true });
-            await cloudinary.uploader.destroy(employee.imgPath.split("/").pop().split(".")[0]);
-            employee.imgPath = cloudinaryRespose.url;
+            try {
+                const cloudinaryRespose = await cloudinary.uploader.upload(file[0].path, { secure: true });
+                await cloudinary.uploader.destroy(employee.imgPath.split("/").pop().split(".")[0]);
+                employee.imgPath = cloudinaryRespose.url;
+            } catch (err) {
+                req.flash("error_message", err);
+                res.redirect("/admin/employees/update/" + id);
+            }
         }
     }
 
@@ -88,15 +111,21 @@ const confirmUpdateEmployee = async (req, res) => {
 const deleteEmployee = async (req, res) => {
     const { id } = req.params;
     let employee = await Employee.findById(id);
-    res.render("admin/employees/delete", { title: "Delete employee", data: employee });
+    res.render("admin/employees/delete", { title: "Borrar empleado", data: employee });
 }
 
 const confirmDeleteEmployee = async (req, res) => {
     const { id } = req.params;
     const employee = await Employee.findById(id);
 
-    if (employee.imgPath != "")
-        await cloudinary.uploader.destroy(employee.imgPath.split("/").pop().split(".")[0]);
+    if (employee.imgPath != "") {
+        try {
+            await cloudinary.uploader.destroy(employee.imgPath.split("/").pop().split(".")[0]);
+        } catch (err) {
+            req.flash("error_message", err);
+            res.redirect("/admin/employees/delete/" + id);
+        }
+    }
 
     await Employee.deleteOne({ _id: id });
 

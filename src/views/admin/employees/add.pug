@@ -1,8 +1,11 @@
 extends ../shared.pug
 
+block links
+    <link rel="stylesheet" href="/public/assets/plugins/summernote/summernote-bs4.css">
+
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Home
+        a(href="/admin/home") Inicio
     li.breadcrumb-item
         a(href="/admin/employees") Empleados
     li.breadcrumb-item.active
@@ -10,50 +13,48 @@ block breadcrumbItem
 
 block content
     section
-        .container
 
-            if success_message != null
-                .alert.alert-success.alert-dismissible.fade.show= success_message
-                    button(type="button" class="close" data-dismiss="alert" aria-label="Close")
-                        span(aria-hidden="true") &times;
+        include ../../common/messages.pug
 
-            .card
-                .card-header.bg-white
-                    h2.text-primary.font-weight-bold Agregar nuevo empleado
-                .card-body
-                    form(action="/admin/employees/add", method="post" enctype="multipart/form-data")
-                        .form-group
-                            .row
-                                .col-sm-12.col-lg-6
-                                    label(for="" class="font-weight-bold") Nombre del empleado
-                                        span.text-danger &nbsp; *
-                                    input(type="text" name="name" class="form-control border-0 bg-light py-4")
-                                .col-sm-12.col-lg-6
-                                    label(for="" class="font-weight-bold") Cargo que ocupa
-                                        span.text-danger &nbsp; *
-                                    input(type="text" name="position" class="form-control border-0 bg-light py-4")
-                        .form-group
-                            .row
-                                .col-sm-12.col-lg-4
-                                    label(for="" class="font-weight-bold") Email
-                                        span.text-danger &nbsp; *
-                                    input(type="email" name="email" class="form-control border-0 bg-light py-4")
-                                .col-sm-12.col-lg-4
-                                    label(for="" class="font-weight-bold") Telefono
-                                        span.text-danger &nbsp; *
-                                    input(type="tel" name="phone" class="form-control border-0 bg-light py-4")
-                                .col-sm-12.col-lg-4
-                                    label(for="" class="font-weight-bold") Fotografía del empleado (800 x 800)
-                                        span.text-danger &nbsp; *
-                                    .custom-file
-                                        input(type="file" name="file" class="custom-file-input" id="customFile")
-                                        label(for="customFile" class="custom-file-label") Choose file
-                        .form-group
-                            label(for="" class="font-weight-bold") Descripción
-                                span.text-danger &nbsp; *
-                            textarea(name="description", cols="30", rows="10" class="form-control border-0 bg-light")
-                        .form-group
-                            button(type="submit" class="btn btn-primary py-3 px-5 mr-3") Guardar
-                            a(href="/admin/employees" class="btn btn-secondary py-3 px-5") Cancelar
+        .card
+            .card-header
+                h2.card-title Agregar nuevo empleado
+            .card-body
+                form(action="/admin/employees/add", method="post" enctype="multipart/form-data")
+                    .form-group
+                        .row
+                            .col-sm-12.col-lg-6
+                                label(for="" class="font-weight-bold") Nombre del empleado
+                                    span.text-danger &nbsp; *
+                                input(type="text" name="name" required class="form-control")
+                            .col-sm-12.col-lg-6
+                                label(for="" class="font-weight-bold") Cargo que ocupa
+                                    span.text-danger &nbsp; *
+                                input(type="text" name="position" required class="form-control")
+                    .form-group
+                        .row
+                            .col-sm-12.col-lg-4
+                                label(for="" class="font-weight-bold") Email
+                                    span.text-danger &nbsp; *
+                                input(type="email" name="email" class="form-control")
+                            .col-sm-12.col-lg-4
+                                label(for="" class="font-weight-bold") Telefono
+                                    span.text-danger &nbsp; *
+                                input(type="tel" name="phone" class="form-control")
+                            .col-sm-12.col-lg-4
+                                label(for="" class="font-weight-bold") Fotografía del empleado (800 x 800)
+                                    span.text-danger &nbsp; *
+                                .custom-file
+                                    input(type="file" name="file" class="custom-file-input" id="customFile")
+                                    label(for="customFile" class="custom-file-label") Choose file
+                    .form-group
+                        label(for="" class="font-weight-bold") Descripción
+                            span.text-danger &nbsp; *
+                        textarea(name="description", cols="30", rows="10" class="textarea form-control" style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;")
+                    .form-group
+                        button(type="submit" class="btn btn-primary mr-3") Guardar
+                        a(href="/admin/employees" class="btn btn-default") Cancelar
 block scripts
     script(src="/public/js/fileinput.js")
+    <script src="/public/assets/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="/public/js/summernote.js"></script>

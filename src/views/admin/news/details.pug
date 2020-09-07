@@ -2,7 +2,7 @@ extends ../shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Home
+        a(href="/admin/home") Inicio
     li.breadcrumb-item
         a(href="/admin/news") Noticias
     li.breadcrumb-item.active
@@ -11,43 +11,41 @@ block breadcrumbItem
 block content
     //- section 1
     section
-        .container
-            .row
-                .col-sm-12.col-lg-8
-                    if news
-                        .card.mb-4.border-0
-                            if news.images.length > 1
-                                div(id="carousel-news" + i class="carousel slide" data-ride="carousel")
-                                    .carousel-inner
-                                        - let j = 0;
-                                        each img in news.images
-                                            - let classActive = (j == 0) ? "active" : "";
-                                            div(class="carousel-item " + classActive)
-                                                img(src= img alt="" class="d-block w-100 rounded-top")
-                                            - j = 1;
-                                    a(href="#carousel-news" + i class="carousel-control-prev" role="button" data-slide="prev")
-                                        i.fas.fa-chevron-left
-                                    a(href="#carousel-news" + i class="carousel-control-next" role="button" data-slide="next")
-                                        i.fas.fa-chevron-right
-                            else
-                                img(src= news.images[0], alt="" class="card-img-top")
-                            .card-body
-                                h4.card-title.text-primary.font-weight-bold.display-3= news.title
-                                p= news.description
-                    else
-                        h5.text-muted No hay datos
-                .col-sm-12.col-lg-4
-                    .card.mb-4.border-0
-                        .card-header.bg-white.border-0
-                            h4.card-title.text-primary.font-weight-bold Informacion
+
+        .row
+            .col-sm-12.col-lg-8
+                if news
+                    .card
+                        if news.images.length > 1
+                            div(id="carousel-news" + i class="carousel slide" data-ride="carousel")
+                                .carousel-inner
+                                    - let j = 0;
+                                    each img in news.images
+                                        - let classActive = (j == 0) ? "active" : "";
+                                        div(class="carousel-item " + classActive)
+                                            img(src= img alt="" class="d-block w-100 rounded-top")
+                                        - j = 1;
+                                a(href="#carousel-news" + i class="carousel-control-prev" role="button" data-slide="prev")
+                                    i.fas.fa-chevron-left
+                                a(href="#carousel-news" + i class="carousel-control-next" role="button" data-slide="next")
+                                    i.fas.fa-chevron-right
+                        else
+                            img(src= news.images[0], alt="" class="card-img-top")
                         .card-body
-                            if news
-                                ul.list-unstyled
-                                        li.d-inline-block.mr-3.my-2
-                                            span.d-block.text-muted.pb-2 Fecha de publicacion
-                                            span.badge.bg-blue.text-primary.p-2.rounded-pill= news.date
-                                        li.d-block.mr-3.my-2
-                                            span.d-block.text-muted.pb-2 Categoria
-                                            span.badge.bg-blue.text-primary.p-2.rounded-pill= news.category
-                            else
-                                h5.text-muted No hay datos
+                            h4.display-3= news.title
+                            div !{news.description}
+                else
+                    h5.text-muted No hay datos
+            .col-sm-12.col-lg-4
+                .card
+                    .card-header
+                        h4.card-title Informacion
+                    .card-body
+                        if news
+                            ul.list-unstyled
+                                    li.d-inline-block.mr-3.my-2
+                                        span.d-block.text-muted.pb-2 Fecha de publicacion
+                                        span.badge.bg-blue.text-primary.p-2.rounded-pill= news.date
+                                    li.d-block.mr-3.my-2
+                                        span.d-block.text-muted.pb-2 Categoria
+                                        span.badge.bg-blue.text-primary.p-2.rounded-pill= news.category

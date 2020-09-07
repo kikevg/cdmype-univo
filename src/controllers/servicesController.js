@@ -18,17 +18,18 @@ const bgColors = [
 
 const getServices = async (req, res) => {
     const servicesList = await Service.find();
-    res.render("admin/services/list", { title: "Services list", data: servicesList });
+    res.render("admin/services/list", { title: "Lista de servicio", data: servicesList });
 }
 
 const getServicesById = async (req, res) => {
     const { id } = req.params;
     let service = await Service.findById(id);
-    res.render("admin/services/details", { title: "Service Details", data: service });
+
+    res.render("admin/services/details", { title: "Detalles de servicio", data: service });
 }
 
 const addService = (req, res) => {
-    res.render("admin/services/add", { title: "Add service" });
+    res.render("admin/services/add", { title: "Agregar servicio" });
 }
 
 const confirmAddService = async (req, res) => {
@@ -59,7 +60,7 @@ const updateService = async (req, res) => {
         if (service.textColor == textColors[i])
             index = i;
     service.textColor = index;
-    res.render("admin/services/update", { title: "Service Details", data: service, colors: textColors });
+    res.render("admin/services/update", { title: "Editar servicio", data: service, colors: textColors });
 }
 
 const confirmUpdateService = async (req, res) => {
@@ -83,7 +84,7 @@ const deleteService = async (req, res) => {
     const { id } = req.params;
     let service = await Service.findById(id);
 
-    res.render("admin/services/delete", { title: "Service Details", data: service });
+    res.render("admin/services/delete", { title: "Borrar servicio", data: service });
 }
 
 const confirmDeleteService = async (req, res) => {

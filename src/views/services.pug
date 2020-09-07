@@ -29,7 +29,7 @@ block content
                             i(class="fa fa-" + val.icon + " fa-2x " + val.textColor)
                         div
                             h4(class="text-center.text-md-left " + val.textColor)= val.name
-                            p.text-muted.text-center.text-md-left= val.description
+                            div.text-muted.text-center.text-md-left !{val.description}
     //- section 3 -
     section.bg-white.custom-padding-1
         .container

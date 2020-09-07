@@ -1,54 +1,56 @@
 extends ../shared.pug
 
+block links
+    <link rel="stylesheet" href="/public/assets/plugins/summernote/summernote-bs4.css">
+
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Home
+        a(href="/admin/home") Inicio
     li.breadcrumb-item
         a(href="/admin/services") Servicios
     li.breadcrumb-item.active
         span Agregar servicio
 block content
     section
-        .container
 
-            if success_message != null
-                .alert.alert-success.alert-dismissible.fade.show= success_message
-                    button(type="button" class="close" data-dismiss="alert" aria-label="Close")
-                        span(aria-hidden="true") &times;
+        include ../../common/messages.pug
 
-            .card
-                .card-header.bg-white
-                    h2.text-primary.font-weight-bold Agregar servicio
-                .card-body
-                    form(action="/admin/services/add", method="post" class="py-5")
-                        .form-group
-                            .row
-                                .col-sm-12.col-lg-4
-                                    label(for="" class="font-weight-bold") Nombre
-                                        | &nbsp;
-                                        span.text-danger *
-                                    input(type="text" name="serviceName" class="form-control bg-light border-0 py-4")
-                                .col-sm-12.col-lg-4
-                                    label(for="" class="font-weight-bold") Icono
-                                        | &nbsp;
-                                        span.text-danger *
-                                    input(type="text" name="iconService" class="form-control bg-light border-0 py-4")
-                                .col-sm-12.col-lg-4
-                                    label(for="" class="font-weight-bold") Color de icono
-                                        | &nbsp;
-                                        span.text-danger *
-                                    select(name="iconColor" class="form-control bg-light border-0")
-                                        option(selected disabled) Selecciona una opcion
-                                        option(value="0") Verde
-                                        option(value="1") Azul
-                                        option(value="2") Rojo
-                                        option(value="3") Amarillo
-                                        option(value="4") Naranja
-                        .form-group
-                            label(for="" class="font-weight-bold") Descripcion
-                                | &nbsp;
-                                span.text-danger *
-                            textarea(name="description", cols="30", rows="5" class="form-control bg-light border-0")
-                        .form-group
-                            button(type="submit" class="btn btn-primary py-3 px-5 mr-3") Guardar
-                            a(href="/admin/services" class="btn btn-secondary py-3 px-5") Cancelar
+        .card
+            .card-header.bg-white
+                h2.card-title Agregar servicio
+            .card-body
+                form(action="/admin/services/add", method="post" class="")
+                    .form-group
+                        .row
+                            .col-sm-12.col-lg-4
+                                label(for="" class="font-weight-bold") Nombre
+                                    | &nbsp;
+                                    span.text-danger *
+                                input(type="text" name="serviceName" class="form-control")
+                            .col-sm-12.col-lg-4
+                                label(for="" class="font-weight-bold") Icono
+                                    | &nbsp;
+                                    span.text-danger *
+                                input(type="text" name="iconService" class="form-control")
+                            .col-sm-12.col-lg-4
+                                label(for="" class="font-weight-bold") Color de icono
+                                    | &nbsp;
+                                    span.text-danger *
+                                select(name="iconColor" class="form-control")
+                                    option(selected disabled) Selecciona una opcion
+                                    option(value="0") Verde
+                                    option(value="1") Azul
+                                    option(value="2") Rojo
+                                    option(value="3") Amarillo
+                                    option(value="4") Naranja
+                    .form-group
+                        label(for="" class="font-weight-bold") Descripcion
+                            | &nbsp;
+                            span.text-danger *
+                        textarea(name="description", cols="30", rows="5" class="form-control textarea")
+                    .form-group
+                        button(type="submit" class="btn btn-primary mr-3") Guardar
+                        a(href="/admin/services" class="btn btn-default") Cancelar
+block scripts
+    <script src="/public/assets/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="/public/js/summernote.js"></script>

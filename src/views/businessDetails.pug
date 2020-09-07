@@ -20,10 +20,12 @@ block content
                 .py-5
                     span.d-block.text-muted Nombre
                     h2.text-primary.display-4.font-weight-bold= data.name
+                    span.d-block.text-muted Propietario
+                    h5= data.own
                     span.d-block.text-muted Fecha de fundación
-                    h4.text-primary= data.fundation
+                    h5= data.yearFundation
                     span.d-block.text-muted Descripcion
-                    p.text-primary= data.description
+                    div !{data.description}
             else
                 .text-center
                     h2.text-primary.display-3.font-weight-bold No data available

@@ -10,71 +10,18 @@ block content
     section
         div(id="principal-carousel" class="carousel slide" data-ride="carousel")
             .carousel-inner
-                .carousel-item.bg-green.active
-                    .carousel-caption.d-flex.align-items-center.justify-content-center
-                        .container
-                            .row.align-items-center.flex-column-reverse.flex-lg-row
-                                .col-sm-12.col-lg-6.text-left
-                                    span.d-block.text-primary 1/5
-                                    br
-                                    h4 Emprende e innova
-                                    h2.display-3.text-primary.font-weight-bold Nosotros te asesoramos
-                                .col-sm-12.col-lg-6
-                                    img(src="/public/img/img-3.png", alt="" class="img-fluid")
-                .carousel-item.bg-primary
-                    .carousel-caption.d-flex.align-items-center.justify-content-center
-                        .container
-                            .row.align-items-center.flex-column-reverse.flex-lg-row
-                                .col-sm-12.col-lg-6.text-left
-                                    span.d-block.text-orange 2/5
-                                    br
-                                    h4.text-white-50 Asesoría legal y de mercadeo
-                                    h2.display-3.text-white.font-weight-bold Legaliza tu empresa
-                                .col-sm-12.col-lg-6
-                                    img(src="/public/img/img-2.png", alt="" class="img-fluid")
-                .carousel-item.bg-orange
-                    .carousel-caption.d-flex.align-items-center.justify-content-center
-                        .container
-                            .row.align-items-center.flex-column-reverse.flex-lg-row
-                                .col-sm-12.col-lg-6.text-left
-                                    span.d-block.text-primary 3/5
-                                    br
-                                    h4 Desarrolla tu idea
-                                    h2.display-3.text-primary.font-weight-bold Centro emprendedor
-                                .col-sm-12.col-lg-6
-                                    img(src="/public/img/img-1.png", alt="" class="img-fluid")
-                .carousel-item.bg-red
-                    .carousel-caption.d-flex.align-items-center.justify-content-center
-                        .container
-                            .row.align-items-center.flex-column-reverse.flex-lg-row
-                                .col-sm-12.col-lg-6.text-left
-                                    span.d-block.text-primary 4/5
-                                    br
-                                    h4 Impulsamos tu emprendimiento
-                                    h2.display-3.text-primary.font-weight-bold Incubadora de empresas
-                                .col-sm-12.col-lg-6
-                                    img(src="/public/img/img-5.png", alt="" class="img-fluid")
-                .carousel-item.bg-blue
-                    .carousel-caption.d-flex.align-items-center.justify-content-center
-                        .container
-                            .row.align-items-center.flex-column-reverse.flex-lg-row
-                                .col-sm-12.col-lg-6.text-left
-                                    span.d-block.text-primary 5/5
-                                    br
-                                    h4 Nos innovamos por ti, hoy te ofrecemos
-                                    h2.display-3.text-secondary.font-weight-bold Asesoría virtual
-                                .col-sm-12.col-lg-6
-                                    img(src="/public/img/img-4.png", alt="" class="img-fluid")
+                - let j = 0;
+                each image in images
+                    - let isActive = (j == 0) ? "active" : "";
+                    div(class="carousel-item " + isActive)
+                        img(src= image.imgPath, alt="" class="d-block w-100")
+                        - j = 1
             a(href="#principal-carousel" class="carousel-control-prev" data-slide="prev")
                 i.fas.fa-chevron-left
             a(href="#principal-carousel" class="carousel-control-next" data-slide="next")
                 i.fas.fa-chevron-right
             ol.carousel-indicators
-                li(data-target="#principal-carousel" data-slide-to="0" class="active")
-                li(data-target="#principal-carousel" data-slide-to="1")
-                li(data-target="#principal-carousel" data-slide-to="2")
-                li(data-target="#principal-carousel" data-slide-to="3")
-                li(data-target="#principal-carousel" data-slide-to="4")
+               
     //- section 2 - nostros, servicios
     section.bg-white.custom-padding-1
         .container
@@ -122,8 +69,9 @@ block content
             each val in businessList
                 .slick-carousel-item
                     img(src="" + val.imgPath alt="" class="img-fluid d-block mx-auto my-5")
-                    h4.text-center.text-primary.font-weight-bold= val.name
-                    p.text-muted.text-center.p-4
+                    a(href="/business/" + val.id)
+                        h4.text-center.text-primary.font-weight-bold= val.name
+                    div.text-center !{val.description}
         .text-center.pt-5
             a(href="/business" class="btn btn-link") Ver más
     //- section 5 - impacto social

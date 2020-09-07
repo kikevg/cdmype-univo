@@ -1,0 +1,22 @@
+
+
+form(action="/admin/carousel/add", method="post" enctype="multipart/form-data")
+    .form-group
+        .row
+            .col-sm-12.col-lg-6
+                label(for="" class="font-weight-bold") Nombre
+                    span.text-danger &nbsp; *
+                input(type="text" name="name" class="form-control")
+            .col-sm-12.col-lg-6
+                label(for="" class="font-weight-bold") Imagen
+                    span.text-danger &nbsp; *
+                .custom-file
+                    input(type="file" name="file" class="custom-file-input" id="customFile")
+                    label(for="customFile" class="custom-file-label") Choose file
+    .form-group
+        label(for="" class="font-weight-bold") Descripción
+            span.text-danger &nbsp; *
+        textarea(name="description", cols="30", rows="10" class="form-control textarea")
+    .form-group
+        button(type="submit" class="btn btn-primary mr-3") Guardar
+        button(type="button" class="btn btn-default" data-dismiss="modal") Cancelar

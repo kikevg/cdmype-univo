@@ -7,6 +7,7 @@ const servicesController = require("../controllers/servicesController");
 const employeesController = require("../controllers/employeesController");
 const alliancesController = require("../controllers/alliancesController");
 const newsController = require("../controllers/newsController");
+const carouselController = require("../controllers/carouselController");
 
 const router = Router();
 
@@ -64,5 +65,14 @@ router.get("/news/update/:id", loginController.isLogged, newsController.updateNe
 router.post("/news/update", loginController.isLogged, newsController.confirmUpdateNews);
 router.get("/news/delete/:id", loginController.isLogged, newsController.deleteNews);
 router.get("/news/delete/confirm/:id", loginController.isLogged, newsController.confirmDeleteNews);
+
+// para la administarcion del carousel principal
+router.get("/carousel", loginController.isLogged, carouselController.getData);
+router.get("/carousel/details/:id", loginController.isLogged, carouselController.getDataById);
+router.post("/carousel/add", loginController.isLogged, carouselController.confirmAddImageToCarousel);
+router.get("/carousel/update/:id", carouselController.updateImage);
+router.post("/carousel/update", carouselController.confirmUpdateImage);
+router.get("/carousel/delete/:id", loginController.isLogged, carouselController.deleteImage);
+router.get("/carousel/delete/confirm/:id", loginController.isLogged, carouselController.confirmDeleteImage);
 
 module.exports = router;

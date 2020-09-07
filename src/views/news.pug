@@ -3,7 +3,7 @@ extends layout.pug
 block links
 
 block content
-    .bg-light
+    .bg-white
         //- section 1 -
         section.custom-padding-1
             .container
@@ -15,7 +15,7 @@ block content
                     .col-sm-12.col-md-8.col-lg-8
                         if data.news.length > 0
                             each val, i in data.news
-                                .card.mb-5.border-0
+                                .card.mb-5
                                     if val.images.length > 1
                                         div(id="carousel-news" + i class="carousel slide" data-ride="carousel")
                                             .carousel-inner
@@ -44,14 +44,14 @@ block content
                                     - let isDisable = "disabled";
                                     - if (pagePrev != undefined) { urlPrev = "/news?category=" + data.pages.category + "&page=" + pagePrev; isDisable = ""}
                                     li(class="page-item " + isDisable)
-                                        a(href= urlPrev class="page-link border-0") Previous
+                                        a(href= urlPrev class="page-link") Anterior
                                     
                                     - let i = 0;
                                     - let activated = "";
                                     while i < pagination / 5
                                         - activated = ((i + 1) == data.pages.current) ? "active" : "";
                                         li(class="page-item " + activated)
-                                            a(href="/news?category="+data.pages.category+"&page=" + (i + 1) class="page-link border-0")= i + 1
+                                            a(href="/news?category="+data.pages.category+"&page=" + (i + 1) class="page-link")= i + 1
                                         - i++
 
                                     - let pageNext = data.pages.next;
@@ -59,11 +59,11 @@ block content
                                     - let isDisabled = "disabled";
                                     - if (pageNext != undefined) { urlNext = "/news?category="+data.pages.category+"&page=" + pageNext; isDisabled = ""}
                                     li(class="page-item " + isDisabled)
-                                        a(href= urlNext class="page-link border-0") Next
+                                        a(href= urlNext class="page-link") Siguiente
                         else
                             h3.text-muted No hay datos
                     .col-sm-12.col-md-4.col-lg-4
-                        .card.mb-5.border-0
+                        .card.mb-5
                             .card-body
                                 h4.card-title.text-primary.font-weight-bold Categorías
                                 ul.list-unstyled
@@ -75,7 +75,7 @@ block content
                                                 a(href="/news?category=" + val + "&page=1" class="badge bg-blue text-primary p-2 rounded-pill")= val
                                     else
                                         h5.text-muted No hay datos
-                        .card.mb-5.border-0
+                        .card.mb-5
                             .card-body
                                 h4.card-title.text-primary.font-weight-bold Últimas noticias
                                 ul.list-group.list-group-flush

@@ -1,47 +1,54 @@
 extends ../shared.pug
 
+block links
+    <link rel="stylesheet" href="/public/assets/plugins/summernote/summernote-bs4.css">
+
+
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Home
+        a(href="/admin/home") Inicio
     li.breadcrumb-item
         a(href="/admin/services") Servicios
     li.breadcrumb-item.active
         span Agregar servicio
 block content
     section
-        .container
-            .card
-                .card-header.bg-white
-                    h2.text-primary.font-weight-bold Agregar servicio
-                .card-body
-                    form(action="/admin/services/update", method="post" class="py-5")
-                        .form-group
-                            input(type="hidden" name="id" value= data.id)
-                            .row
-                                .col-sm-12.col-lg-4
-                                    label(for="" class="font-weight-bold") Nombre
-                                        | &nbsp;
-                                        span.text-danger *
-                                    input(type="text" name="serviceName" value= data.name class="form-control bg-light border-0 py-4")
-                                .col-sm-12.col-lg-4
-                                    label(for="" class="font-weight-bold") Icono
-                                        | &nbsp;
-                                        span.text-danger *
-                                    input(type="text" name="iconService" value= data.icon class="form-control bg-light border-0 py-4")
-                                .col-sm-12.col-lg-4
-                                    label(for="" class="font-weight-bold") Color de icono
-                                        | &nbsp;
-                                        span.text-danger *
-                                    select(name="iconColor" class="form-control bg-light border-0")
-                                        option(selected disabled) Selecciona una opcion
-                                        each val, i in colors
-                                            - var selected = i == data.textColor
-                                            option(value= i selected= selected)= val
-                        .form-group
-                            label(for="" class="font-weight-bold") Descripcion
-                                | &nbsp;
-                                span.text-danger *
-                            textarea(name="description", cols="30", rows="5" class="form-control bg-light border-0")= data.description
-                        .form-group
-                            button(type="submit" class="btn btn-primary py-3 px-5 mr-3") Guardar
-                            a(href="/admin/services" class="btn btn-secondary py-3 px-5") Cancelar
+
+        .card
+            .card-header.bg-white
+                h4.card-title Agregar servicio
+            .card-body
+                form(action="/admin/services/update", method="post" class="")
+                    .form-group
+                        input(type="hidden" name="id" value= data.id)
+                        .row
+                            .col-sm-12.col-lg-4
+                                label(for="" class="font-weight-bold") Nombre
+                                    | &nbsp;
+                                    span.text-danger *
+                                input(type="text" name="serviceName" value= data.name class="form-control")
+                            .col-sm-12.col-lg-4
+                                label(for="" class="font-weight-bold") Icono
+                                    | &nbsp;
+                                    span.text-danger *
+                                input(type="text" name="iconService" value= data.icon class="form-control")
+                            .col-sm-12.col-lg-4
+                                label(for="" class="font-weight-bold") Color de icono
+                                    | &nbsp;
+                                    span.text-danger *
+                                select(name="iconColor" class="form-control")
+                                    option(selected disabled) Selecciona una opcion
+                                    each val, i in colors
+                                        - var selected = i == data.textColor
+                                        option(value= i selected= selected)= val
+                    .form-group
+                        label(for="" class="font-weight-bold") Descripcion
+                            | &nbsp;
+                            span.text-danger *
+                        textarea(name="description", cols="30", rows="5" class="form-control textarea")= data.description
+                    .form-group
+                        button(type="submit" class="btn btn-primary mr-3") Guardar
+                        a(href="/admin/services" class="btn btn-default") Cancelar
+block scripts
+    <script src="/public/assets/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="/public/js/summernote.js"></script>

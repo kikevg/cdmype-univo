@@ -1,0 +1,29 @@
+extends ../shared.pug
+
+
+block links
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home") Inicio
+    li.breadcrumb-item
+        a(href="/admin/carousel") Carousel
+    li.breadcrumb-item.active
+        span Detalles de carousel
+block content
+    section
+
+        .card
+            .card-header.d-flex.justify-content-between
+                h4.card-title Detalles de la imagen
+                .ml-auto
+                    a(href="/admin/carousel/update/" + image.id class="text-decoration-none mr-3") Editar
+                    a(href="/admin/carousel/delete/" + image.id class="text-decoration-none") Borrar
+            .card-body
+                if image
+                    img(src= image.imgPath, alt="" class="img-fluid d-block")
+                    h4= image.name
+                    div !{image.description}
+                else 
+                    p No hay imagen
+block scripts

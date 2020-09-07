@@ -27,7 +27,7 @@ block content
                                 img(src= news.images[0], alt="" class="card-img-top")
                             .card-body.p-0
                                 h4.card-title.text-primary.font-weight-bold.display-3= news.title
-                                p= news.description
+                                div !{news.description}
                     else
                         h5.text-muted No hay datos
                 .col-sm-12.col-lg-4

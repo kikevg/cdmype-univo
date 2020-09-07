@@ -2,44 +2,59 @@ extends ../shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Home
+        a(href="/admin/home") Inicio
     li.breadcrumb-item.active
         span Servicios
 block content
     section
-        .container
 
-            if success_message != null
-                .alert.alert-success.alert-dismissible.fade.show= success_message
-                    button(type="button" class="close" data-dismiss="alert" aria-label="Close")
-                        span(aria-hidden="true") &times;
+        include ../../common/buttonChangeView.pug
 
+        include ../../common/messages.pug
+
+        .view-list
             .card
-                .card-header.bg-white.d-flex.justify-content-between
-                    h2.text-primary.font-weight-bold Lista de servicios
-                    a(href="/admin/services/add" class="btn btn-primary py-3 px-4") Agregar servicio
-                .card-body
-                    table.table
+                .card-header
+                    h2.card-title Lista de servicios
+                .card-body.table-responsive
+                    table.table.table-bordered
                         thead
                             tr
-                                th Id
+                                th Nº
                                 th Nombre
                                 th Acciones
                         tbody
                             if data.length > 0
-                                each val in data
+                                each val, i in data
                                     tr
-                                        td= val.id
+                                        td= i + 1
                                         td= val.name
                                         td
                                             div.btn-group
-                                                a(href="/admin/services/details/" + val.id class="btn btn-light")
-                                                    i.fa.fa-info.text-primary
-                                                a(href="/admin/services/update/" + val.id class="btn btn-light")
-                                                    i.fa.fa-pencil.text-primary
-                                                a(href="/admin/services/delete/" + val.id class="btn btn-light")
+                                                a(href="/admin/services/details/" + val.id class="btn btn-light" title="info")
+                                                    i.fa.fa-info.text-dark
+                                                a(href="/admin/services/update/" + val.id class="btn btn-light" title="editar")
+                                                    i.fa.fa-edit.text-dark
+                                                a(href="/admin/services/delete/" + val.id class="btn btn-light" title="borrar")
                                                     i.fa.fa-trash.text-danger
-                            else
-                                tr
-                                    td(colspan="4")
-                                        h4.text-center.text-primary.font-weight-bold No hay datos
+        div(class="d-none view-grid")
+            .row
+                each val in data
+
+                    .col-sm-12.col-md-4
+                        .info-box
+                            span(class="info-box-icon " + val.bgColor)
+                                i(class="fas fa-" + val.icon)
+                            .info-box-content
+                                span.font-weight-bold= val.name
+                                br
+                                span
+                                    div.btn-group.btn-group-sm
+                                    a(href="/admin/services/details/" + val.id class="btn btn-light" title="info")
+                                        i.fa.fa-info.text-dark
+                                    a(href="/admin/services/update/" + val.id class="btn btn-light" title="editar")
+                                        i.fa.fa-edit.text-dark
+                                    a(href="/admin/services/delete/" + val.id class="btn btn-light" title="borrar")
+                                        i.fa.fa-trash.text-danger
+block scripts
+    script(src="/public/js/changeview.js")

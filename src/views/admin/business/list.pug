@@ -2,48 +2,59 @@ extends ../shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Home
+        a(href="/admin/home") Inicio
     li.breadcrumb-item.active
         span Empresas
 block content
     section
-        .container
 
-            if success_message != null
-                .alert.alert-success.alert-dismissible.fade.show= success_message
-                    button(type="button" class="close" data-dismiss="alert" aria-label="Close")
-                        span(aria-hidden="true") &times;
+        include ../../common/buttonChangeView.pug
 
+        include ../../common/messages.pug
+
+        .view-list
             .card
-                .card-header.bg-white.d-flex.justify-content-between
-                    h2.text-primary.font-weight-bold Lista de empresas
-                    a(href="/admin/business/add" class="btn btn-primary py-3 px-4") Agregar empresa
-                .card-body
-                    table.table
+                .card-header
+                    h2.card-title Lista de empresas
+                .card-body.table-responsive
+                    table.table.table-bordered
                         thead
                             tr
-                                th Id
+                                th Nº
                                 th Nombre
                                 th Propietario
                                 th Acciones
                         tbody
                             if data.length > 0
-                                each val in data
+                                each val, i in data
                                     tr
-                                        td= val.id
+                                        td= i + 1
                                         td= val.name
                                         td= val.own
                                         td
                                             div.btn-group
-                                                a(href="/admin/business/details/" + val.id class="btn btn-light")
-                                                    i.fa.fa-info.text-primary
-                                                a(href="/admin/business/update/" + val.id class="btn btn-light")
-                                                    i.fa.fa-pencil.text-primary
-                                                a(href="/admin/business/delete/" + val.id class="btn btn-light")
+                                                a(href="/admin/business/details/" + val.id class="btn btn-light" title="info")
+                                                    i.fa.fa-info.text-dark
+                                                a(href="/admin/business/update/" + val.id class="btn btn-light" title="editar")
+                                                    i.fa.fa-edit.text-dark
+                                                a(href="/admin/business/delete/" + val.id class="btn btn-light" title="borrar")
                                                     i.fa.fa-trash.text-danger
-                                                //- button(type="button" class="btn btn-light" data-toggle="modal" data-target="#modal")
-                                                //-     i.fa.fa-trash.text-danger
-                            else
-                                tr
-                                    td(colspan="4")
-                                        h4.text-center.text-primary.font-weight-bold No hay datos
+        div(class="d-none view-grid")
+            .card-columns
+                each val in data
+                    .card
+                        img(src= val.imgPath, alt="" class="card-img-top")
+                        .card-body
+                            h4.card-title= val.name
+                            br
+                            p.text-muted= val.position
+                            div.btn-group.btn-group-sm
+                                a(href="/admin/business/details/" + val.id class="btn btn-light" title="info")
+                                    i.fa.fa-info.text-dark
+                                a(href="/admin/business/update/" + val.id class="btn btn-light" title="editar")
+                                    i.fa.fa-edit.text-dark
+                                a(href="/admin/business/delete/" + val.id class="btn btn-light" title="borrar")
+                                    i.fa.fa-trash.text-danger
+
+block scripts
+    script(src="/public/js/changeview.js")

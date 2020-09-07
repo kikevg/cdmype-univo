@@ -1,0 +1,76 @@
+extends ../shared.pug
+
+block links
+    <link rel="stylesheet" href="/public/assets/plugins/summernote/summernote-bs4.css">
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home") Inicio
+    li.breadcrumb-item.active
+        span Carousel
+block content
+
+    div(id="modaladd" class="modal fade" tabindex="-1")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.modal-title Agregar nueva imagen
+                    button(type="button" class="close" data-dismiss="modal")
+                        span &times;
+                .modal-body
+                    include add.pug
+
+    section
+
+        include ../../common/messages.pug
+        
+        .row
+            .col-sm-12.col-md-6.col-lg-4
+                .card
+                    .card-header
+                        h4.card-title Carousel principal
+                    .card-body
+                        if images.length > 0
+                            div(id="carousel1" class="carousel slide" data-ride="carousel")
+                                .carousel-inner
+                                    - let j = 0;
+                                    each img in images
+                                        - let classActive = (j == 0) ? "active" : "";
+                                        div(class="carousel-item " + classActive)
+                                            img(src= img.imgPath alt="" class="d-block w-100")
+                                        - j = 1;
+                                a(href="#carousel1" class="carousel-control-prev" role="button" data-slide="prev")
+                                    i.fas.fa-chevron-left
+                                a(href="#carousel1" class="carousel-control-next" role="button" data-slide="next")
+                                    i.fas.fa-chevron-right
+            .col-sm-12.col-md-6.col-lg-8
+                .card
+                    .card-header.d-flex
+                        h4.card-title Images de carousel
+                        .ml-auto
+                            a(href="#modaladd" class="text-decoration-none" data-toggle="modal") Agregar nueva imagen
+                    .card-body
+                        table.table.table-bordered
+                            thead
+                                tr
+                                    th Nº
+                                    th Nombre
+                                    th Acciones
+                            tbody
+                                if images.length > 0
+                                        each val, i in images
+                                            tr
+                                                td= i + 1
+                                                td= val.name
+                                                td
+                                                    div.btn-group
+                                                        a(href="/admin/carousel/details/" + val.id class="btn btn-light" title="info")
+                                                            i.fa.fa-info.text-dark
+                                                        a(href="/admin/carousel/update/" + val.id class="btn btn-light" title="editar")
+                                                            i.fa.fa-edit.text-dark
+                                                        a(href="/admin/carousel/delete/" + val.id class="btn btn-light" title="borrar")
+                                                            i.fa.fa-trash.text-danger
+block scripts
+    script(src="/public/js/fileinput.js")
+    <script src="/public/assets/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="/public/js/summernote.js"></script>

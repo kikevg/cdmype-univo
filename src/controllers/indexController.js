@@ -5,6 +5,7 @@ const Alliance = require("../models/Alliance");
 const Service = require("../models/Service");
 const Employee = require("../models/Employee");
 const News = require("../models/News");
+const Carousel = require("../models/Carousel");
 
 const index = async (req, res) => {
 
@@ -12,8 +13,9 @@ const index = async (req, res) => {
     const alliancesTotal = (await Alliance.find()).length;
     const servicesTotal = (await Service.find()).length;
 
-    let alliancesList = await Alliance.find();
-    let businesses = await Business.find();
+    const alliancesList = await Alliance.find();
+    const businesses = await Business.find();
+    const carouselImages = await Carousel.find();
 
     let businessList = [];
 
@@ -22,7 +24,7 @@ const index = async (req, res) => {
             businessList.push(businesses[i]);
 
     res.render("index", {
-        title: 'Home', businessList: businessList, alliancesList: alliancesList, data: {
+        title: 'Inicio', images: carouselImages, businessList: businessList, alliancesList: alliancesList, data: {
             businessTotal,
             alliancesTotal,
             servicesTotal
@@ -34,15 +36,15 @@ const about = async (req, res) => {
 
     const employees = await Employee.find();
 
-    res.render("about", { title: "About", employees: employees });
+    res.render("about", { title: "Nosotros", employees: employees });
 }
 
 const contact = (req, res) => {
-    res.render("contact", { title: "Contact" });
+    res.render("contact", { title: "Contacto" });
 }
 
 const training = (req, res) => {
-    res.render("training", { title: "Training" });
+    res.render("training", { title: "Asesoria" });
 }
 
 const downloadDocs = (req, res) => {
@@ -53,20 +55,20 @@ const services = async (req, res) => {
 
     const servicesList = await Service.find();
 
-    res.render("services", { title: "Services", services: servicesList });
+    res.render("services", { title: "Servicios", services: servicesList });
 }
 
 const business = async (req, res) => {
 
     const businessList = await Business.find();
 
-    res.render("business", { title: "Business", business: businessList });
+    res.render("business", { title: "Empresas", business: businessList });
 }
 
 const businessDetails = async (req, res) => {
     const { id } = req.params;
     let business = await Business.findById(id);
-    res.render("businessDetails", { title: "Business Details", data: business });
+    res.render("businessDetails", { title: "Detalles de empresa", data: business });
 }
 
 const news = async (req, res) => {
@@ -117,12 +119,14 @@ const news = async (req, res) => {
         news: newsResult
     };
 
-    res.render("news", { title: "News", data: result, categories: categories, latestNews: latestNews, pagination: news.length });
+    res.render("news", { title: "Noticias", data: result, categories: categories, latestNews: latestNews, pagination: news.length });
 }
 
 const newsDetails = async (req, res) => {
     const { id } = req.params;
     let news = await News.findById(id);
+
+    const newsList = await News.find();
 
     let latestNews = [];
     let randomNews = [];
@@ -135,7 +139,7 @@ const newsDetails = async (req, res) => {
     for (let i = 0; i < 4; i++)
         randomNews.push(newsList[Math.floor(Math.random() * newsList.length)]);
 
-    res.render("newsDetails", { title: "News details", news: news, latestNews: latestNews, randomNews: randomNews });
+    res.render("newsDetails", { title: "Detalles de noticias", news: news, latestNews: latestNews, randomNews: randomNews });
 }
 
 module.exports = {

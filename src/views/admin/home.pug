@@ -2,7 +2,34 @@ extends shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item.active
-        span Home
+        span Inicio
+
 block content
 
-    h1.text-center.text-primary.font-weight-bold.display-2.my-5 Welcome admin
+    .row
+        .col-sm-12.col-md-6.col-lg-4
+            .info-box
+                .info-box-icon.bg-teal
+                    span
+                        i.fab.fa-envira
+                .info-box-content
+                    h2.text-right= totalServices
+                    span.d-block.text-muted.text-right Servicios
+
+        .col-sm-12.col-md-6.col-lg-4
+            .info-box
+                .info-box-icon.bg-indigo
+                    span
+                        i.fas.fa-building
+                .info-box-content
+                    h2.text-right= totalBusiness
+                    span.d-block.text-muted.text-right Empresas
+
+        .col-sm-12.col-md-6.col-lg-4
+            .info-box
+                .info-box-icon.bg-navy
+                    span
+                        i.fas.fa-award
+                .info-box-content
+                    h2.text-right= totalAlliances
+                    span.d-block.text-muted.text-right Alianzas

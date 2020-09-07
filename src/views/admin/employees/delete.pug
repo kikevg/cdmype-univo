@@ -2,44 +2,39 @@ extends ../shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Home
+        a(href="/admin/home") Inicio
     li.breadcrumb-item
         a(href="/admin/employees") Empleados
     li.breadcrumb-item.active
         span Borrar empleado
 block content
     section
-        .container
-            if data
-                .row
-                    .col-sm-12.col-lg-5
-                        .card
-                            img(src=""+ data.imgPath +"", alt="" class="card-img-top")
-                            .card-body
-                                span.d-block.text-muted Nombre
-                                h2.text-primary.display-4.font-weight-bold= data.name
-                                span.d-block.text-muted Cargo
-                                h4.text-primary= data.position
-                                span.d-block.text-muted Email
-                                h4.text-primary= data.email
-                                span.d-block.text-muted Telefono
-                                h4.text-primary= data.phone
-                                span.d-block.text-muted Descripcion
-                                p.text-primary= data.description
-                    .col-sm-12.col-lg-7
-                        h2.text-danger.font-weight-bold.display-4 Deseas eliminar este registro?
-                        .py-4
-                        a(href="/admin/employees/delete/confirm/" + data.id class="btn bg-red py-3 px-4 mr-3")
-                            i.fa.fa-trash.text-danger
-                            | &nbsp;
-                            span.text-danger Confirmar
-                        a(href="/admin/employees" class="btn bg-blue py-3 px-4")
-                            i.fa.fa-arrow-left.text-primary
-                            | &nbsp;
-                            span.text-primary Cancelar
-            else
-                .text-center
-                    h2.text-primary.display-3.font-weight-bold No data available
-                    br
-                    a(href="/admin/employees" class="btn btn-secondary py-4 px-5") Regresar
+        
+        if data
+            .row
+                .col-sm-12.col-lg-5
+                    .card
+                        img(src=""+ data.imgPath +"", alt="" class="card-img-top")
+                        .card-body
+                            span.d-block.text-muted Nombre
+                            h2.display-4= data.name
+                            span.d-block.text-muted Cargo
+                            h5= data.position
+                            span.d-block.text-muted Email
+                            h5= data.email
+                            span.d-block.text-muted Telefono
+                            h5= data.phone
+                            span.d-block.text-muted Descripcion
+                            div !{data.description}
+                .col-sm-12.col-lg-7
+                    h2.text-danger.font-weight-bold.display-4 Deseas eliminar este registro?
+                    .py-4
+                    a(href="/admin/employees/delete/confirm/" + data.id class="btn btn-outline-danger mr-3")
+                        i.fa.fa-trash
+                        | &nbsp;
+                        span Confirmar
+                    a(href="/admin/employees" class="btn bg-white")
+                        i.fa.fa-arrow-left.text-primary
+                        | &nbsp;
+                        span.text-primary Cancelar
 block scripts
