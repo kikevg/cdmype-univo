@@ -3,20 +3,20 @@ extends ../shared.pug
 block links
     <link rel="stylesheet" href="/public/assets/plugins/summernote/summernote-bs4.css">
 
-
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Inicio
+        a(href="/admin/home")
+            i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/services") Servicios
-    li.breadcrumb-item.active
-        span Agregar servicio
+    li.breadcrumb-item.active.font-italic
+        span Editar servicio
 block content
     section
 
         .card
             .card-header.bg-white
-                h4.card-title Agregar servicio
+                h5.card-title Agregar servicio
             .card-body
                 form(action="/admin/services/update", method="post" class="")
                     .form-group
@@ -31,7 +31,7 @@ block content
                                 label(for="" class="font-weight-bold") Icono
                                     | &nbsp;
                                     span.text-danger *
-                                input(type="text" name="iconService" value= data.icon class="form-control")
+                                input(type="text" name="iconService" value= data.iconName class="form-control")
                             .col-sm-12.col-lg-4
                                 label(for="" class="font-weight-bold") Color de icono
                                     | &nbsp;
@@ -39,7 +39,7 @@ block content
                                 select(name="iconColor" class="form-control")
                                     option(selected disabled) Selecciona una opcion
                                     each val, i in colors
-                                        - var selected = i == data.textColor
+                                        - var selected = i == data.iconColor
                                         option(value= i selected= selected)= val
                     .form-group
                         label(for="" class="font-weight-bold") Descripcion
@@ -48,7 +48,6 @@ block content
                         textarea(name="description", cols="30", rows="5" class="form-control textarea")= data.description
                     .form-group
                         button(type="submit" class="btn btn-primary mr-3") Guardar
-                        a(href="/admin/services" class="btn btn-default") Cancelar
+                        a(href="/admin/services" class="btn btn-light") Cancelar
 block scripts
-    <script src="/public/assets/plugins/summernote/summernote-bs4.min.js"></script>
-    <script src="/public/js/summernote.js"></script>
+    <script src="/public/js/tinymce.js"></script>

@@ -3,8 +3,8 @@ const { Schema, model } = require("mongoose");
 const serviceSchema = new Schema({
     name: String,
     description: String,
-    icon: String,
-    textColor: String,
+    iconName: String,
+    iconColor: String,
     bgColor: String
 });
 

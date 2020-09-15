@@ -1,6 +1,8 @@
 extends layout.pug
 
 block links
+    <!-- feather icon -->
+    <link rel="stylesheet" href="/public/assets/fonts/feather/css/feather.css">
 
 block content
     //- section 1 - servicios
@@ -20,7 +22,7 @@ block content
                 each val in services
                     .col-sm-12.col-md-12.col-lg-6.d-lg-flex.align-items-center.my-5.text-lg-left
                         div(class="p-5 m-auto mr-lg-3 "+ val.bgColor +" d-flex align-items-center justify-content-center" style="border-radius: 30px; height: 25px; width: 25px")
-                            i(class="fa fa-" + val.icon + " fa-2x " + val.textColor)
+                            i(class="" + val.iconName + " " + val.iconColor + " display-4")
                         div
                             h4(class="text-center.text-md-left " + val.textColor)= val.name
                             div.text-muted.text-center.text-md-left !{val.description}

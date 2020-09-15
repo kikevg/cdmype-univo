@@ -107,15 +107,8 @@ const confirmUpdateBusiness = async (req, res) => {
 }
 
 const deleteBusiness = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body;
     const business = await Business.findById(id);
-
-    res.render("admin/business/delete", { title: "Borrar empresa", data: business });
-}
-
-const confirmDeleteBusiness = async (req, res) => {
-    const { id } = req.params;
-    let business = await Business.findById(id);
 
     if (business.imgPath != "") {
         try {
@@ -131,6 +124,7 @@ const confirmDeleteBusiness = async (req, res) => {
     req.flash("success_message", "Datos eliminados exitosamente");
 
     res.redirect("/admin/business");
+
 }
 
 module.exports = {
@@ -141,5 +135,4 @@ module.exports = {
     updateBusiness, updateBusiness,
     confirmUpdateBusiness, confirmUpdateBusiness,
     deleteBusiness, deleteBusiness,
-    confirmDeleteBusiness, confirmDeleteBusiness,
 };

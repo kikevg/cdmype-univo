@@ -1,395 +1,245 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  title #{title} | Admin CDMYPE UNIVO
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="cdmype, cdmype univo, univo,">
+  <meta name="author" content="CDMYPE UNIVO" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="/public/assets/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Favicon icon -->
+  <link rel="icon" href="/public/assets/images/favicon.ico" type="image/x-icon">
+  <!-- fontawesome icon -->
+  <link rel="stylesheet" href="/public/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+  <!-- animation css -->
+  <link rel="stylesheet" href="/public/assets/plugins/animation/css/animate.min.css">
+  <!-- prism css -->
+  <link rel="stylesheet" href="/public/assets/plugins/prism/css/prism.min.css">
+  <!-- vendor css -->
+  <link rel="stylesheet" href="/public/assets/css/style.css">
 
-  <!-- DataTables -->
-  <link rel="stylesheet" href="/public/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="/public/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-
-  //- custom links
+  title= title
   block links
-
-  <!-- theme styles -->
-  <link rel="stylesheet" href="/public/assets/dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 </head>
 
-<body class="hold-transition sidebar-mini">
-  <!-- Site wrapper -->
-  <div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <!-- Left navbar links -->
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="/admin/home" class="nav-link">Inicio</a>
-        </li>
-      </ul>
-
-      <!-- SEARCH FORM -->
-      <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search">
-          <div class="input-group-append">
-
-            <button class="btn btn-navbar" type="button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
+<body>
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
         </div>
-      </form>
-
-      <!-- Right navbar links -->
-      //- <ul class="navbar-nav ml-auto">
-        <!-- Messages Dropdown Menu -->
-        //- <li class="nav-item dropdown">
-        //-   <a class="nav-link" data-toggle="dropdown" href="#">
-        //-     <i class="far fa-comments"></i>
-        //-     <span class="badge badge-danger navbar-badge">3</span>
-        //-   </a>
-        //-   <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        //-     <a href="#" class="dropdown-item">
-        //-       <!-- Message Start -->
-        //-       <div class="media">
-        //-         <img src="/public/assets/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-        //-         <div class="media-body">
-        //-           <h3 class="dropdown-item-title">
-        //-             Brad Diesel
-        //-             <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-        //-           </h3>
-        //-           <p class="text-sm">Call me whenever you can...</p>
-        //-           <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-        //-         </div>
-        //-       </div>
-        //-       <!-- Message End -->
-        //-     </a>
-        //-     <div class="dropdown-divider"></div>
-        //-     <a href="#" class="dropdown-item">
-        //-       <!-- Message Start -->
-        //-       <div class="media">
-        //-         <img src="/public/assets/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-        //-         <div class="media-body">
-        //-           <h3 class="dropdown-item-title">
-        //-             John Pierce
-        //-             <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-        //-           </h3>
-        //-           <p class="text-sm">I got your message bro</p>
-        //-           <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-        //-         </div>
-        //-       </div>
-        //-       <!-- Message End -->
-        //-     </a>
-        //-     <div class="dropdown-divider"></div>
-        //-     <a href="#" class="dropdown-item">
-        //-       <!-- Message Start -->
-        //-       <div class="media">
-        //-         <img src="/public/assets/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-        //-         <div class="media-body">
-        //-           <h3 class="dropdown-item-title">
-        //-             Nora Silvester
-        //-             <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-        //-           </h3>
-        //-           <p class="text-sm">The subject goes here</p>
-        //-           <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-        //-         </div>
-        //-       </div>
-        //-       <!-- Message End -->
-        //-     </a>
-        //-     <div class="dropdown-divider"></div>
-        //-     <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        //-   </div>
-        //- </li>
-        <!-- Notifications Dropdown Menu -->
-        //- <li class="nav-item dropdown">
-        //-   <a class="nav-link" data-toggle="dropdown" href="#">
-        //-     <i class="far fa-bell"></i>
-        //-     <span class="badge badge-warning navbar-badge">15</span>
-        //-   </a>
-        //-   <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        //-     <span class="dropdown-item dropdown-header">15 Notifications</span>
-        //-     <div class="dropdown-divider"></div>
-        //-     <a href="#" class="dropdown-item">
-        //-       <i class="fas fa-envelope mr-2"></i> 4 new messages
-        //-       <span class="float-right text-muted text-sm">3 mins</span>
-        //-     </a>
-        //-     <div class="dropdown-divider"></div>
-        //-     <a href="#" class="dropdown-item">
-        //-       <i class="fas fa-users mr-2"></i> 8 friend requests
-        //-       <span class="float-right text-muted text-sm">12 hours</span>
-        //-     </a>
-        //-     <div class="dropdown-divider"></div>
-        //-     <a href="#" class="dropdown-item">
-        //-       <i class="fas fa-file mr-2"></i> 3 new reports
-        //-       <span class="float-right text-muted text-sm">2 days</span>
-        //-     </a>
-        //-     <div class="dropdown-divider"></div>
-        //-     <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        //-   </div>
-        //- </li>
-        //- <li class="nav-item">
-        //-   <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-        //-     <i class="fas fa-th-large"></i>
-        //-   </a>
-        //- </li>
-      //- </ul>
-    </nav>
-    <!-- /.navbar -->
-
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-        <a href="/admin/home" class="brand-link d-flex align-items-center">
-        img(src="/public/img/LogoCDMYPE_blanco.png", alt="" width="150" class="img-fluid")
-        //- <span class="brand-text font-weight-bold">CDMYPE UNIVO</span>
-      </a>
-
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Sidebar user (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
-          <div class="image">
-            div(style="height: 33px; width: 33px;").bg-teal.rounded-circle.d-flex.align-items-center.justify-content-center Ad
-            //- <img src="/public/assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-            <span class="d-block text-white-50">Administrador</span>
-          </div>
-        </div>
-
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-            
-            <li class="nav-header">PRINCIPAL</li>
-
-            <li class="nav-item">
-              <a href="/admin/home" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>Dashboard</p>
-              </a>
-            </li>
-        
-            <li class="nav-header">GESTIÓN</li>
-
-            <li class="nav-item">
-              <a href="/admin/carousel" class="nav-link">
-                <i class="nav-icon far fa-images"></i>
-                <p>Carousel</p>
-              </a>
-            </li>
-
-            <!-- Empleados -->
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user-friends"></i>
-                <p> Empleados
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="/admin/employees" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lista de empleados</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/admin/employees/add" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Agregar nuevo empleado</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <!-- Servicios -->
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-list"></i>
-                <p> Servicios
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="/admin/services" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lista de servicios</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/admin/services/add" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Agregar nuevo servicio</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <!-- Empresas -->
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-industry"></i>
-                <p> Empresas
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="/admin/business" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lista de empresas</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/admin/business/add" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Agregar nueva empresa</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <!-- alianzas -->
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
-                <p> Alianzas
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="/admin/alliances" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lista de alianzas</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/admin/alliances/add" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Agregar nueva alianza</p>
-                  </a>
-                </li>
-              </ul>
-            </li> 
-
-            <!-- noticias -->
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-newspaper"></i>
-                <p> Noticias
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="/admin/news" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lista de noticias</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/admin/news/add" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Agregar nueva noticia</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          
-            <!-- Logout -->
-            <li class="nav-header">CERRAR SESION</li>
-            <li class="nav-item">
-              <a href="/admin/logout" class="nav-link">
-                <i class="nav-icon fas fa-sign-out-alt"></i>
-                <p>Salir</p>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
-      </div>
-      <!-- /.sidebar -->
-    </aside>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Dashboard</h1>
-            </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                block breadcrumbItem
-              </ol>
-            </div>
-          </div>
-        </div><!-- /.container-fluid -->
-      </section>
-
-      <!-- Main content -->
-      <section class="content">
-
-        block content
-
-      </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
+    <!-- [ Pre-loader ] End -->
 
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 1.0
-      </div>
-      <strong>Copyright &copy; 2020 All rights | CDMYPE UNIVO
-      reserved.
-    </footer>
+    <!-- [ navigation menu ] start -->
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo">
+                <a href="/admin/home" class="b-brand">
+                    <div class="b-bg"> A
+                    </div>
+                    <span class="b-title">Administracion</span>
+                </a>
+                <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Principal</label>
+                    </li>
+                    <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item">
+                        <a href="/admin/home" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Gestión</label>
+                    </li>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-  </div>
-  <!-- ./wrapper -->
+                    // gestion para carousel
+                    <li data-username="Sample Page" class="nav-item"><a href="/admin/carousel" class="nav-link"><span class="pcoded-micon"><i class="feather icon-image"></i></span><span class="pcoded-mtext">Carousel</span></a></li>
 
-  <!-- jQuery -->
-  <script src="/public/assets/plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="/public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="/public/assets/dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="/public/assets/dist/js/demo.js"></script>
-  <!-- DataTables -->
-  <script src="/public/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="/public/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="/public/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="/public/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-  <!-- custom scripts -->
-  <script src="/public/js/datatable.js"></script>
-  block scripts
+                    //- gestion para servicios
+                    <li data-username="Menu levels Menu level 2.1 Menu level 2.2" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:void" class="nav-link"><span class="pcoded-micon"><i class="feather icon-menu"></i></span><span class="pcoded-mtext">Servicios</span></a>
+                        <ul class="pcoded-submenu" id="services-menu">
+                            <li class=""><a href="/admin/services" class="">Lista de servicios</a></li>
+                            <li class=""><a href="/admin/services/add" class="">Agregar servicio</a></li>
+                        </ul>
+                    </li>
+
+                    //- gestion para empresas
+                    <li data-username="Menu levels Menu level 2.1 Menu level 2.2" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:void" class="nav-link"><span class="pcoded-micon"><i class="feather icon-layers"></i></span><span class="pcoded-mtext">Empresas</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="/admin/business" class="">Lista de empresas</a></li>
+                            <li class=""><a href="/admin/business/add" class="">agregar empresa</a></li>
+                        </ul>
+                    </li>
+
+                    //- gestion para alianzas
+                    <li data-username="Menu levels Menu level 2.1 Menu level 2.2" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:void" class="nav-link"><span class="pcoded-micon"><i class="feather icon-package"></i></span><span class="pcoded-mtext">Alianzas</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="/admin/alliances" class="">Lista de alianzas</a></li>
+                            <li class=""><a href="/admin/alliances/add" class="">Agregar alianza</a></li>
+                        </ul>
+                    </li>
+
+                    //- gestion para empleados
+                    <li data-username="Menu levels Menu level 2.1 Menu level 2.2" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:void" class="nav-link"><span class="pcoded-micon"><i class="feather icon-user-plus"></i></span><span class="pcoded-mtext">Empleados</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="/admin/employees" class="">Lista de empleados</a></li>
+                            <li class=""><a href="/admin/employees/add" class="">Agregar empleado</a></li>
+                        </ul>
+                    </li>
+
+                    //- gestion para noticias
+                    <li data-username="Menu levels Menu level 2.1 Menu level 2.2" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:void" class="nav-link"><span class="pcoded-micon"><i class="feather icon-book"></i></span><span class="pcoded-mtext">Noticias</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="/admin/news" class="">Lista de noticias</a></li>
+                            <li class=""><a href="/admin/news/add" class="">Agregar noticia</a></li>
+                        </ul>
+                    </li>
+
+                    //- gestion para noticias
+                    <li data-username="Menu levels Menu level 2.1 Menu level 2.2" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:void" class="nav-link"><span class="pcoded-micon"><i class="feather icon-copy"></i></span><span class="pcoded-mtext">Iconos</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="/admin/icons/feather" class="">Feather</a></li>
+                            <li class=""><a href="/admin/icons/fontawesome" class="">Font Awesome</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item pcoded-menu-caption"><label>Cerrar sesion</label></li>
+                    <li data-username="Documentation" class="nav-item"><a href="/admin/logout" class="nav-link"><span class="pcoded-micon"><i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Salir</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- [ navigation menu ] end -->
+
+    <!-- [ Header ] start -->
+    <header class="navbar pcoded-header navbar-expand-lg navbar-light">
+        <div class="m-header">
+            <a class="mobile-menu" id="mobile-collapse1" href="#!"><span></span></a>
+            <a href="/admin/home" class="b-brand">
+                <div class="b-bg"> A
+                </div>
+                <span class="b-title">Admin</span>
+            </a>
+        </div>
+        <a class="mobile-menu" id="mobile-header" href="#!">
+            <i class="feather icon-more-horizontal"></i>
+        </a>
+        <div class="collapse navbar-collapse">
+            <a href="#!" class="mob-toggler"></a>
+            <ul class="navbar-nav mr-auto">
+                <li>
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Navegacion</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        block breadcrumbItem
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <div class="dropdown drp-user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon feather icon-user"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-notification">
+                            <div class="pro-head">
+                                <span>Admin</span>
+                                <a href="javascript:void" class="dud-logout" title="Logout">
+                                    <i class="feather icon-user"></i>
+                                </a>
+                            </div>
+                            <ul class="pro-body">
+                                <li><a href="javascript:void" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
+                                <li><a href="/admin/logout" class="dropdown-item"><i class="feather icon-log-out"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <!-- [ Header ] end -->
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ breadcrumb ] start -->
+                            <div class="page-header">
+                                <div class="page-block">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-12">
+                                            <div class="page-header-title">
+                                                <h5 class="m-b-10">Navegacion</h5>
+                                            </div>
+                                            <ul class="breadcrumb">
+                                              block breadcrumbItem
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ breadcrumb ] end -->
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <!-- [ static-layout ] start -->
+                                <div class="col-sm-12">
+
+                                    block content
+
+                                   
+                                </div>
+                                <!-- [ static-layout ] end -->
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+    <!-- Required Js -->
+    <script src="/public/assets/js/vendor-all.min.js"></script>
+    <script src="/public/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/public/assets/js/pcoded.min.js"></script>
+
+    <!-- prism Js -->
+    <script src="/public/assets/plugins/prism/js/prism.min.js"></script>
+    <script src="/public/assets/js/analytics.js"></script>
+
+    // editor plugin
+    <script src="/public/assets/plugins/tinymce/tinymce.min.js"></script>
+
+    block scripts
+
 </body>
 
 </html>

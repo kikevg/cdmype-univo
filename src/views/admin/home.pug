@@ -1,35 +1,40 @@
 extends shared.pug
 
 block breadcrumbItem
-    li.breadcrumb-item.active
-        span Inicio
+    li.breadcrumb-item
+        span
+            i.feather.icon-home
 
 block content
 
     .row
-        .col-sm-12.col-md-6.col-lg-4
-            .info-box
-                .info-box-icon.bg-teal
-                    span
-                        i.fab.fa-envira
-                .info-box-content
-                    h2.text-right= totalServices
-                    span.d-block.text-muted.text-right Servicios
-
-        .col-sm-12.col-md-6.col-lg-4
-            .info-box
-                .info-box-icon.bg-indigo
-                    span
-                        i.fas.fa-building
-                .info-box-content
-                    h2.text-right= totalBusiness
-                    span.d-block.text-muted.text-right Empresas
-
-        .col-sm-12.col-md-6.col-lg-4
-            .info-box
-                .info-box-icon.bg-navy
-                    span
-                        i.fas.fa-award
-                .info-box-content
-                    h2.text-right= totalAlliances
-                    span.d-block.text-muted.text-right Alianzas
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="card social-widget-card">
+                <div class="card-body-big bg-purple">
+                    h3.text-white.m-0= totalServices
+                        |&nbsp;+
+                    <span class="m-t-10">Servicios</span>
+                    <i class="fab fa-envira"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="card social-widget-card">
+                <div class="card-body-big bg-twitter">
+                    h3.text-white.m-0= totalAlliances
+                        |&nbsp;+
+                    <span class="m-t-10">Alianzas</span>
+                    <i class="fas fa-award"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="card social-widget-card">
+                <div class="card-body-big bg-c-purple">
+                    h3.text-white.m-0= totalBusiness
+                        |&nbsp;+
+                    <span class="m-t-10">Empresas</span>
+                    <i class="far fa-building"></i>
+                </div>
+            </div>
+        </div>

@@ -2,10 +2,11 @@ extends ../shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Inicio
+        a(href="/admin/home")
+            i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/news") Noticias
-    li.breadcrumb-item.active
+    li.breadcrumb-item.active.font-italic
         span Detalles de noticia
 
 block content

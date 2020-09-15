@@ -90,13 +90,7 @@ const confirmUpdateNews = async (req, res) => {
 }
 
 const deleteNews = async (req, res) => {
-    const { id } = req.params;
-    let news = await News.findById(id);
-    res.render("admin/news/delete", { title: "Borrar noticia", news: news });
-}
-
-const confirmDeleteNews = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body;
     let news = await News.findById(id);
 
     if (news.images)
@@ -124,5 +118,4 @@ module.exports = {
     updateNews: updateNews,
     confirmUpdateNews: confirmUpdateNews,
     deleteNews: deleteNews,
-    confirmDeleteNews: confirmDeleteNews,
 };

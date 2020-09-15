@@ -33,13 +33,14 @@ const addService = (req, res) => {
 }
 
 const confirmAddService = async (req, res) => {
-    const { serviceName, iconService, iconColor, description } = req.body;
+    const { serviceName, iconName, description, colorIndex } = req.body;
+
     const newService = {
         name: serviceName,
         description: description,
-        icon: iconService,
-        textColor: textColors[iconColor],
-        bgColor: bgColors[iconColor]
+        iconName: iconName,
+        iconColor: textColors[colorIndex],
+        bgColor: bgColors[colorIndex]
     };
 
     const service = new Service(newService);
@@ -57,21 +58,23 @@ const updateService = async (req, res) => {
     let index = null;
 
     for (let i = 0; i < textColors.length; i++)
-        if (service.textColor == textColors[i])
+        if (service.iconColor == textColors[i])
             index = i;
-    service.textColor = index;
+    service.iconColor = index;
     res.render("admin/services/update", { title: "Editar servicio", data: service, colors: textColors });
 }
 
 const confirmUpdateService = async (req, res) => {
-    const { id, serviceName, iconService, iconColor, description } = req.body;
+
+    const { id, serviceName, iconName, description, colorIndex } = req.body;
+
     let service = await Service.findById(id);
 
-    service.name = serviceName;
-    service.description = description;
-    service.icon = iconService;
-    service.textColor = textColors[iconColor];
-    service.bgColor = bgColors[iconColor];
+    service.name = serviceName,
+    service.description = description,
+    service.iconName = iconName,
+    service.iconColor = textColors[colorIndex],
+    service.bgColor = bgColors[colorIndex]
 
     await Service.updateOne({ _id: id }, service);
 
@@ -81,18 +84,13 @@ const confirmUpdateService = async (req, res) => {
 }
 
 const deleteService = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body;
     let service = await Service.findById(id);
-
-    res.render("admin/services/delete", { title: "Borrar servicio", data: service });
-}
-
-const confirmDeleteService = async (req, res) => {
-    const { id } = req.params;
     await Service.deleteOne({ _id: id });
     req.flash("success_message", "Datos eliminados exitosamente");
     res.redirect("/admin/services");
 }
+
 
 module.exports = {
     getServices: getServices,
@@ -102,5 +100,4 @@ module.exports = {
     updateService: updateService,
     confirmUpdateService: confirmUpdateService,
     deleteService: deleteService,
-    confirmDeleteService: confirmDeleteService
 };

@@ -1,77 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Log in | CDMYPE UNIVO</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="cdmype, cdmype univo, univo,">
+	<meta name="author" content="CDMYPE UNIVO" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="/public/assets/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="/public/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="/public/assets/dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+	title Login - CDMYPE UNIVO
+
+	<!-- Favicon icon -->
+	<link rel="icon" href="/public/assets/images/favicon.ico" type="image/x-icon">
+	<!-- fontawesome icon -->
+	<link rel="stylesheet" href="/public/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+	<!-- animation css -->
+	<link rel="stylesheet" href="/public/assets/plugins/animation/css/animate.min.css">
+
+	<!-- vendor css -->
+	<link rel="stylesheet" href="/public/assets/css/style.css">
+	
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <!-- /.login-logo -->
 
-  include ../common/messages.pug
-
-  <div class="card">
-    <div class="card-body login-card-body">
-      <img src="/public/img/cdmype.jpg" alt="" width="200" class="d-block mx-auto my-4" />
-      <p class="login-box-msg">Logueate para iniciar sesion</p>
-
-      <form action="/admin" method="post">
-        <div class="input-group mb-3">
-          <input type="email" name="username" class="form-control" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">Recuerdame</label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-    </div>
-    <!-- /.login-card-body -->
-  </div>
+<!-- [ signin-img-tabs ] start -->
+<div class="blur-bg-images"></div>
+<div class="auth-wrapper">
+	<div class="auth-content container">
+		<div class="card">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<div class="card-body">
+						<h2 class="mb-4">Bienvenido a <span class="text-c-blue">CDMYPE UNIVO</span></h2>
+						<p>CDMYPE es un programa de acompañamiento a emprendedores, micro y pequeñas empresas</p>
+						<form action="/admin" method="post">
+							<ol class="position-relative carousel-indicators justify-content-start">
+								<li class=""></li>
+								<li class="active"></li>
+							</ol>
+							include ../common/messages.pug
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="feather icon-mail"></i></span>
+								</div>
+								<input type="text" name="username" class="form-control" autocomplete="off" placeholder="Nombre de usuario">
+							</div>
+							<div class="input-group mb-4">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="feather icon-lock"></i></span>
+								</div>
+								<input type="password" name="password" class="form-control" placeholder="Contraseña">
+							</div>
+							<div class="form-group text-left">
+								<div class="checkbox checkbox-primary d-inline">
+									<input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
+									<label for="checkbox-fill-a1" class="cr"> Save credentials</label>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary mb-4">Entrar</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-md-6 d-none d-md-block">
+					<img src="/public/img/cdmype.jpg" alt="" width="300" class="img-fluid bd-placeholder-img bd-placeholder-img-lg d-block m-auto">
+					<img src="../assets/images/logo.png" alt="" class="img-fluid img-logo-overlay">
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<!-- /.login-box -->
+<!-- [ signin-img-tabs ] end -->
 
-<!-- jQuery -->
-<script src="/public/assets/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="/public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/public/assets/dist/js/adminlte.min.js"></script>
+<!-- Required Js -->
+<script src="/public/assets/js/vendor-all.min.js"></script>
+<script src="/public/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>

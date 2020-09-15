@@ -2,10 +2,11 @@ extends ../shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Inicio
+        a(href="/admin/home")
+            i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/alliances") Alianzas
-    li.breadcrumb-item.active
+    li.breadcrumb-item.active.font-italic
         span Detalles de alianza
 block content
     section
@@ -14,10 +15,9 @@ block content
 
              .card
                 .card-header.d-flex.justify-content-between
-                    h4.card-title Detalles de la alianza
+                    h5.card-title Detalles de la alianza
                     .ml-auto
                         a(href="/admin/alliances/update/" + data.id class="text-decoration-none mr-3") Editar
-                        a(href="/admin/alliances/delete/" + data.id class="text-decoration-none") Eliminar
                 .card-body
                     table.table.table-bordered
                         tr

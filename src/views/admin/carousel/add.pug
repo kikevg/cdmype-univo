@@ -1,22 +1,46 @@
+extends ../shared.pug
 
+block links
+    <!-- fileupload-custom css -->
+    <link rel="stylesheet" href="/public/assets/css/pages/fileupload.css">
 
-form(action="/admin/carousel/add", method="post" enctype="multipart/form-data")
-    .form-group
-        .row
-            .col-sm-12.col-lg-6
-                label(for="" class="font-weight-bold") Nombre
-                    span.text-danger &nbsp; *
-                input(type="text" name="name" class="form-control")
-            .col-sm-12.col-lg-6
-                label(for="" class="font-weight-bold") Imagen
-                    span.text-danger &nbsp; *
-                .custom-file
-                    input(type="file" name="file" class="custom-file-input" id="customFile")
-                    label(for="customFile" class="custom-file-label") Choose file
-    .form-group
-        label(for="" class="font-weight-bold") Descripción
-            span.text-danger &nbsp; *
-        textarea(name="description", cols="30", rows="10" class="form-control textarea")
-    .form-group
-        button(type="submit" class="btn btn-primary mr-3") Guardar
-        button(type="button" class="btn btn-default" data-dismiss="modal") Cancelar
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home")
+            i.feather.icon-home
+    li.breadcrumb-item
+        a(href="/admin/carousel") Carousel
+    li.breadcrumb-item.active.font-italic
+        span Agregar imagen
+
+block content
+    <div class="row">
+        <!-- [ file-upload ] start -->
+
+        include ../../common/messages.pug
+        
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Subir archivos</h5>
+                </div>
+                <div class="card-body">
+                    <form action="/admin/carousel/add" method="post" class="dropzone" enctype="multipart/form-data">
+                        div.form-group
+                            <div class="fallback">
+                                <input name="file" type="file" multiple />
+                            </div>
+                    </form>
+                    <div class="text-center m-t-20 form-group">
+                        a(href="/admin/carousel" class="btn btn-primary") Listo
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ file-upload ] end -->
+    </div>
+
+block scripts
+    <!-- file-upload Js -->
+    <script src="/public/assets/plugins/fileupload/js/dropzone-amd-module.min.js"></script>
+

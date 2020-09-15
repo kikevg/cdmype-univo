@@ -1,9 +1,14 @@
 extends ../shared.pug
 
+block links
+    link(rel="stylesheet" href="/public/assets/plugins/modal-window-effects/css/md-modal.css")
+    <link rel="stylesheet" href="/public/assets/plugins/data-tables/css/datatables.min.css">
+
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Inicio
-    li.breadcrumb-item.active
+        a(href="/admin/home")
+            i.feather.icon-home
+    li.breadcrumb-item.active.font-italic
         span Empleados
 
 block content
@@ -16,7 +21,7 @@ block content
         .view-list
             .card
                 .card-header
-                    h4.card-title Lista de empleados
+                    h5.card-title Lista de empleados
                 .card-body.table-responsive
                     table.table.table-bordered
                         thead
@@ -34,12 +39,13 @@ block content
                                         td= val.position
                                         td
                                             div.btn-group
-                                                a(href="/admin/employees/details/" + val.id class="btn btn-light" title="info")
-                                                    i.fa.fa-info.text-dark
-                                                a(href="/admin/employees/update/" + val.id class="btn btn-light" title="editar")
-                                                    i.fa.fa-edit.text-dark
-                                                a(href="/admin/employees/delete/" + val.id class="btn btn-light" title="borrar")
-                                                    i.fa.fa-trash.text-danger
+                                                a(href="/admin/services/details/" + val.id class="btn btn-light" title="info")
+                                                    i.feather.icon-info.m-0
+                                                a(href="/admin/services/update/" + val.id class="btn btn-light" title="editar")
+                                                    i.feather.icon-edit.m-0
+                                                <button class="btn btn-light md-trigger btn-delete" data-modal="modal-1" data-id=!{val.id}>
+                                                    i.feather.icon-trash.m-0.text-danger
+                                                </button>
         
         div(class="d-none view-grid")
             .card-columns
@@ -60,6 +66,27 @@ block content
                                             i.fa.fa-edit.text-dark
                                         a(href="/admin/employees/delete/" + val.id class="btn btn-light" title="borrar")
                                             i.fa.fa-trash.text-danger
+    <div class="md-modal md-effect-1" id="modal-1">
+        <div class="md-content shadow">
+            <h3 class="bg-warning"><i class="feather icon-alert-triangle"></i> Advertencia</h3>
+            <div>
+                <h5 class="text-center my-4">Deseas eliminar este registro?</h5>
 
+                form(action="/admin/employees/delete", method="post")
+
+                    input(type="hidden" name="id" id="id")
+
+                    div.form-group.text-center
+                        <button type="submit" class="btn btn-primary d-inline-block">Sí</button>
+                        <button type="button" class="btn btn-light md-close d-inline-block">Cerrar</button>
+            </div>
+        </div>
+    </div>
 block scripts
     script(src="/public/js/changeview.js")
+    <script src="/public/assets/plugins/modal-window-effects/js/classie.js"></script>
+    <script src="/public/assets/plugins/modal-window-effects/js/modalEffects.js"></script>
+    <script src="/public/assets/plugins/data-tables/js/datatables.min.js"></script>
+    <script src="/public/assets/js/pages/data-basic-custom.js"></script>
+    script(src="/public/js/modal.js")
+    script(src="/public/js/datatables.js")

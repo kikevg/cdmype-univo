@@ -3,6 +3,25 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 const login = (req, res) => {
+
+    // const saltRounds = 10;
+    // const pass = "123";
+
+    // bcrypt.hash(pass, saltRounds, (err, ecrypted) => {
+    //     if (err) {
+    //         return;
+    //     } else {
+    //         const user = new User({
+    //             name: "test",
+    //             email: "test@test.com",
+    //             username: "@test",
+    //             password: ecrypted
+    //         });
+
+    //         user.save();
+    //     }
+    // })
+
     res.render("admin/login");
 }
 

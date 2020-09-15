@@ -1,76 +1,92 @@
 extends ../shared.pug
 
 block links
-    <link rel="stylesheet" href="/public/assets/plugins/summernote/summernote-bs4.css">
+    <!-- data tables css -->
+    link(rel="stylesheet" href="/public/assets/plugins/modal-window-effects/css/md-modal.css")
+    <link rel="stylesheet" href="/public/assets/plugins/data-tables/css/datatables.min.css">
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Inicio
-    li.breadcrumb-item.active
+        a(href="/admin/home")
+            i.feather.icon-home
+    li.breadcrumb-item.active.font-italic
         span Carousel
 block content
-
-    div(id="modaladd" class="modal fade" tabindex="-1")
-        .modal-dialog
-            .modal-content
-                .modal-header
-                    h4.modal-title Agregar nueva imagen
-                    button(type="button" class="close" data-dismiss="modal")
-                        span &times;
-                .modal-body
-                    include add.pug
 
     section
 
         include ../../common/messages.pug
         
         .row
-            .col-sm-12.col-md-6.col-lg-4
+            .col-sm-12.col-md-12.col-lg-4
                 .card
                     .card-header
-                        h4.card-title Carousel principal
+                        h5.card-title Carousel principal
                     .card-body
                         if images.length > 0
                             div(id="carousel1" class="carousel slide" data-ride="carousel")
                                 .carousel-inner
                                     - let j = 0;
-                                    each img in images
+                                    each img, i in images
                                         - let classActive = (j == 0) ? "active" : "";
                                         div(class="carousel-item " + classActive)
                                             img(src= img.imgPath alt="" class="d-block w-100")
+                                            .carousel-caption
+                                                p.text-white
+                                                    span= (i + 1)
+                                                    | /
+                                                    span= images.length 
                                         - j = 1;
                                 a(href="#carousel1" class="carousel-control-prev" role="button" data-slide="prev")
                                     i.fas.fa-chevron-left
                                 a(href="#carousel1" class="carousel-control-next" role="button" data-slide="next")
                                     i.fas.fa-chevron-right
-            .col-sm-12.col-md-6.col-lg-8
+            .col-sm-12.col-md-12.col-lg-8
                 .card
                     .card-header.d-flex
-                        h4.card-title Images de carousel
+                        h5.card-title Imagenes de carousel
                         .ml-auto
-                            a(href="#modaladd" class="text-decoration-none" data-toggle="modal") Agregar nueva imagen
+                            a(href="/admin/carousel/add" class="text-decoration-none") Agregar nueva imagen
                     .card-body
                         table.table.table-bordered
                             thead
                                 tr
                                     th Nº
-                                    th Nombre
+                                    th Direccion
                                     th Acciones
                             tbody
                                 if images.length > 0
                                         each val, i in images
                                             tr
                                                 td= i + 1
-                                                td= val.name
+                                                td
+                                                    span(style="width: 350px" class="d-block text-truncate")= val.imgPath
                                                 td
                                                     div.btn-group
                                                         a(href="/admin/carousel/details/" + val.id class="btn btn-light" title="info")
-                                                            i.fa.fa-info.text-dark
-                                                        a(href="/admin/carousel/update/" + val.id class="btn btn-light" title="editar")
-                                                            i.fa.fa-edit.text-dark
-                                                        a(href="/admin/carousel/delete/" + val.id class="btn btn-light" title="borrar")
-                                                            i.fa.fa-trash.text-danger
+                                                            i.feather.icon-info.m-0
+                                                        <button class="btn btn-light md-trigger btn-delete" data-modal="modal-1" data-id=!{val.id}>
+                                                            i.feather.icon-trash.m-0.text-danger
+                                                        </button>
+    <div class="md-modal md-effect-1" id="modal-1">
+        <div class="md-content shadow">
+            <h3 class="bg-warning"><i class="feather icon-alert-triangle"></i> Advertencia</h3>
+            <div>
+                <h5 class="text-center my-4">Deseas eliminar este registro?</h5>
+
+                form(action="/admin/carousel/delete", method="post")
+
+                    input(type="hidden" name="id" id="id")
+
+                    div.form-group.text-center
+                        <button type="submit" class="btn btn-primary d-inline-block">Sí</button>
+                        <button type="button" class="btn btn-light md-close d-inline-block">Cerrar</button>
+            </div>
+        </div>
+    </div>
 block scripts
-    script(src="/public/js/fileinput.js")
-    <script src="/public/assets/plugins/summernote/summernote-bs4.min.js"></script>
-    <script src="/public/js/summernote.js"></script>
+    <script src="/public/assets/plugins/modal-window-effects/js/classie.js"></script>
+    <script src="/public/assets/plugins/modal-window-effects/js/modalEffects.js"></script>
+    <script src="/public/assets/plugins/data-tables/js/datatables.min.js"></script>
+    script(src="/public/js/modal.js")
+    script(src="/public/js/datatables.js")

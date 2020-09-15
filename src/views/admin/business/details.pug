@@ -2,10 +2,11 @@ extends ../shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Inicio
+        a(href="/admin/home")
+            i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/business") Empresas
-    li.breadcrumb-item.active
+    li.breadcrumb-item.active.font-italic
         span Detalles de empresa
 block content
     section
@@ -13,10 +14,9 @@ block content
         if data
             .card
                 .card-header.d-flex.justify-content-between
-                    h4.card-title Detalles de empresa
+                    h5.card-title Detalles de empresa
                     .ml-auto
                         a(href="/admin/business/update/" + data.id class="text-decoration-none mr-3") Editar
-                        a(href="/admin/business/delete/" + data.id class="text-decoration-none") Borrar
                 .card-body
                     table.table.table-bordered
                         tr

@@ -6,10 +6,11 @@ block links
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Inicio
+        a(href="/admin/home")
+            i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/business") Empresas
-    li.breadcrumb-item.active
+    li.breadcrumb-item.active.font-italic
         span Agregar empresa
 block content
     section
@@ -18,7 +19,7 @@ block content
 
         .card
             .card-header.bg-white
-                h2.card-title Agregar nueva empresa
+                h5.card-title Agregar nueva empresa
             .card-body
                 form(action="/admin/business/add", method="post" enctype="multipart/form-data")
                     .form-group
@@ -49,9 +50,8 @@ block content
                         textarea(name="description", cols="30", rows="10" class="form-control textarea")
                     .form-group
                         button(type="submit" class="btn btn-primary mr-3") Guardar
-                        a(href="/admin/business" class="btn btn-default") Cancelar
+                        a(href="/admin/business" class="btn btn-light") Cancelar
 block scripts
     script(src="/public/js/fileinput.js")
-    <script src="/public/assets/plugins/summernote/summernote-bs4.min.js"></script>
-    <script src="/public/js/summernote.js"></script>
+    <script src="/public/js/tinymce.js"></script>
 

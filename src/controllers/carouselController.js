@@ -18,9 +18,14 @@ const getDataById = async (req, res) => {
     res.render("admin/carousel/details", { title: "Detalles", image: carouselImage });
 }
 
+const addImageToCarousel = (req, res) => {
+
+    res.render("admin/carousel/add", { title: "Agregar imagen a carousel" });
+
+}
+
 const confirmAddImageToCarousel = async (req, res) => {
 
-    const { name, description } = req.body;
     const { file } = req.files;
     let url = "";
 
@@ -34,91 +39,42 @@ const confirmAddImageToCarousel = async (req, res) => {
         try {
             const cloudinaryRespose = await cloudinary.uploader.upload(file[0].path, { secure: true });
             url = cloudinaryRespose.url;
+            console.log(file);
         } catch (err) {
 
             req.flash("error_message", err.getMessage());
-            res.redirect("/admin/carousel");
+            res.redirect("/admin/carousel/add");
 
         }
     }
 
-    const newImageCarousel = {
-        name: name,
-        description: description,
+    const imageCaoursel = new Carousel({
         imgPath: url
-    };
+    });
 
-    const carousel = new Carousel(newImageCarousel);
+    const carousel = new Carousel(imageCaoursel);
     await carousel.save();
 
     req.flash("success_message", "Datos agregados exitosamente");
 
-    res.redirect("/admin/carousel");
-
-}
-
-const updateImage = async (req, res) => {
-
-    const { id } = req.params;
-
-    const image = await Carousel.findById(id);
-
-    res.render("admin/carousel/update", { title: "Editar images de carousel", image: image });
-
-}
-
-const confirmUpdateImage = async (req, res) => {
-
-    const { id, name, description } = req.body;
-    const { file } = req.files;
-    const url = "";
-
-    let carouselImage = await Carousel.findById(id);
-
-    if (file) {
-        try {
-
-            await cloudinary.uploader.destroy(carouselImage.imgPath.split("/").pop().split(".")[0]);
-            const cloudinaryRespose = await cloudinary.uploader.upload(file[0].path, { secure: true });
-            carouselImage.imgPath = cloudinaryRespose.url;
-
-        } catch (err) {
-            req.flash("error_message", err);
-            res.redirect("/admin/carousel/update/" + id);
-        }
-    }
-
-    carouselImage.name = name;
-    carouselImage.description = description;
-
-    await Carousel.updateOne({_id: id}, carouselImage);
-
-    req.flash("success_message", "Datos actualizados correctamente");
-
-    res.redirect("/admin/carousel");
+    res.redirect("/admin/carousel/add");
 
 }
 
 const deleteImage = async (req, res) => {
-    const { id } = req.params;
+
+    const { id } = req.body;
 
     const carouselImage = await Carousel.findById(id);
 
-    res.render("admin/carousel/delete", { title: "Detalles", image: carouselImage });
-}
-
-const confirmDeleteImage = async (req, res) => {
-
-    const { id } = req.params;
-
-    const carouselImage = await Carousel.findById(id);
+    console.log(carouselImage);
 
     if (carouselImage.imgPath != undefined) {
         try {
             await cloudinary.uploader.destroy(carouselImage.imgPath.split("/").pop().split(".")[0]);
         } catch (error) {
             req.flash("error_message", error);
-            res.redirect("/admin/carousel/delete/" + id);
+            res.redirect("/admin/carousel");
         }
     }
 
@@ -127,15 +83,12 @@ const confirmDeleteImage = async (req, res) => {
     req.flash("success_message", "Datos eliminados satisfactoriamente");
 
     res.redirect("/admin/carousel");
-
 }
 
 module.exports = {
     getData: getData,
     getDataById: getDataById,
+    addImageToCarousel: addImageToCarousel,
     confirmAddImageToCarousel: confirmAddImageToCarousel,
-    updateImage: updateImage,
-    confirmUpdateImage: confirmUpdateImage,
     deleteImage: deleteImage,
-    confirmDeleteImage: confirmDeleteImage,
 };

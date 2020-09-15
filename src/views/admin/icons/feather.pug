@@ -1,0 +1,37 @@
+extends ../shared.pug
+
+block links
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home")
+            i.feather.icon-home
+    li.breadcrumb-item.active.font-italic
+        span Iconos
+
+block content
+
+    <div class="row">
+        <!-- [ feather-icon ] start -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Feather Icon</h5>
+                </div>
+                <div class="card-body text-center">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-6">
+                            <input type="text" id="icon-search" class="form-control mb-4" placeholder="search . . ">
+                        </div>
+                    </div>
+                    <div class="i-main" id="icon-wrapper"></div>
+                </div>
+            </div>
+        </div>
+        <!-- [ feather-icon ] end -->
+    </div>
+    <!-- [ Main Content ] end -->
+
+block scripts
+    <script src="/public/assets/plugins/clipboard/js/clipboard.js"></script>
+    script(src="/public/js/feather.js")

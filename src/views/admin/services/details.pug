@@ -2,10 +2,11 @@ extends ../shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Inicio
+        a(href="/admin/home")
+            i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/services") Servicios
-    li.breadcrumb-item.active
+    li.breadcrumb-item.active.font-italic
         span Detalles de servicio
 block content
     section
@@ -15,14 +16,13 @@ block content
                 h4.card-title Detalles de servicio
                 .ml-auto
                     a(href="/admin/services/update/" + data.id class="text-decoration-none mr-3") Editar
-                    a(href="/admin/services/delete/" + data.id class="text-decoration-none") Borrar
             .card-body
                 table.table.table-bordered
                     tr
                         td.font-weight-bold Icono
                         td
                             div(class="p-5 mr-lg-3 "+ data.bgColor +" d-flex align-items-center justify-content-center" style="border-radius: 30px; height: 25px; width: 25px")
-                                i(class="fa fa-" + data.icon + " fa-2x ")
+                                i(class="" + data.iconName + " " + data.iconColor + " display-3")
                     tr
                         td.font-weight-bold Nombre
                         td

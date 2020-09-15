@@ -109,14 +109,8 @@ const confirmUpdateEmployee = async (req, res) => {
 }
 
 const deleteEmployee = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body;
     let employee = await Employee.findById(id);
-    res.render("admin/employees/delete", { title: "Borrar empleado", data: employee });
-}
-
-const confirmDeleteEmployee = async (req, res) => {
-    const { id } = req.params;
-    const employee = await Employee.findById(id);
 
     if (employee.imgPath != "") {
         try {
@@ -142,5 +136,4 @@ module.exports = {
     updateEmployee: updateEmployee,
     confirmUpdateEmployee: confirmUpdateEmployee,
     deleteEmployee: deleteEmployee,
-    confirmDeleteEmployee: confirmDeleteEmployee
 };

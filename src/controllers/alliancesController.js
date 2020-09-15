@@ -106,14 +106,7 @@ const confirmUpdateAlliance = async (req, res) => {
 }
 
 const deleteAlliance = async (req, res) => {
-    const { id } = req.params;
-    let alliance = await Alliance.findById(id);
-
-    res.render("admin/alliances/delete", { title: "Borrar alianza", data: alliance });
-}
-
-const confirmDeleteAlliance = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body;
     let alliance = await Alliance.findById(id);
 
     if (alliance.imgPath != "")
@@ -140,5 +133,4 @@ module.exports = {
     updateAlliance: updateAlliance,
     confirmUpdateAlliance: confirmUpdateAlliance,
     deleteAlliance: deleteAlliance,
-    confirmDeleteAlliance: confirmDeleteAlliance,
 }

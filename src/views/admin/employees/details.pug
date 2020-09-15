@@ -2,10 +2,11 @@ extends ../shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        a(href="/admin/home") Inicio
+        a(href="/admin/home")
+            i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/employees") Empleados
-    li.breadcrumb-item.active
+    li.breadcrumb-item.active.font-italic
         span Detalles de empleado
 block content
     section
@@ -14,10 +15,9 @@ block content
 
             .card
                 .card-header.d-flex.justify-content-between
-                    h4.card-title Detalles del empleado
+                    h5.card-title Detalles del empleado
                     .ml-auto
                         a(href="/admin/employees/update/" + data.id class="text-decoration-none mr-3") Editar
-                        a(href="/admin/employees/delete/" + data.id class="text-decoration-none") Borrar
                 .card-body
                     table.table.table-bordered
                         tr
@@ -39,9 +39,4 @@ block content
                         tr
                             td(class="font-weight-bold") Descripcion
                             td !{data.description}
-        else
-            .text-center
-                h2.text-primary.display-3.font-weight-bold No data available
-                br
-                a(href="/employees" class="btn btn-secondary py-4 px-5") Regresar
 block scripts
