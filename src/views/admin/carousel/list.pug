@@ -9,13 +9,11 @@ block breadcrumbItem
     li.breadcrumb-item
         a(href="/admin/home")
             i.feather.icon-home
-    li.breadcrumb-item.active.font-italic
+    li.breadcrumb-item.active.font-italic.text-white-50
         span Carousel
 block content
 
     section
-
-        include ../../common/messages.pug
         
         .row
             .col-sm-12.col-md-12.col-lg-4
@@ -43,6 +41,7 @@ block content
                                     i.fas.fa-chevron-right
             .col-sm-12.col-md-12.col-lg-8
                 .card
+                    include ../../common/messages.pug
                     .card-header.d-flex
                         h5.card-title Imagenes de carousel
                         .ml-auto

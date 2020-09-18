@@ -1,6 +1,8 @@
 const cloudinary = require("cloudinary").v2;
+const moment = require("moment");
 
 const Business = require("../models/Business");
+const Log = require("../models/Log");
 
 const getBusiness = async (req, res) => {
 
@@ -55,6 +57,17 @@ const confirmAddBusiness = async (req, res) => {
     const business = new Business(newBusiness);
     await business.save();
 
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Agregó nueva empresa",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos guardados exitosamente");
 
     res.redirect("/admin/business/add");
@@ -101,6 +114,17 @@ const confirmUpdateBusiness = async (req, res) => {
         _id: id
     }, business);
 
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Editó una empresa",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos actualizados exitosamente");
 
     res.redirect("/admin/business");
@@ -120,6 +144,17 @@ const deleteBusiness = async (req, res) => {
     }
 
     await Business.deleteOne({ _id: id });
+
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Eliminó una empresa",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
 
     req.flash("success_message", "Datos eliminados exitosamente");
 

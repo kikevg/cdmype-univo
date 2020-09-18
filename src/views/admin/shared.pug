@@ -25,7 +25,7 @@
 
 </head>
 
-<body>
+<body class="layout-4">
     <!-- [ Pre-loader ] start -->
     <div class="loader-bg">
         <div class="loader-track">
@@ -35,13 +35,14 @@
     <!-- [ Pre-loader ] End -->
 
     <!-- [ navigation menu ] start -->
-    <nav class="pcoded-navbar">
+    <nav class="pcoded-navbar menu-light brand-info icon-colored">
         <div class="navbar-wrapper">
             <div class="navbar-brand header-logo">
                 <a href="/admin/home" class="b-brand">
-                    <div class="b-bg"> A
+                    <div class="b-bg">
+                        span.text-uppercase= user_logged_name[0]
                     </div>
-                    <span class="b-title">Administracion</span>
+                    span.b-title= user_logged_name
                 </a>
                 <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
             </div>
@@ -57,7 +58,7 @@
                         <label>Gestión</label>
                     </li>
 
-                    // gestion para carousel
+                    //- gestion para carousel
                     <li data-username="Sample Page" class="nav-item"><a href="/admin/carousel" class="nav-link"><span class="pcoded-micon"><i class="feather icon-image"></i></span><span class="pcoded-mtext">Carousel</span></a></li>
 
                     //- gestion para servicios
@@ -105,7 +106,25 @@
                         </ul>
                     </li>
 
-                    //- gestion para noticias
+                    //- gestion para usuarios
+                    <li data-username="Menu levels Menu level 2.1 Menu level 2.2" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:void" class="nav-link"><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Usuarios</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="/admin/users" class="">Lista de usuarios</a></li>
+                            <li class=""><a href="/admin/users/add" class="">Agregar usuario</a></li>
+                        </ul>
+                    </li>
+
+                    //- logs
+                    <li data-username="Sample Page" class="nav-item">
+                        a(href="/admin/logs" class="nav-link")
+                            <span class="pcoded-micon">
+                                <i class="feather icon-activity"></i>
+                            </span>
+                            <span class="pcoded-mtext"> Actividad</span>
+                    </li>
+
+                    //- iconos
                     <li data-username="Menu levels Menu level 2.1 Menu level 2.2" class="nav-item pcoded-hasmenu">
                         <a href="javascript:void" class="nav-link"><span class="pcoded-micon"><i class="feather icon-copy"></i></span><span class="pcoded-mtext">Iconos</span></a>
                         <ul class="pcoded-submenu">
@@ -164,16 +183,26 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon feather icon-user"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right profile-notification">
-                            <div class="pro-head">
-                                <span>Admin</span>
-                                <a href="javascript:void" class="dud-logout" title="Logout">
-                                    <i class="feather icon-user"></i>
-                                </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-notification shadow border-0">
+                            <div class="pro-head bg-purple">
+                                <img src="/public/assets/images/user/user.png" class="" alt="User-Profile-Image">
+                                span= user_logged_name
                             </div>
                             <ul class="pro-body">
-                                <li><a href="javascript:void" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
-                                <li><a href="/admin/logout" class="dropdown-item"><i class="feather icon-log-out"></i> Logout</a></li>
+                                <li>
+                                    a(href="/admin/users/profile/" + user_logged_id class="dropdown-item")
+                                        <i class="feather icon-user"></i> Perfil
+                                </li>
+                                <li>
+                                    a(href="/admin/users/config/" + user_logged_id class="dropdown-item")
+                                        <i class="feather icon-settings"></i> Configuracion
+                                </li>
+                                <li>
+                                    a(href="/admin/logs/" + user_logged_id class="dropdown-item")
+                                        <i class="feather icon-list"></i> Mi actividad
+                                </li>
+                                div.dropdown-divider
+                                <li><a href="/admin/logout" class="dropdown-item"><i class="feather icon-log-out"></i> Salir</a></li>
                             </ul>
                         </div>
                     </div>

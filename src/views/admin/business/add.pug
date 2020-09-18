@@ -10,15 +10,13 @@ block breadcrumbItem
             i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/business") Empresas
-    li.breadcrumb-item.active.font-italic
+    li.breadcrumb-item.active.font-italic.text-white-50
         span Agregar empresa
 block content
     section
-
-        include ../../common/messages.pug
-
         .card
             .card-header.bg-white
+                include ../../common/messages.pug
                 h5.card-title Agregar nueva empresa
             .card-body
                 form(action="/admin/business/add", method="post" enctype="multipart/form-data")

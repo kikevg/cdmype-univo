@@ -1,27 +1,10 @@
 const bcrypt = require("bcrypt");
+const moment = require("moment");
 
 const User = require("../models/User");
+const Log = require("../models/Log");
 
 const login = (req, res) => {
-
-    // const saltRounds = 10;
-    // const pass = "123";
-
-    // bcrypt.hash(pass, saltRounds, (err, ecrypted) => {
-    //     if (err) {
-    //         return;
-    //     } else {
-    //         const user = new User({
-    //             name: "test",
-    //             email: "test@test.com",
-    //             username: "@test",
-    //             password: ecrypted
-    //         });
-
-    //         user.save();
-    //     }
-    // })
-
     res.render("admin/login");
 }
 
@@ -34,7 +17,7 @@ const verifyLogin = async (req, res) => {
         req.flash("error_message", "El usuario no existe");
         res.redirect("/admin");
     } else {
-        bcrypt.compare(password, user.password, (err, same) => {
+        bcrypt.compare(password, user.password, async (err, same) => {
             if (err) {
                 console.log("Error: " + err);
             } else {
@@ -43,6 +26,19 @@ const verifyLogin = async (req, res) => {
                         id: user._id,
                         name: user.name
                     };
+
+                    const log = {
+                        user: {
+                            id: user.id,
+                            name: user.name
+                        },
+                        description: "Inicio de sesion",
+                        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+                    };
+
+                    const l = new Log(log);  // l -> log
+                    await l.save();
+
                     res.redirect("/admin/home");
                 } else {
                     req.flash("error_message", "Datos incorrectos");
@@ -60,8 +56,20 @@ const isLogged = (req, res, next) => {
         res.redirect("/admin");
 }
 
-const logout = (req, res) => {
+const logout = async (req, res) => {
     if (req.session.user) {
+
+        const log = new Log({
+            user: {
+                id: req.session.user.id,
+                name: req.session.user.name
+            },
+            description: "Finalizó la sesion",
+            date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+        });
+
+        await log.save();
+
         delete req.session.user
         res.redirect("/admin");
     }

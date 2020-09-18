@@ -9,15 +9,14 @@ block breadcrumbItem
             i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/news") Noticias
-    li.breadcrumb-item.active.font-italic
+    li.breadcrumb-item.active.font-italic.text-white-50
         span Agregar noticia
 block content
     section
 
-        include ../../common/messages.pug
-
         .card
             .card-header
+                include ../../common/messages.pug
                 h5.card-title Agregar noticia
             .card-body
                 form(action="/admin/news/add", method="post" class="" enctype="multipart/form-data")

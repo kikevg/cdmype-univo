@@ -1,0 +1,35 @@
+extends ../shared.pug
+
+block links
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home")
+            i.feather.icon-home
+    li.breadcrumb-item.active.font-italic.text-white-50
+        span Actividad
+
+block content
+
+    .row
+        .col-sm-12
+            <div class="card latest-update-card" style="min-height: 400px">
+                <div class="card-header">
+                    <h5>Actividad</h5>
+                </div>
+                <div class="card-body py-0">
+                    <div class="latest-update-box">
+                        each val in logs
+                            <div class="row p-t-20 p-b-20">
+                                <div class="col-auto text-right update-meta">
+                                    <i class="b-primary update-icon ring"></i>
+                                </div>
+                                <div class="col p-l-5">
+                                    h6.m-0= val.date
+                                    p.m-b-0= val.user.name + " - " + val.description
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+block scripts

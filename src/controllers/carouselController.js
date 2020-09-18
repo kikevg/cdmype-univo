@@ -1,6 +1,8 @@
 const cloudinary = require("cloudinary").v2;
+const moment = require("moment");
 
 const Carousel = require("../models/Carousel.js");
+const Log = require("../models/Log");
 
 const getData = async (req, res) => {
 
@@ -55,6 +57,17 @@ const confirmAddImageToCarousel = async (req, res) => {
     const carousel = new Carousel(imageCaoursel);
     await carousel.save();
 
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Agregó una imagen a carousel",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos agregados exitosamente");
 
     res.redirect("/admin/carousel/add");
@@ -79,6 +92,17 @@ const deleteImage = async (req, res) => {
     }
 
     await Carousel.deleteOne({ _id: id });
+
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Eliminó una imagen de carousel",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
 
     req.flash("success_message", "Datos eliminados satisfactoriamente");
 

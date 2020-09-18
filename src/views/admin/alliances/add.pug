@@ -9,17 +9,15 @@ block breadcrumbItem
             i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/alliances") Alianzas
-    li.breadcrumb-item.active.font-italic
+    li.breadcrumb-item.active.font-italic.text-white-50
         span Agregar alianza
 
 
 block content
     section
-
-        include ../../common/messages.pug
-
         .card
             .card-header.bg-white
+                include ../../common/messages.pug
                 h5.card-title Agregar nueva alianza
             .card-body
                 form(action="/admin/alliances/add", method="post" enctype="multipart/form-data")

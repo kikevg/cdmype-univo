@@ -51,6 +51,13 @@ app.use((req, res, next) => {
     app.locals.error_message = req.flash("error_message")[0];
     next();
 });
+app.use((req, res, next) => {
+    if (req.session.user) {
+        app.locals.user_logged_id = req.session.user.id;
+        app.locals.user_logged_name = req.session.user.name;
+    }
+    next();
+});
 const diskStorage = multer.diskStorage({
     destination: (req, file, cb) => {
 

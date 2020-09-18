@@ -1,0 +1,83 @@
+extends ../shared.pug
+
+block links
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home")
+            i.feather.icon-home
+    li.breadcrumb-item.active.font-italic.text-white-50
+        span Configuracion
+
+block content
+    .row
+        <div class="col-md-12 col-xl-12">
+            <div class="card">
+                .card-header
+                    h5 Configuracion de la cuenta
+                <div class="card-body" style="min-height: 600px">
+                    .row
+                        .col-sm-12.col-md-4.col-lg-3
+                            div(class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical")
+
+                                a(class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="true") Perfil
+
+                                a(class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password" role="tab" aria-controls="v-pills-password" aria-selected="true") Contraseña
+
+                                a(class="nav-link" id="v-pills-account-tab" data-toggle="pill" href="#v-pills-account" role="tab" aria-controls="v-pills-account" aria-selected="true") Cuenta
+
+                        .col-sm-12.col-md-8.col-lg-9
+                            div(class="tab-content" id="v-pills-tabcontent")
+
+                                div(class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab")
+                                    h3.h2 Perfil
+                                    br
+                                    form(action="/admin/users/config/profile", method="post")
+                                        .form-group
+                                            input(type="hidden" name="profileId" value= user.id)
+                                            label(for="") Nombre
+                                            input(type="text" name="profileName" class="form-control" value= user.name)
+                                        .form-group
+                                            label(for="") Nombre de usuario
+                                            input(type="text" name="profileUsername" class="form-control" value= user.username)
+                                        .form-group
+                                            label(for="") Email
+                                            input(type="email" name="profileEmail" class="form-control" value= user.email)
+                                        .form-group.pt-3
+                                            button(type="submit" class="btn btn-primary mr-3") Editar
+                                            a(href="/admin/users/profile/" + user.id class="btn btn-light") Cancelar
+
+                                div(class="tab-pane fade show" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab")
+                                    h3.h2 Contraseña
+                                    br
+                                    form(action="/admin/users/config/password", method="post")
+                                        .form-group
+                                            input(type="hidden" name="passId" value= user.id)
+                                            label(for="") Contraseña actual
+                                            input(type="password" name="currentPassword" class="form-control")
+                                        .form-group
+                                            label(for="") Nueva contraseña
+                                            input(type="password" name="newPassword" class="form-control")
+                                        .form-group
+                                            label(for="") Repite la contraseña
+                                            input(type="password" name="repeatNewPassword" class="form-control")
+                                        .form-group.pt-3
+                                            button(type="submit" class="btn btn-primary mr-3") Editar
+                                            a(href="/admin/users/profile/" + user.id class="btn btn-light") Cancelar
+
+                                div(class="tab-pane fade show" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab")
+                                    h3.h2 Cuenta
+                                    br
+                                    p ¿Eliminar esta cuenta?
+
+                                    form(action="/admin/users/config/account/delete", method="post")
+                                        .form-group
+                                            input(type="hidden" name="id" value= user.id)
+                                        .form-group.pt-3
+                                            button(type="submit" class="btn btn-danger mr-3") Aceptar
+                                            a(href="/admin/users/profile/" + user.id class="btn btn-light") Cancelar
+                </div>
+            </div>
+        </div>
+
+block scripts

@@ -1,0 +1,32 @@
+extends ../shared.pug
+
+block links
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home")
+            i.feather.icon-home
+    li.breadcrumb-item.active.font-italic.text-white-50
+        span Perfil
+
+block content
+    .row
+        <div class="col-sm-12 col-md-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    div(class="m-auto")
+                        div(style="height: 200px; width: 200px;" class="rounded-circle bg-primary p-5 m-auto")
+                            img(src="/public/assets/images/user/user.png", alt="" class="img-fluid")
+                        br
+                        span.text-muted.d-block.text-center Nombre
+                        h3.text-center.text-dark= user.name
+                        span.text-muted.d-block.text-center Nombre de usuario
+                        h6.text-dark.text-center= user.username
+                        span.text-muted.d-block.text-center Email
+                        h6.text-dark.text-center= user.email
+
+                </div>
+            </div>
+        </div>
+
+block scripts

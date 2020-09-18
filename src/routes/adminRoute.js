@@ -8,6 +8,8 @@ const employeesController = require("../controllers/employeesController");
 const alliancesController = require("../controllers/alliancesController");
 const newsController = require("../controllers/newsController");
 const carouselController = require("../controllers/carouselController");
+const usersController = require("../controllers/usersController");
+const logsController = require("../controllers/logsController");
 
 const router = Router();
 
@@ -75,5 +77,19 @@ router.get("/carousel/details/:id", loginController.isLogged, carouselController
 router.get("/carousel/add", loginController.isLogged, carouselController.addImageToCarousel);
 router.post("/carousel/add", loginController.isLogged, carouselController.confirmAddImageToCarousel);
 router.post("/carousel/delete", loginController.isLogged, carouselController.deleteImage);
+
+// para la administracion de usuarios
+router.get("/users", loginController.isLogged, usersController.getUsers);
+router.get("/users/add", loginController.isLogged, usersController.addUser);
+router.post("/users/add", loginController.isLogged, usersController.confirmAddUser);
+router.get("/users/profile/:id", loginController.isLogged, usersController.profile);
+router.get("/users/config/:id", loginController.isLogged, usersController.config);
+router.post("/users/config/profile", loginController.isLogged, usersController.updateProfile);
+router.post("/users/config/password", loginController.isLogged, usersController.updatePassword);
+router.post("/users/config/account/delete", loginController.isLogged, usersController.deleteUser);
+
+// para la actividad de los usuarios
+router.get("/logs", loginController.isLogged, logsController.index);
+router.get("/logs/:id", loginController.isLogged, logsController.getLogsByUser);
 
 module.exports = router;

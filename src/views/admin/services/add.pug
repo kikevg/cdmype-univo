@@ -9,15 +9,14 @@ block breadcrumbItem
             i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/services") Servicios
-    li.breadcrumb-item.active.font-italic
+    li.breadcrumb-item.active.font-italic.text-white-50
         span Agregar servicio
 block content
     section
 
-        include ../../common/messages.pug
-
         .card
             .card-header.bg-white
+                include ../../common/messages.pug
                 h5.card-title Agregar servicio
             .card-body
                 form(action="/admin/services/add", method="post" class="")

@@ -8,18 +8,17 @@ block breadcrumbItem
     li.breadcrumb-item
         a(href="/admin/home")
             i.feather.icon-home
-    li.breadcrumb-item.active.font-italic
+    li.breadcrumb-item.active.font-italic.text-white-50
         span Alianzas
 block content
     section
 
         include ../../common/buttonChangeView.pug
 
-        include ../../common/messages.pug
-        
         .view-list
             .card
                 .card-header
+                    include ../../common/messages.pug
                     h5.card-title Lista de alianzas
                 .card-body.table-responsive
                     table.table.table-bordered

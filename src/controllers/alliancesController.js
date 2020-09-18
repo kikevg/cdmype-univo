@@ -1,6 +1,8 @@
 const cloudinary = require("cloudinary").v2;
+const moment = require("moment");
 
 const Alliance = require("../models/Alliance");
+const Log = require("../models/Log");
 
 const getAlliances = async (req, res) => {
     const alliancesList = await Alliance.find();
@@ -53,6 +55,17 @@ const confirmAddAlliance = async (req, res) => {
     const alliance = new Alliance(newAlliance);
     await alliance.save();
 
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Agregó nueva alianza",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos agregados exitosamente");
 
     res.redirect("/admin/alliances/add");
@@ -100,6 +113,17 @@ const confirmUpdateAlliance = async (req, res) => {
         _id: id
     }, alliance);
 
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Editó una alianza",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos actualizados exitosamente");
 
     res.redirect("/admin/alliances");
@@ -119,6 +143,17 @@ const deleteAlliance = async (req, res) => {
         }
 
     await Alliance.deleteOne({ _id: id });
+
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Eliminó una alianza",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
 
     req.flash("success_message", "Datos eliminados exitosamente");
 

@@ -1,6 +1,8 @@
 const cloudinary = require("cloudinary").v2;
+const moment = require("moment");
 
 const News = require("../models/News");
+const Log = require("../models/Log");
 
 const getNews = async (req, res) => {
     const newsList = await News.find();
@@ -57,6 +59,17 @@ const confirmAddNews = async (req, res) => {
     const n = new News(news);
     await n.save();
 
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Agregó nueva noticia",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos agregados exitosamente");
 
     res.redirect("/admin/news/add");
@@ -84,6 +97,17 @@ const confirmUpdateNews = async (req, res) => {
 
     await News.updateOne({ _id: id }, news);
 
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Editó una noticia",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos actualizados exitosamente");
 
     res.redirect("/admin/news");
@@ -104,6 +128,17 @@ const deleteNews = async (req, res) => {
         }
 
     await News.deleteOne({ _id: id });
+
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Eliminó una noticia",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
 
     req.flash("success_message", "Datos eliminados exitosamente");
 

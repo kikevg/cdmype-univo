@@ -1,0 +1,42 @@
+extends ../shared.pug
+
+block links
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home")
+            i.feather.icon-home
+    li.breadcrumb-item
+        a(href="/admin/employees") Usuarios
+    li.breadcrumb-item.active.font-italic.text-white-50
+        span Agregar usuario
+
+block content
+    section
+        .card
+            .card-header
+                include ../../common/messages.pug
+                h5.card-title Agregar nuevo usuario
+            .card-body
+                form(action="/admin/users/add", method="post" style="width: 300px")
+                    .form-group
+                        label(for="" class="font-weight-bold") Nombre del usuario
+                            span.text-danger &nbsp; *
+                        input(type="text" name="name" required class="form-control")
+                    .form-group
+                        label(for="" class="font-weight-bold") Email
+                            span.text-danger &nbsp; *
+                        input(type="email" name="email" required class="form-control")
+                    .form-group
+                        label(for="" class="font-weight-bold") Nombre de usuario
+                            span.text-danger &nbsp; *
+                        input(type="text" name="username" required class="form-control" placeholder="juan123")
+                    .form-group
+                        label(for="" class="font-weight-bold") Contraseña
+                            span.text-danger &nbsp; *
+                        input(type="password" name="password" required class="form-control")
+                    .form-group
+                        button(type="submit" class="btn btn-primary mr-3") Guardar
+                        a(href="/admin/users" class="btn btn-light") Cancelar
+block scripts
+    <script src="/public/js/tinymce.js"></script>

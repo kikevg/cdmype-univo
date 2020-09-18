@@ -1,6 +1,8 @@
 const cloudinary = require("cloudinary").v2;
+const moment = require("moment");
 
 const Employee = require("../models/Employee");
+const Log = require("../models/Log");
 
 const getEmployees = async (req, res) => {
 
@@ -58,6 +60,17 @@ const confirmAddEmployee = async (req, res) => {
     const employee = new Employee(newEmployee);
     await employee.save();
 
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Agregó un nuevo empleado",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos agregados exitosamente");
 
     res.redirect("/admin/employees/add");
@@ -103,6 +116,17 @@ const confirmUpdateEmployee = async (req, res) => {
 
     await Employee.updateOne({ _id: id }, employee);
 
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Editó un empleado",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos actualizados exitosamente");
 
     res.redirect("/admin/employees");
@@ -122,6 +146,17 @@ const deleteEmployee = async (req, res) => {
     }
 
     await Employee.deleteOne({ _id: id });
+
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Eliminó un empleado",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
 
     req.flash("success_message", "Datos eliminados exitosamente");
 

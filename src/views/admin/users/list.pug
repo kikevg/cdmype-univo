@@ -1,0 +1,48 @@
+extends ../shared.pug
+
+block links
+    <link rel="stylesheet" href="/public/assets/plugins/data-tables/css/datatables.min.css">
+
+block breadcrumbItem
+    li.breadcrumb-item
+        a(href="/admin/home")
+            i.feather.icon-home
+    li.breadcrumb-item.active.font-italic.text-white-50
+        span Usuarios
+
+block content
+    section
+    
+        include ../../common/buttonChangeView.pug
+
+        include ../../common/messages.pug
+
+        .view-list
+            .card
+                .card-header
+                    h5.card-title Lista de usuarios
+                .card-body.table-responsive
+                    table.table.table-bordered
+                        thead
+                            tr
+                                th Nº
+                                th Nombre
+                                th Email
+                        tbody
+                            if users.length > 0
+                                each val, i in users
+                                    tr
+                                        td= i + 1
+                                        td= val.name
+                                        td= val.email
+        div(class="d-none view-grid")
+            .card-columns
+                each val in users
+                    .card
+                        .card-body
+                            h3= val.name
+                            p.text-muted= val.email
+block scripts
+    script(src="/public/js/changeview.js")
+    <script src="/public/assets/plugins/data-tables/js/datatables.min.js"></script>
+    script(src="/public/js/datatables.js")

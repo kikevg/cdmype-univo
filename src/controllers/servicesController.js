@@ -1,4 +1,8 @@
+const moment = require("moment");
+
 const Service = require("../models/Service");
+const Log = require("../models/Log");
+
 
 const textColors = [
     "text-success",
@@ -46,6 +50,17 @@ const confirmAddService = async (req, res) => {
     const service = new Service(newService);
     await service.save();
 
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Agregó un nuevo servicio",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos agregados exitosamente");
 
     res.redirect("/admin/services/add");
@@ -78,6 +93,17 @@ const confirmUpdateService = async (req, res) => {
 
     await Service.updateOne({ _id: id }, service);
 
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Editó un servicio",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos actualizados exitosamente");
 
     res.redirect("/admin/services");
@@ -85,8 +111,20 @@ const confirmUpdateService = async (req, res) => {
 
 const deleteService = async (req, res) => {
     const { id } = req.body;
-    let service = await Service.findById(id);
+    
     await Service.deleteOne({ _id: id });
+
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Eliminó un servicio",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
     req.flash("success_message", "Datos eliminados exitosamente");
     res.redirect("/admin/services");
 }

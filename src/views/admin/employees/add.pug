@@ -1,7 +1,6 @@
 extends ../shared.pug
 
 block links
-    <link rel="stylesheet" href="/public/assets/plugins/summernote/summernote-bs4.css">
 
 block breadcrumbItem
     li.breadcrumb-item
@@ -9,16 +8,14 @@ block breadcrumbItem
             i.feather.icon-home
     li.breadcrumb-item
         a(href="/admin/employees") Empleados
-    li.breadcrumb-item.active.font-italic
+    li.breadcrumb-item.active.font-italic.text-white-50
         span Agregar empleado
 
 block content
     section
-
-        include ../../common/messages.pug
-
         .card
-            .card-header
+            .card-header        
+                include ../../common/messages.pug
                 h5.card-title Agregar nuevo empleado
             .card-body
                 form(action="/admin/employees/add", method="post" enctype="multipart/form-data")

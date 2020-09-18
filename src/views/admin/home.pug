@@ -2,7 +2,7 @@ extends shared.pug
 
 block breadcrumbItem
     li.breadcrumb-item
-        span
+        span.text-white-50
             i.feather.icon-home
 
 block content
@@ -10,31 +10,31 @@ block content
     .row
         <div class="col-sm-12 col-md-6 col-xl-4">
             <div class="card social-widget-card">
-                <div class="card-body-big bg-purple">
-                    h3.text-white.m-0= totalServices
+                <div class="card-body-big">
+                    h3.text-purple.m-0= totalServices
                         |&nbsp;+
-                    <span class="m-t-10">Servicios</span>
-                    <i class="fab fa-envira"></i>
+                    <span class="m-t-10 text-purple">Servicios</span>
+                    <i class="fab fa-envira text-purple"></i>
                 </div>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 col-xl-4">
             <div class="card social-widget-card">
-                <div class="card-body-big bg-twitter">
-                    h3.text-white.m-0= totalAlliances
+                <div class="card-body-big">
+                    h3.text-info.m-0= totalAlliances
                         |&nbsp;+
-                    <span class="m-t-10">Alianzas</span>
-                    <i class="fas fa-award"></i>
+                    <span class="m-t-10 text-info">Alianzas</span>
+                    <i class="fas fa-award text-info"></i>
                 </div>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 col-xl-4">
             <div class="card social-widget-card">
-                <div class="card-body-big bg-c-purple">
-                    h3.text-white.m-0= totalBusiness
+                <div class="card-body-big">
+                    h3.text-primary.m-0= totalBusiness
                         |&nbsp;+
-                    <span class="m-t-10">Empresas</span>
-                    <i class="far fa-building"></i>
+                    <span class="m-t-10 text-primary">Empresas</span>
+                    <i class="far fa-building text-primary"></i>
                 </div>
             </div>
         </div>
