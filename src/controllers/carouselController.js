@@ -28,6 +28,7 @@ const addImageToCarousel = (req, res) => {
 
 const confirmAddImageToCarousel = async (req, res) => {
 
+    const { name, description } = req.body;
     const { file } = req.files;
     let url = "";
 
@@ -41,7 +42,6 @@ const confirmAddImageToCarousel = async (req, res) => {
         try {
             const cloudinaryRespose = await cloudinary.uploader.upload(file[0].path, { secure: true });
             url = cloudinaryRespose.url;
-            console.log(file);
         } catch (err) {
 
             req.flash("error_message", err.getMessage());
@@ -50,12 +50,15 @@ const confirmAddImageToCarousel = async (req, res) => {
         }
     }
 
-    const imageCaoursel = new Carousel({
+    const image = {
+        name: name,
+        description: description,
         imgPath: url
-    });
+    };
 
-    const carousel = new Carousel(imageCaoursel);
-    await carousel.save();
+    const imageCaoursel = new Carousel(image);
+
+    await imageCaoursel.save();
 
     const log = new Log({
         user: {

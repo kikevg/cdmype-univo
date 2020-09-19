@@ -1,8 +1,6 @@
 extends ../shared.pug
 
 block links
-    <!-- fileupload-custom css -->
-    <link rel="stylesheet" href="/public/assets/css/pages/fileupload.css">
 
 block breadcrumbItem
     li.breadcrumb-item
@@ -16,24 +14,38 @@ block breadcrumbItem
 block content
     <div class="row">
         <!-- [ file-upload ] start -->
-
-        include ../../common/messages.pug
         
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
+                    include ../../common/messages.pug
                     <h5>Subir archivos</h5>
                 </div>
                 <div class="card-body">
-                    <form action="/admin/carousel/add" method="post" class="dropzone" enctype="multipart/form-data">
-                        div.form-group
-                            <div class="fallback">
-                                <input name="file" type="file" multiple />
-                            </div>
+                    <form action="/admin/carousel/add" method="post" enctype="multipart/form-data">
+
+                        .form-group
+                            .row
+                                .col-sm-12.col-lg-6
+                                    label(for="" class="font-weight-bold") Nombre
+                                        span.text-danger &nbsp; *
+                                    input(type="text" name="name" class="form-control")
+                                .col-sm-12.col-lg-6
+                                    label(for="" class="font-weight-bold") Imagen de la empresa
+                                        span.text-danger &nbsp; *
+                                    .custom-file
+                                        input(type="file" name="file" class="custom-file-input" id="customFile")
+                                        label(for="customFile" class="custom-file-label" data-browse="Buscar") Elije un archivo
+                        .form-group
+                            label(for="" class="font-weight-bold") Descripcion
+                                span.text-danger &nbsp; *
+                            textarea(name="description", cols="30", rows="10" class="form-control")
+                        
+                        <div class="form-group">
+                            button(type="submit" class="btn btn-primary mr-3") Guardar
+                            a(href="/admin/carousel" class="btn btn-light") Cancelar
+                        </div>
                     </form>
-                    <div class="text-center m-t-20 form-group">
-                        a(href="/admin/carousel" class="btn btn-primary") Listo
-                    </div>
                 </div>
             </div>
         </div>
@@ -41,6 +53,5 @@ block content
     </div>
 
 block scripts
-    <!-- file-upload Js -->
-    <script src="/public/assets/plugins/fileupload/js/dropzone-amd-module.min.js"></script>
+    script(src="/public/js/fileinput.js")
 

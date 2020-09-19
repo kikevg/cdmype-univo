@@ -51,15 +51,14 @@ block content
                             thead
                                 tr
                                     th Nº
-                                    th Direccion
+                                    th Titulo
                                     th Acciones
                             tbody
                                 if images.length > 0
                                         each val, i in images
                                             tr
                                                 td= i + 1
-                                                td
-                                                    span(style="width: 350px" class="d-block text-truncate")= val.imgPath
+                                                td= val.name
                                                 td
                                                     div.btn-group
                                                         a(href="/admin/carousel/details/" + val.id class="btn btn-light" title="info")
