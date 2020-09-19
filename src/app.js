@@ -20,7 +20,7 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 const DbConnect = async () => {
-    await mongoose.connect("mongodb://localhost/db_cdmypeunivo", {
+    await mongoose.connect(process.env.DB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
