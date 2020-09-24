@@ -34,21 +34,25 @@ html(lang="es")
                                 .dropdown
                                     a(href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" id="dropdownAbout") Acerca de
                                     .dropdown-menu(id="dropdownAbout")
-                                        a(href="/about" class="dropdown-item") Nosotros
-                                        a(href="/about" class="dropdown-item") Equipo
-                                        a(href="/contact" class="dropdown-item") Contacto
+                                        a(href="/nosotros" class="dropdown-item") Nosotros
+                                        a(href="/centro-emprendedor" class="dropdown-item") Centro emprendedor
+                                        a(href="/incubadora-de-empresas" class="dropdown-item") Incubadora de empresas
+                                        a(href="/contacto" class="dropdown-item") Contacto
                             li.nav-item
                                 .dropdown
                                     a(href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" id="dropdownServices") Servicios
                                     .dropdown-menu(id="dropdownServices")
-                                        a(href="/training" class="dropdown-item") Asesoría
-                                        a(href="/services" class="dropdown-item") Servicios
+                                        a(href="/asesoria" class="dropdown-item") Asesoría
+                                        a(href="/servicios" class="dropdown-item") Servicios
                             li.nav-item
-                                a.nav-link(href="/business") Empresas
+                                a.nav-link(href="/empresas") Empresas
                             li.nav-item
                                 a.nav-link(href="/news?category=all&page=1") Noticias
         main
             block content
+        //- <!-- Load Facebook SDK for JavaScript -->
+        <div id="fb-root"></div>
+        <div class="fb-customerchat" attribution=setup_tool page_id="104605224739974" logged_in_greeting="¡Hola! ¿Cómo podemos ayudarte?" logged_out_greeting="¡Hola! ¿Cómo podemos ayudarte?"></div>
         footer.bg-light
             .container.custom-padding-1
                 .row
@@ -71,19 +75,21 @@ html(lang="es")
                                 br
                                 ul.list-unstyled
                                     li
-                                        a(href="/training" class="d-block py-2") Asesoría
+                                        a(href="/asesoria" class="d-block py-2") Asesoría
                                     li
-                                        a(href="/services" class="d-block py-2") Servicios
+                                        a(href="/servicios" class="d-block py-2") Servicios
                             .col-sm-12.col-md-12.col-lg-4
                                 h4.text-primary.font-weight-bold Acerca de
                                 br
                                 ul.list-unstyled
                                     li
-                                        a(href="/about" class="d-block py-2") Nosotros
+                                        a(href="/nosotros" class="d-block py-2") Nosotros
                                     li
-                                        a(href="/about" class="d-block py-2") Equipo
+                                        a(href="/centro-emprendedor" class="d-block py-2") Centro emprendedor
                                     li
-                                        a(href="/contact" class="d-block py-2") Contacto
+                                        a(href="/incubadora-de-empresas" class="d-block py-2") Incubadora de empresas
+                                    li
+                                        a(href="/contacto" class="d-block py-2") Contacto
                             .col-sm-12.col-md-12.col-lg-4
                                 h4.text-primary.font-weight-bold Info
                                 br
@@ -105,4 +111,6 @@ html(lang="es")
         script(src="https://code.jquery.com/jquery-3.5.1.min.js")
         //- bootstrap
         script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+        //- fb chat
+        script(src="/public/js/fbchat.js")
         block scripts

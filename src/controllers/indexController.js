@@ -39,6 +39,14 @@ const about = async (req, res) => {
     res.render("about", { title: "Nosotros", employees: employees });
 }
 
+const center = async (req, res) => {
+    res.render("center", { title: "Centro emprendedor" });
+}
+
+const incubator = (req, res) => {
+    res.render("incubator", { title: "Incubadora de empresas" });
+}
+
 const contact = (req, res) => {
     res.render("contact", { title: "Contacto" });
 }
@@ -145,6 +153,8 @@ const newsDetails = async (req, res) => {
 module.exports = {
     index: index,
     about: about,
+    center: center,
+    incubator: incubator,
     contact: contact,
     training: training,
     downloadDocs: downloadDocs,
