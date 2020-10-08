@@ -61,6 +61,24 @@ block content
                                                 td= val.name
                                                 td
                                                     div.btn-group
+                                                        if (i == 0)
+                                                            button(type="button" class="btn btn-light btn-up " disabled)
+                                                                i.feather.icon-chevron-up.m-0
+                                                        else
+                                                            form(action="/admin/carousel/sort/up", method="post")
+                                                                input(type="hidden" name="id" value= val.id)
+                                                                input(type="hidden" name="index" value= val.index)
+                                                                button(type="submit" class="btn btn-light" title="posicionar hacia arriba")
+                                                                    i.feather.icon-chevron-up.m-0
+                                                        if (i == (images.length - 1))
+                                                            button(type="button" class="btn btn-light btn-down" disabled)
+                                                                i.feather.icon-chevron-down.m-0
+                                                        else
+                                                            form(action="/admin/carousel/sort/down", method="post")
+                                                                input(type="hidden" name="id" value= val.id)
+                                                                input(type="hidden" name="index" value= val.index)
+                                                                button(type="submit" class="btn btn-light" title="posicionar hacia abajo")
+                                                                    i.feather.icon-chevron-down.m-0
                                                         a(href="/admin/carousel/details/" + val.id class="btn btn-light" title="info")
                                                             i.feather.icon-info.m-0
                                                         <button class="btn btn-light md-trigger btn-delete" data-modal="modal-1" data-id=!{val.id}>

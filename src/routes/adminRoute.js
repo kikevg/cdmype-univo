@@ -77,6 +77,8 @@ router.get("/carousel/details/:id", loginController.isLogged, carouselController
 router.get("/carousel/add", loginController.isLogged, carouselController.addImageToCarousel);
 router.post("/carousel/add", loginController.isLogged, carouselController.confirmAddImageToCarousel);
 router.post("/carousel/delete", loginController.isLogged, carouselController.deleteImage);
+router.post('/carousel/sort/up', loginController.isLogged, carouselController.sortUp);
+router.post('/carousel/sort/down', loginController.isLogged, carouselController.sortDown);
 
 // para la administracion de usuarios
 router.get("/users", loginController.isLogged, usersController.getUsers);

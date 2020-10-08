@@ -6,7 +6,7 @@ const Log = require("../models/Log");
 
 const getData = async (req, res) => {
 
-    const imagesList = await Carousel.find();
+    const imagesList = await Carousel.find().sort({ index: 'asc' });
 
     res.render("admin/carousel/list", { title: "Lista de images", images: imagesList });
 }
@@ -28,7 +28,7 @@ const addImageToCarousel = (req, res) => {
 
 const confirmAddImageToCarousel = async (req, res) => {
 
-    const { name, description } = req.body;
+    const { name, description, priority } = req.body;
     const { file } = req.files;
     let url = "";
 
@@ -53,6 +53,7 @@ const confirmAddImageToCarousel = async (req, res) => {
     const image = {
         name: name,
         description: description,
+        index: (await Carousel.find()).length + 1,
         imgPath: url
     };
 
@@ -83,8 +84,6 @@ const deleteImage = async (req, res) => {
 
     const carouselImage = await Carousel.findById(id);
 
-    console.log(carouselImage);
-
     if (carouselImage.imgPath != undefined) {
         try {
             await cloudinary.uploader.destroy(carouselImage.imgPath.split("/").pop().split(".")[0]);
@@ -95,6 +94,16 @@ const deleteImage = async (req, res) => {
     }
 
     await Carousel.deleteOne({ _id: id });
+
+    const images = await Carousel.find({ index: { $gt: carouselImage.index } }).sort({index: 'asc'});
+
+    images.forEach(async i => {
+
+        await Carousel.updateOne({_id: i.id}, {
+            index: (i.index - 1)
+        });
+
+    });
 
     const log = new Log({
         user: {
@@ -112,10 +121,75 @@ const deleteImage = async (req, res) => {
     res.redirect("/admin/carousel");
 }
 
+const sortUp = async (req, res) => {
+
+    const { id, index } = req.body;
+
+    let image = await Carousel.findOne({ index: index });
+    let imageUp = await Carousel.findOne({ index: parseInt(index) - 1 });
+
+    console.log(image);
+    console.log(imageUp);
+
+    await Carousel.updateOne({ _id: image.id }, {
+        index: imageUp.index
+    });
+
+    await Carousel.updateOne({ _id: imageUp.id }, {
+        index: image.index
+    });
+
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Cambio el indice de una imagen hacia arriba",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
+    res.redirect("/admin/carousel");
+
+}
+
+const sortDown = async (req, res) => {
+
+    const i = req.body.index;
+
+    let image = await Carousel.findOne({ index: i });
+    let imageDown = await Carousel.findOne({ index: parseInt(i) + 1 });
+
+    await Carousel.updateOne({ _id: image.id }, {
+        index: imageDown.index
+    });
+
+    await Carousel.updateOne({ _id: imageDown.id }, {
+        index: image.index
+    });
+
+    const log = new Log({
+        user: {
+            id: req.session.user.id,
+            name: req.session.user.name
+        },
+        description: "Cambio el indice de una imagen hacia abajo",
+        date: moment().format("DD/MM/YYYY - hh:mm:ss a")
+    });
+
+    await log.save();
+
+    res.redirect("/admin/carousel");
+
+}
+
 module.exports = {
     getData: getData,
     getDataById: getDataById,
     addImageToCarousel: addImageToCarousel,
     confirmAddImageToCarousel: confirmAddImageToCarousel,
     deleteImage: deleteImage,
+    sortUp: sortUp,
+    sortDown: sortDown,
 };

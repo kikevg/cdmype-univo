@@ -14,17 +14,11 @@ const index = async (req, res) => {
     const servicesTotal = (await Service.find()).length;
 
     const alliancesList = await Alliance.find();
-    const businesses = await Business.find();
-    const carouselImages = await Carousel.find();
-
-    let businessList = [];
-
-    for (let i = 0; i < businesses.length; i++)
-        if (i < 5)
-            businessList.push(businesses[i]);
+    const businessList = await Business.find();
+    const imagesList = await Carousel.find().sort({index: 'asc'});
 
     res.render("index", {
-        title: 'Inicio', images: carouselImages, businessList: businessList, alliancesList: alliancesList, data: {
+        title: 'Inicio', images: imagesList, businessList: businessList, alliancesList: alliancesList, data: {
             businessTotal,
             alliancesTotal,
             servicesTotal
